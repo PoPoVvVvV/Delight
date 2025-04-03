@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi des Stocks Restaurant</title>
+    <style>
+        /* --- Styles Généraux --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #5a8d03; /* Vert olive */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* --- Style pour le formulaire de login --- */
+        #login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #login-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        #login-form input[type="text"],
+        #login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #login-form button {
+            padding: 12px 20px;
+            background-color: #007bff; /* Bleu */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #login-form button:hover {
+            background-color: #0056b3;
+        }
+
+        #login-error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* --- Style pour le bouton de logout --- */
+        #logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background-color: #6c757d; /* Gris */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            z-index: 100; /* Pour être au-dessus du contenu */
+        }
+
+        #logout-btn:hover {
+            background-color: #5a6268;
+        }
+
+        /* --- Styles Généraux (suite) --- */
+        /* ... (Les styles existants restent ici) ... */
+        .suppliers-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f0f8ea;
+            border-radius: 5px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .suppliers-section h2 {
+            color: #28a745;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        #addSupplierForm {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #addSupplierForm label {
+            font-weight: normal;
+        }
+
+        #addSupplierName {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #addSupplierBtn {
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #addSupplierBtn:hover {
+            background-color: #1e7e34;
+        }
+
+        #suppliersList {
+            list-style: none;
+            padding: 0;
+        }
+
+        #suppliersList li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #suppliersList li:last-child {
+            border-bottom: none;
+        }
+
+        .delete-supplier-btn {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .delete-supplier-btn:hover {
+            color: #c82333;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .filter-section label {
+            font-weight: bold;
+        }
+
+        .filter-section input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .filter-section select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #stockTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #stockTable th {
+            background-color: #a5d6a7;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #stockTable th, #stockTable td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        #stockTable tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #stockTable tr:hover {
+            background-color: #e8f5e9;
+        }
+
+        .quantity-cell {
+            cursor: pointer;
+            position: relative;
+        }
+        .quantity-cell:hover {
+             background-color: #dcedc8;
+        }
+
+        .quantity-input {
+            width: 80%;
+            padding: 5px;
+            text-align: right;
+            border: 1px solid #7cb342;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .action-buttons button {
+            padding: 5px 8px;
+            margin: 0 3px;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .btn-increase { background-color: #4CAF50; }
+        .btn-decrease { background-color: #ff9800; }
+        .btn-delete { background-color: #f44336; }
+        .btn-remove-qty { background-color: #2196F3; }
+        .btn-edit { background-color: #008CBA; }
+
+        .btn-increase:hover { background-color: #388E3C; }
+        .btn-decrease:hover { background-color: #fb8c00; }
+        .btn-delete:hover { background-color: #d32f2f; }
+        .btn-remove-qty:hover { background-color: #1976D2; }
+        .btn-edit:hover { background-color: #0077A3; }
+
+        .low-stock .quantity-cell,
+        .low-stock td:nth-child(3) {
+            color: #e65100;
+            font-weight: bold;
+        }
+        .low-stock td:not(.action-buttons) {
+            background-color: #fff3e0 !important;
+        }
+        .low-stock td:first-child::before {
+            content: "⚠️ ";
+            color: orange;
+            font-weight: bold;
+        }
+        .low-stock .quantity-cell {
+             cursor: pointer;
+        }
+         .low-stock .quantity-cell:hover {
+             background-color: #ffe0b2 !important;
+        }
+
+        .stock-image {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            vertical-align: middle;
+        }
+
+        #productSuppliersTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #productSuppliersTable th, #productSuppliersTable td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        #productSuppliersTable th {
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #productSuppliersTable tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #feedback-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .feedback-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 5px;
+        }
+
+        .modal-buttons {
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            padding: 8px 15px;
+            margin-left: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-confirm {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+        .modal-confirm:hover {
+            background-color: #c82333;
+        }
+
+        .modal-cancel {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+
+        .modal-cancel:hover {
+            background-color: #5a6268;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            z-index: 100;
+        }
+
+        #logout-btn:hover {
+            background-color: #5a6268;
+        }
+
+        @media (max-width: 768px) {
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .form-ajout {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            #stockTable th, #stockTable td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+            .action-buttons button {
+                padding: 4px 6px;
+                font-size: 0.8em;
+            }
+            .quantity-input {
+                width: 90%;
+            }
+            #productSuppliersTable th, #productSuppliersTable td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="login-container">
+        <h2>Connexion Administrateur</h2>
+        <form id="login-form">
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Se connecter</button>
+            <div id="login-error" style="display:none;">Nom d'utilisateur ou mot de passe incorrect.</div>
+        </form>
+    </div>
+
+    <div class="container" style="display:none;">
+        <h1>Suivi des Stocks du Restaurant <button id="logout-btn">Déconnexion</button></h1>
+
+        <section class="suppliers-section">
+            <h2>Gestion des Fournisseurs</h2>
+            <form id="addSupplierForm">
+                <label for="addSupplierName">Nouveau Fournisseur :</label>
+                <input type="text" id="addSupplierName" placeholder="Nom du fournisseur">
+                <button type="button" id="addSupplierBtn">Ajouter Fournisseur</button>
+            </form>
+            <h3>Liste des Fournisseurs</h3>
+            <ul id="suppliersList">
+                </ul>
+        </section>
+
+        <section class="form-ajout">
+            <h2>Ajouter un Article</h2>
+            <fieldset>
+                <legend>Informations sur l'article</legend>
+                <div>
+                    <label for="itemName">Nom de l'article :</label>
+                    <input type="text" id="itemName" placeholder="Ex: Tomates" required>
+                </div>
+                <div>
+                    <label for="itemQuantity">Quantité initiale :</label>
+                    <input type="number" id="itemQuantity" placeholder="Ex: 10" min="0" required>
+                </div>
+                <div>
+                    <label for="itemUnit">Unité :</label>
+                    <select id="itemUnit">
+                        <option value="">-- Sélectionner --</option>
+                        <option value="kg">kg</option>
+                        <option value="unité">unité</option>
+                        <option value="L">L</option>
+                        <option value="g">g</option>
+                        <option value="ml">ml</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="itemCategory">Catégorie :</label>
+                    <select id="itemCategory">
+                        <option value="">-- Sélectionner --</option>
+                        <option value="fruit">Fruit</option>
+                        <option value="legume">Légume</option>
+                        <option value="boisson">Boisson</option>
+                        <option value="viande">Viande</option>
+                        <option value="poisson">Poisson</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="lowStockThreshold">Seuil stock bas :</label>
+                    <input type="number" id="lowStockThreshold" placeholder="Ex: 5" min="0" value="5" required>
+                </div>
+                <div>
+                    <label for="itemImage">URL de l'image :</label>
+                    <input type="text" id="itemImage" placeholder="Ex: http://example.com/image.jpg">
+                </div>
+                <div>
+                    <label for="itemSupplier">Fournisseur :</label>
+                    <select id="itemSupplier">
+                        <option value="">-- Sélectionner --</option>
+                    </select>
+                </div>
+                <input type="hidden" id="itemIdToEdit">
+            </fieldset>
+            <button id="addItemBtn">Ajouter au Stock</button>
+            <div id="feedback-message" style="display:none;"></div>
+        </section>
+
+        <section class="filter-section">
+            <div>
+                <label for="search-input">Rechercher un article :</label>
+                <input type="text" id="search-input" placeholder="Nom de l'article">
+            </div>
+        </section>
+
+        <section>
+            <h2>Stock Actuel</h2>
+            <table id="stockTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col" data-sort="name">Article</th>
+                        <th scope="col" data-sort="quantity">Quantité</th>
+                        <th scope="col">Unité</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col" data-sort="lowStockThreshold">Seuil Bas</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="stockBody">
+                    </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Fournisseurs des Produits</h2>
+            <table id="productSuppliersTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Article</th>
+                        <th scope="col">Fournisseur</th>
+                    </tr>
+                </thead>
+                <tbody id="productSuppliersBody">
+                </tbody>
+            </table>
+        </section>
+
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeDeleteModal()">&times;</span>
+                <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-confirm" id="confirmDeleteBtn">Supprimer</button>
+                    <button type="button" class="modal-cancel" onclick="closeDeleteModal()">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Variables Globales ---
+        const itemForm = document.querySelector('.form-ajout');
+        const itemNameInput = document.getElementById('itemName');
+        const itemQuantityInput = document.getElementById('itemQuantity');
+        const itemUnitInput = document.getElementById('itemUnit');
+        const itemCategoryInput = document.getElementById('itemCategory');
+        const lowStockThresholdInput = document.getElementById('lowStockThreshold');
+        const itemImageInput = document.getElementById('itemImage');
+        const itemSupplierInput = document.getElementById('itemSupplier');
+        const addItemBtn = document.getElementById('addItemBtn');
+        const stockTableBody = document.getElementById('stockBody');
+        const productSuppliersTableBody = document.getElementById('productSuppliersBody');
+        const itemIdToEditInput = document.getElementById('itemIdToEdit');
+        const searchInput = document.getElementById('search-input');
+        const feedbackMessageDiv = document.getElementById('feedback-message');
+        const deleteModal = document.getElementById('deleteModal');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        let currentItemToDeleteId = null;
+
+        // --- Gestion des Fournisseurs ---
+        const addSupplierForm = document.getElementById('addSupplierForm');
+        const addSupplierNameInput = document.getElementById('addSupplierName');
+        const addSupplierBtn = document.getElementById('addSupplierBtn');
+        const suppliersListElement = document.getElementById('suppliersList');
+        let suppliers = JSON.parse(localStorage.getItem('restaurantSuppliers')) || [];
+
+        // --- Stock et Fournisseurs des Produits (utilise le localStorage) ---
+        let stock = JSON.parse(localStorage.getItem('restaurantStock')) || [];
+        let productSuppliers = JSON.parse(localStorage.getItem('productSuppliers')) || [];
+
+        // --- Variables pour la gestion de l'admin login ---
+        const loginContainer = document.getElementById('login-container');
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginErrorDiv = document.getElementById('login-error');
+        const mainContainer = document.querySelector('.container');
+        const logoutBtn = document.getElementById('logout-btn');
+        const ADMIN_USERNAME = 'AidenWellington'; // **IMPORTANT: Ceci est pour démonstration uniquement. Ne jamais coder en dur des identifiants dans une application réelle.**
+        const ADMIN_PASSWORD = 'Delight2205'; // **Utiliser des méthodes de stockage et d'authentification sécurisées côté serveur.**
+        let isLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
+
+        // --- Fonction pour vérifier l'état de connexion ---
+        function checkLoginStatus() {
+            if (isLoggedIn) {
+                loginContainer.style.display = 'none';
+                mainContainer.style.display = 'block';
+            } else {
+                loginContainer.style.display = 'block';
+                mainContainer.style.display = 'none';
+            }
+        }
+
+        // --- Fonction pour gérer la connexion ---
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                localStorage.setItem('isAdminLoggedIn', 'true');
+                checkLoginStatus();
+                loginErrorDiv.style.display = 'none';
+            } else {
+                loginErrorDiv.style.display = 'block';
+            }
+            usernameInput.value = '';
+            passwordInput.value = '';
+        });
+
+        // --- Fonction pour gérer la déconnexion ---
+        logoutBtn.addEventListener('click', function() {
+            isLoggedIn = false;
+            localStorage.removeItem('isAdminLoggedIn');
+            checkLoginStatus();
+        });
+
+        // --- Fonction pour sauvegarder les fournisseurs ---
+        function saveSuppliers() {
+            localStorage.setItem('restaurantSuppliers', JSON.stringify(suppliers));
+            renderSupplierDropdown();
+            renderSuppliersList();
+        }
+
+        // --- Fonction pour afficher la liste des fournisseurs ---
+        function renderSuppliersList() {
+            suppliersListElement.innerHTML = '';
+            suppliers.forEach(supplier => {
+                const li = document.createElement('li');
+                li.textContent = supplier.name;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.classList.add('delete-supplier-btn');
+                deleteButton.addEventListener('click', () => deleteSupplier(supplier.id));
+                li.appendChild(deleteButton);
+                suppliersListElement.appendChild(li);
+            });
+        }
+
+        // --- Fonction pour ajouter un fournisseur ---
+        function addSupplier() {
+            const name = addSupplierNameInput.value.trim();
+            if (name) {
+                const newSupplier = { id: Date.now().toString(), name: name };
+                suppliers.push(newSupplier);
+                saveSuppliers();
+                addSupplierNameInput.value = '';
+            }
+        }
+
+        // --- Fonction pour supprimer un fournisseur ---
+        function deleteSupplier(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce fournisseur ? (Cela ne supprimera pas les produits déjà associés)')) {
+                suppliers = suppliers.filter(supplier => supplier.id !== id);
+                saveSuppliers();
+            }
+        }
+
+        // --- Fonction pour remplir le dropdown des fournisseurs dans le formulaire ---
+        function renderSupplierDropdown() {
+            itemSupplierInput.innerHTML = '<option value="">-- Sélectionner --</option>';
+            suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.name;
+                option.textContent = supplier.name;
+                itemSupplierInput.appendChild(option);
+            });
+        }
+
+        // --- Fonctions de sauvegarde pour le stock et les fournisseurs de produits ---
+        function saveStock() {
+            localStorage.setItem('restaurantStock', JSON.stringify(stock));
+        }
+
+        function saveProductSuppliers() {
+            localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
+        }
+
+        /**
+         * Affiche les articles du stock dans le tableau HTML.
+         */
+        function renderStock(sortColumn = null, sortDirection = 'asc') {
+            stockTableBody.innerHTML = ''; // Vide le tableau
+
+            let sortedStock = [...stock];
+            if (sortColumn) {
+                sortedStock.sort((a, b) => {
+                    const aValue = a[sortColumn];
+                    const bValue = b[sortColumn];
+                    if (typeof aValue === 'string') {
+                        return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                    } else {
+                        return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+                    }
+                });
+            }
+
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredStock = sortedStock.filter(item => item.name.toLowerCase().includes(searchTerm));
+
+            if (filteredStock.length === 0) {
+                stockTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Aucun article en stock pour le moment.</td></tr>';
+                return;
+            }
+
+            filteredStock.forEach(item => {
+                const row = document.createElement('tr');
+                row.dataset.id = item.id; // ID sur la ligne
+
+                // Vérification stock bas AVANT de générer le HTML des cellules
+                const isLowStock = item.quantity <= item.lowStockThreshold;
+                if (isLowStock) {
+                    row.classList.add('low-stock');
+                }
+
+                row.innerHTML = `
+                    <td><img src="${escapeHtml(item.imageUrl || '')}" alt="${escapeHtml(item.name)}" class="stock-image"></td>
+                    <td>${escapeHtml(item.name)}</td>
+                    <td class="quantity-cell" title="Cliquez pour modifier">${item.quantity}</td>
+                    <td>${escapeHtml(item.unit || '')}</td>
+                    <td>${escapeHtml(item.category || '')}</td>
+                    <td>${item.lowStockThreshold}</td>
+                    <td class="action-buttons">
+                        <button class="btn-increase" data-action="increase" title="Augmenter de 1">+</button>
+                        <button class="btn-decrease" data-action="decrease" title="Diminuer de 1">-</button>
+                        <button class="btn-remove-qty" data-action="remove-qty" title="Retirer une quantité spécifique">Retirer</button>
+                        <button class="btn-edit" data-action="edit" title="Modifier l'article">Modifier</button>
+                        <button class="btn-delete" data-action="delete" title="Supprimer l'article">Supprimer</button>
+                    </td>
+                `;
+                stockTableBody.appendChild(row);
+            });
+
+            renderProductSuppliersTable(); // Mettre à jour le tableau des fournisseurs à chaque rendu du stock
+        }
+
+        function addItem() {
+            const name = itemNameInput.value.trim();
+            const quantity = parseInt(itemQuantityInput.value, 10);
+            const unit = itemUnitInput.value;
+            const category = itemCategoryInput.value;
+            const lowStockThreshold = parseInt(lowStockThresholdInput.value, 10) || 0;
+            const imageUrl = itemImageInput.value.trim();
+            const supplier = itemSupplierInput.value;
+            const itemIdToEdit = itemIdToEditInput.value;
+
+            if (!name || isNaN(quantity) || quantity < 0 || isNaN(lowStockThreshold) || lowStockThreshold < 0) {
+                displayFeedback('Veuillez remplir tous les champs correctement (Nom, Quantité >= 0, Seuil >= 0).', 'error');
+                return;
+            }
+
+            if (itemIdToEdit) {
+                // Mode édition
+                const itemIndex = stock.findIndex(item => item.id === itemIdToEdit);
+                if (itemIndex > -1) {
+                    stock[itemIndex].name = name;
+                    stock[itemIndex].quantity = quantity;
+                    stock[itemIndex].unit = unit;
+                    stock[itemIndex].category = category;
+                    stock[itemIndex].lowStockThreshold = lowStockThreshold;
+                    stock[itemIndex].imageUrl = imageUrl;
+
+                    const supplierLinkIndex = productSuppliers.findIndex(link => link.productId === itemIdToEdit);
+                    if (supplier) {
+                        if (supplierLinkIndex > -1) {
+                            productSuppliers[supplierLinkIndex].supplier = supplier;
+                        } else {
+                            productSuppliers.push({ productId: itemIdToEdit, supplier: supplier });
+                        }
+                    } else if (supplierLinkIndex > -1) {
+                        productSuppliers.splice(supplierLinkIndex, 1); // Supprimer le lien si le fournisseur est vidé
+                    }
+
+                    saveStock();
+                    saveProductSuppliers();
+                    renderStock();
+                    resetForm();
+                    addItemBtn.textContent = 'Ajouter au Stock';
+                    displayFeedback(`L'article "${escapeHtml(name)}" a été mis à jour.`, 'success');
+                }
+            } else {
+                // Mode ajout
+                const existingItemIndex = stock.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
+                let newItemId;
+
+                if (existingItemIndex > -1) {
+                     stock[existingItemIndex].quantity += quantity;
+                     displayFeedback(`Quantité ajoutée à l'article existant "${escapeHtml(name)}".`, 'success');
+                     newItemId = stock[existingItemIndex].id;
+                } else {
+                     const newItem = {
+                        id: Date.now().toString(),
+                        name: name,
+                        quantity: quantity,
+                        unit: unit,
+                        category: category,
+                        lowStockThreshold: lowStockThreshold,
+                        imageUrl: imageUrl
+                    };
+                    stock.push(newItem);
+                    newItemId = newItem.id;
+                }
+
+                saveStock();
+
+                if (supplier) {
+                    const existingSupplierLink = productSuppliers.find(link => link.productId === newItemId);
+                    if (existingSupplierLink) {
+                        existingSupplierLink.supplier = supplier;
+                    } else {
+                        productSuppliers.push({ productId: newItemId, supplier: supplier });
+                    }
+                    saveProductSuppliers();
+                }
+
+                renderStock();
+                resetForm();
+                displayFeedback(`L'article "${escapeHtml(name)}" a été ajouté au stock.`, 'success');
+            }
+        }
+
+        function resetForm() {
+            itemNameInput.value = '';
+            itemQuantityInput.value = '';
+            itemUnitInput.value = '';
+            itemCategoryInput.value = '';
+            itemImageInput.value = '';
+            itemSupplierInput.value = '';
+            lowStockThresholdInput.value = '5';
+            itemIdToEditInput.value = '';
+            addItemBtn.textContent = 'Ajouter au Stock';
+            document.querySelector('.form-ajout h2').textContent = 'Ajouter un Article';
+            feedbackMessageDiv.style.display = 'none';
+        }
+
+        /**
+         * Affiche les fournisseurs des produits dans le tableau HTML.
+         */
+        function renderProductSuppliersTable() {
+            productSuppliersTableBody.innerHTML = ''; // Vide le tableau des fournisseurs
+
+            productSuppliers.forEach(link => {
+                const product = stock.find(item => item.id === link.productId);
+                if (product) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${escapeHtml(product.name)}</td>
+                        <td>${escapeHtml(link.supplier)}</td>
+                    `;
+                    productSuppliersTableBody.appendChild(row);
+                }
+            });
+        }
+
+        /**
+         * Met à jour la quantité d'un article via les boutons + ou -.
+         * @param {string} id - L'ID de l'article.
+         * @param {number} change - La quantité à ajouter (+1) ou à retirer (-1).
+         */
+        function updateQuantityByButton(id, change) {
+            const itemIndex = stock.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                stock[itemIndex].quantity += change;
+                if (stock[itemIndex].quantity < 0) {
+                    stock[itemIndex].quantity = 0;
+                }
+                saveStock();
+                renderStock(); // Redessine pour mettre à jour visuellement
+            }
+        }
+
+        /**
+         * Permet de retirer une quantité spécifique du stock.
+         * @param {string} id - L'ID de l'article.
+         */
+        function removeQuantity(id) {
+            const itemIndex = stock.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                const currentQuantity = stock[itemIndex].quantity;
+                const quantityToRemove = prompt(`Entrez la quantité à retirer de "${escapeHtml(stock[itemIndex].name)}" (Stock actuel: ${currentQuantity}):`, '1');
+
+                if (quantityToRemove !== null) {
+                    const qtyToRemove = parseInt(quantityToRemove, 10);
+                    if (!isNaN(qtyToRemove) && qtyToRemove > 0 && qtyToRemove <= currentQuantity) {
+                        stock[itemIndex].quantity -= qtyToRemove;
+                        saveStock();
+                        renderStock();
+                        displayFeedback(`Retiré ${qtyToRemove} de "${escapeHtml(stock[itemIndex].name)}".`, 'success');
+                    } else if (isNaN(qtyToRemove) || qtyToRemove <= 0) {
+                        displayFeedback('Veuillez entrer une quantité valide (nombre supérieur à zéro).', 'error');
+                    } else {
+                        displayFeedback('La quantité à retirer est supérieure au stock actuel.', 'error');
+                    }
+                }
+            }
+        }
+
+        /**
+         * Prépare le formulaire pour l'édition d'un article.
+         * @param {string} id - L'ID de l'article à éditer.
+         */
+        function editItem(id) {
+            const itemToEdit = stock.find(item => item.id === id);
+            if (itemToEdit) {
+                itemNameInput.value = itemToEdit.name;
+                itemQuantityInput.value = itemToEdit.quantity;
+                itemUnitInput.value = itemToEdit.unit || '';
+                itemCategoryInput.value = itemToEdit.category || '';
+                lowStockThresholdInput.value = itemToEdit.lowStockThreshold;
+                itemImageInput.value = itemToEdit.imageUrl || '';
+                itemIdToEditInput.value = itemToEdit.id;
+                addItemBtn.textContent = 'Enregistrer les Modifications';
+                document.querySelector('.form-ajout h2').textContent = `Modifier "${escapeHtml(itemToEdit.name)}"`;
+
+                const supplierLink = productSuppliers.find(link => link.productId === id);
+                itemSupplierInput.value = supplierLink ? supplierLink.supplier : '';
+            }
+        }
+
+        function openDeleteModal(id) {
+            currentItemToDeleteId = id;
+            deleteModal.style.display = "block";
+        }
+
+        function closeDeleteModal() {
+            deleteModal.style.display = "none";
+            currentItemToDeleteId = null;
+        }
+
+        function deleteItem() {
+            if (currentItemToDeleteId) {
+                stock = stock.filter(item => item.id !== currentItemToDeleteId);
+                productSuppliers = productSuppliers.filter(link => link.productId !== currentItemToDeleteId);
+                saveStock();
+                saveProductSuppliers();
+                renderStock();
+                closeDeleteModal();
+                displayFeedback("L'article a été supprimé.", 'success');
+            }
+        }
+
+        function escapeHtml(unsafe) {
+            if (!unsafe) return "";
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        function displayFeedback(message, type = 'success') {
+            feedbackMessageDiv.textContent = message;
+            feedbackMessageDiv.className = `feedback-message feedback-${type}`;
+            feedbackMessageDiv.style.display = 'block';
+            setTimeout(() => {
+                feedbackMessageDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        let currentSortColumn = null;
+        let currentSortDirection = 'asc';
+
+        function sortTable(column) {
+            if (currentSortColumn === column) {
+                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortColumn = column;
+                currentSortDirection = 'asc';
+            }
+            renderStock(currentSortColumn, currentSortDirection);
+        }
+
+        // --- Initialisation ---
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLoginStatus();
+            renderSuppliersList();
+            renderSupplierDropdown();
+            renderStock();
+            renderProductSuppliersTable();
+        });
+
+        // Écouteurs d'événements
+        addSupplierBtn.addEventListener('click', addSupplier);
+        searchInput.addEventListener('input', () => renderStock(currentSortColumn, currentSortDirection));
+
+        // Écouteurs pour le tri des colonnes
+        document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => sortTable(th.dataset.sort));
+        });
+
+        confirmDeleteBtn.addEventListener('click', deleteItem);
+        addItemBtn.addEventListener('click', addItem);
+
+        lowStockThresholdInput.addEventListener('keypress', function(event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            addItem();
+          }
+        });
+        itemSupplierInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addItem();
+            }
+        });
+
+        // Gestion des clics dans le tableau (Délégation d'événements)
+        stockTableBody.addEventListener('click', (event) => {
+            const target = event.target;
+            const row = target.closest('tr');
+            if (!row) return;
+
+            const id = row.dataset.id;
+
+            if (target.tagName === 'BUTTON' && target.closest('td.action-buttons')) {
+                const action = target.dataset.action;
+                if (action === 'increase') {
+                    updateQuantityByButton(id, 1);
+                } else if (action === 'decrease') {
+                    updateQuantityByButton(id, -1);
+                } else if (action === 'remove-qty') {
+                    removeQuantity(id);
+                } else if (action === 'edit') {
+                    editItem(id);
+                } else if (action === 'delete') {
+                    openDeleteModal(id);
+                }
+            } else if (target.classList.contains('quantity-cell') && !target.querySelector('input')) {
+                const currentQuantity = target.textContent;
+                target.innerHTML = '';
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.value = currentQuantity;
+                input.min = '0';
+                input.className = 'quantity-input';
+                target.appendChild(input);
+                input.focus();
+                input.select();
+
+                const saveEdit = () => {
+                    const newValue = parseInt(input.value, 10);
+                    updateQuantityDirectly(id, newValue);
+                };
+
+                input.addEventListener('blur', saveEdit);
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        saveEdit();
+                    } else if (e.key === 'Escape') {
+                        renderStock();
+                    }
+                });
+            }
+        });
+
+        // Fermer le modal si l'utilisateur clique en dehors
+        window.onclick = function(event) {
+            if (event.target == deleteModal) {
+                closeDeleteModal();
+            }
+        }
+
+        // --- Initialisation de l'état de connexion ---
+        checkLoginStatus();
+
+    </script>
+
+</body>
+</html>
