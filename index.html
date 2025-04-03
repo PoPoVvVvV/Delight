@@ -13,6 +13,7 @@
             padding: 20px;
             background-color: #f4f4f4;
             color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -22,12 +23,15 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Pour positionner le bouton de déconnexion */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         h1, h2 {
             color: #5a8d03; /* Vert olive */
             text-align: center;
             margin-bottom: 20px;
+            transition: color 0.3s ease;
         }
 
         /* --- Style pour le formulaire de login --- */
@@ -39,6 +43,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         #login-form label {
@@ -46,6 +51,7 @@
             margin-bottom: 8px;
             font-weight: bold;
             color: #444;
+            transition: color 0.3s ease;
         }
 
         #login-form input[type="text"],
@@ -56,6 +62,9 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
+            color: #333;
+            background-color: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         #login-form button {
@@ -78,11 +87,14 @@
             margin-top: 10px;
         }
 
-        /* --- Style pour le bouton de logout --- */
-        #logout-btn {
+        /* --- Style pour le bouton de déconnexion --- */
+        .logout-container {
             position: absolute;
             top: 20px;
             right: 20px;
+        }
+
+        .logout-button {
             padding: 8px 15px;
             background-color: #6c757d; /* Gris */
             color: white;
@@ -91,54 +103,67 @@
             cursor: pointer;
             font-size: 0.9em;
             transition: background-color 0.3s ease;
-            z-index: 100; /* Pour être au-dessus du contenu */
+            text-decoration: none; /* Pour le lien */
         }
 
-        #logout-btn:hover {
+        .logout-button:hover {
             background-color: #5a6268;
         }
 
         /* --- Styles Généraux (suite) --- */
         /* ... (Les styles existants restent ici) ... */
         .suppliers-section {
-            margin-bottom: 30px;
-            padding: 20px;
+            padding: 10px; /* Réduit le padding */
             background-color: #f0f8ea;
             border-radius: 5px;
             border: 1px solid #c3e6cb;
+            display: none; /* Initialement caché */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            font-size: 0.9em; /* Réduit la taille de la police */
+            flex: 1; /* Prend la moitié de l'espace disponible */
         }
 
         .suppliers-section h2 {
             color: #28a745;
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Réduit la marge */
+            font-size: 1.1em; /* Réduit la taille du titre */
+            transition: color 0.3s ease;
         }
 
         #addSupplierForm {
             display: grid;
             grid-template-columns: auto 1fr auto;
-            gap: 10px;
+            gap: 5px; /* Réduit l'espacement */
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Réduit la marge */
         }
 
         #addSupplierForm label {
             font-weight: normal;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
         }
 
         #addSupplierName {
-            padding: 8px;
+            padding: 6px; /* Réduit le padding */
             border: 1px solid #ccc;
             border-radius: 4px;
+            color: #333;
+            background-color: #fff;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         #addSupplierBtn {
-            padding: 8px 15px;
+            padding: 6px 10px; /* Réduit le padding */
             background-color: #28a745;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
         }
 
         #addSupplierBtn:hover {
@@ -148,14 +173,18 @@
         #suppliersList {
             list-style: none;
             padding: 0;
+            margin-top: 5px; /* Réduit la marge */
         }
 
         #suppliersList li {
-            padding: 8px 0;
+            padding: 6px 0; /* Réduit le padding */
             border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: #333;
+            font-size: 0.9em;
+            transition: color 0.3s ease, border-color 0.3s ease;
         }
 
         #suppliersList li:last-child {
@@ -167,8 +196,9 @@
             border: none;
             color: #dc3545;
             cursor: pointer;
-            font-size: 0.9em;
-            margin-left: 10px;
+            font-size: 0.8em; /* Encore plus petit */
+            margin-left: 5px; /* Réduit la marge */
+            transition: color 0.3s ease;
         }
 
         .delete-supplier-btn:hover {
@@ -184,18 +214,25 @@
 
         .filter-section label {
             font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         .filter-section input[type="text"] {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            color: #333;
+            background-color: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         .filter-section select {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            color: #333;
+            background-color: #fff;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         #stockTable {
@@ -209,16 +246,19 @@
             color: #333;
             font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         #stockTable th, #stockTable td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
+            transition: border-color 0.3s ease, color 0.3s ease;
         }
 
         #stockTable tr:nth-child(even) {
             background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
         }
 
         #stockTable tr:hover {
@@ -240,6 +280,9 @@
             border: 1px solid #7cb342;
             border-radius: 3px;
             box-sizing: border-box;
+            color: #333;
+            background-color: #fff;
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
         }
 
         .action-buttons button {
@@ -301,16 +344,19 @@
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
+            transition: border-color 0.3s ease, color 0.3s ease;
         }
 
         #productSuppliersTable th {
             background-color: #f0f0f0;
             color: #333;
             font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         #productSuppliersTable tr:nth-child(even) {
             background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
         }
 
         #feedback-message {
@@ -350,6 +396,7 @@
             border: 1px solid #888;
             width: 80%;
             border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         .modal-buttons {
@@ -389,6 +436,7 @@
             float: right;
             font-size: 28px;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         .close-button:hover,
@@ -398,51 +446,284 @@
             cursor: pointer;
         }
 
-        #logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 8px 15px;
-            background-color: #6c757d;
+        /* --- Style pour la gestion des utilisateurs (Réduit et en bas) --- */
+        .user-management-section {
+            padding: 10px; /* Réduit le padding */
+            background-color: #f8f9fa; /* Gris très clair */
+            border-radius: 5px;
+            border: 1px solid #dee2e6; /* Bordure légère */
+            display: none; /* Initialement caché */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            font-size: 0.9em; /* Réduit la taille de la police */
+            flex: 1; /* Prend la moitié de l'espace disponible */
+        }
+
+        .user-management-section h2 {
+            color: #007bff; /* Bleu */
+            text-align: left;
+            margin-bottom: 10px; /* Réduit la marge */
+            font-size: 1.1em; /* Réduit la taille du titre */
+            transition: color 0.3s ease;
+        }
+
+        #addUserForm {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 5px; /* Réduit l'espacement */
+            align-items: center;
+            margin-bottom: 5px; /* Réduit la marge */
+        }
+
+        #addUserForm label {
+            font-weight: normal;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+
+        #newUsername, #newPassword {
+            padding: 6px; /* Réduit le padding */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+            background-color: #fff;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #addUserBtn {
+            padding: 6px 10px; /* Réduit le padding */
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.9em;
             transition: background-color 0.3s ease;
-            z-index: 100;
         }
 
-        #logout-btn:hover {
-            background-color: #5a6268;
+        #addUserBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #usersList {
+            list-style: none;
+            padding: 0;
+            margin-top: 5px; /* Réduit la marge */
+        }
+
+        #usersList li {
+            padding: 6px 0; /* Réduit le padding */
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            font-size: 0.9em;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #usersList li:last-child {
+            border-bottom: none;
+        }
+
+        .delete-user-btn {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 0.8em; /* Encore plus petit */
+            margin-left: 5px; /* Réduit la marge */
+            transition: color 0.3s ease;
+        }
+
+        .delete-user-btn:hover {
+            color: #c82333;
+        }
+
+        /* --- Style pour le container des sections du bas --- */
+        .bottom-sections {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px; /* Espacement avec le contenu précédent */
+        }
+
+        /* --- Dark Mode Styles --- */
+        .dark-mode body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .container {
+            background: #1e1e1e;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode h1, .dark-mode h2 {
+            color: #8bc34a; /* Vert plus clair pour le mode sombre */
+        }
+
+        .dark-mode #login-container {
+            background: #1e1e1e;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode #login-form label {
+            color: #e0e0e0;
+        }
+
+        .dark-mode #login-form input[type="text"],
+        .dark-mode #login-form input[type="password"] {
+            color: #e0e0e0;
+            background-color: #303030;
+            border-color: #555;
+        }
+
+        .dark-mode .logout-button {
+            background-color: #424242;
+        }
+
+        .dark-mode .logout-button:hover {
+            background-color: #303030;
+        }
+
+        .dark-mode .suppliers-section {
+            background-color: #2e3d29;
+            border-color: #558b2f;
+        }
+
+        .dark-mode .suppliers-section h2 {
+            color: #aed581;
+        }
+
+        .dark-mode #addSupplierForm label {
+            color: #e0e0e0;
+        }
+
+        .dark-mode #addSupplierName {
+            color: #e0e0e0;
+            background-color: #303030;
+            border-color: #555;
+        }
+
+        .dark-mode #suppliersList li {
+            color: #e0e0e0;
+            border-color: #555;
+        }
+
+        .dark-mode .filter-section label {
+            color: #e0e0e0;
+        }
+
+        .dark-mode .filter-section input[type="text"],
+        .dark-mode .filter-section select {
+            color: #e0e0e0;
+            background-color: #303030;
+            border-color: #555;
+        }
+
+        .dark-mode #stockTable th {
+            background-color: #689f38;
+            color: #e0e0e0;
+        }
+
+        .dark-mode #stockTable th, .dark-mode #stockTable td {
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        .dark-mode #stockTable tr:nth-child(even) {
+            background-color: #212121;
+        }
+
+        .dark-mode #stockTable tr:hover {
+            background-color: #424242;
+        }
+
+        .dark-mode .quantity-input {
+            color: #e0e0e0;
+            background-color: #303030;
+            border-color: #8bc34a;
+        }
+
+        .dark-mode #productSuppliersTable th {
+            background-color: #424242;
+            color: #e0e0e0;
+        }
+
+        .dark-mode #productSuppliersTable th, .dark-mode #productSuppliersTable td {
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        .dark-mode #productSuppliersTable tr:nth-child(even) {
+            background-color: #212121;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #303030;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .close-button {
+            color: #ccc;
+        }
+
+        .dark-mode .user-management-section {
+            background-color: #263238;
+            border-color: #455a64;
+        }
+
+        .dark-mode .user-management-section h2 {
+            color: #64b5f6;
+        }
+
+        .dark-mode #addUserForm label {
+            color: #e0e0e0;
+        }
+
+        .dark-mode #newUsername, .dark-mode #newPassword {
+            color: #e0e0e0;
+            background-color: #37474f;
+            border-color: #546e7a;
+        }
+
+        .dark-mode #usersList li {
+            color: #e0e0e0;
+            border-color: #555;
+        }
+
+        .dark-mode .bottom-sections .user-management-section {
+            background-color: #f8f9fa; /* Gris très clair */
+            border: 1px solid #dee2e6; /* Bordure légère */
+        }
+
+        .dark-mode .bottom-sections .suppliers-section {
+            background-color: #f0f8ea;
+            border: 1px solid #c3e6cb;
+        }
+
+        .dark-mode.dark-mode .bottom-sections .user-management-section {
+            background-color: #263238;
+            border-color: #455a64;
+        }
+
+        .dark-mode.dark-mode .bottom-sections .suppliers-section {
+            background-color: #2e3d29;
+            border-color: #558b2f;
         }
 
         @media (max-width: 768px) {
-            .filter-section {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+            .bottom-sections {
+                flex-direction: column; /* Empiler les sections sur les écrans plus petits */
             }
-            .form-ajout {
-                grid-template-columns: 1fr;
+            .user-management-section, .suppliers-section {
+                width: 100%; /* Prendre toute la largeur */
             }
+            /* ... (Styles existants) ... */
         }
         @media (max-width: 600px) {
-            #stockTable th, #stockTable td {
-                padding: 8px;
-                font-size: 0.9em;
-            }
-            .action-buttons button {
-                padding: 4px 6px;
-                font-size: 0.8em;
-            }
-            .quantity-input {
-                width: 90%;
-            }
-            #productSuppliersTable th, #productSuppliersTable td {
-                padding: 8px;
-                font-size: 0.9em;
-            }
+            /* ... (Styles existants) ... */
         }
 
     </style>
@@ -464,19 +745,11 @@
     </div>
 
     <div class="container" style="display:none;">
-        <h1>Suivi des Stocks du Restaurant <button id="logout-btn">Déconnexion</button></h1>
+        <h1>Suivi des Stocks du Restaurant</h1>
 
-        <section class="suppliers-section">
-            <h2>Gestion des Fournisseurs</h2>
-            <form id="addSupplierForm">
-                <label for="addSupplierName">Nouveau Fournisseur :</label>
-                <input type="text" id="addSupplierName" placeholder="Nom du fournisseur">
-                <button type="button" id="addSupplierBtn">Ajouter Fournisseur</button>
-            </form>
-            <h3>Liste des Fournisseurs</h3>
-            <ul id="suppliersList">
-                </ul>
-        </section>
+        <div class="logout-container">
+            <a href="#" id="logout-link" class="logout-button">Déconnexion</a>
+        </div>
 
         <section class="form-ajout">
             <h2>Ajouter un Article</h2>
@@ -489,17 +762,6 @@
                 <div>
                     <label for="itemQuantity">Quantité initiale :</label>
                     <input type="number" id="itemQuantity" placeholder="Ex: 10" min="0" required>
-                </div>
-                <div>
-                    <label for="itemUnit">Unité :</label>
-                    <select id="itemUnit">
-                        <option value="">-- Sélectionner --</option>
-                        <option value="kg">kg</option>
-                        <option value="unité">unité</option>
-                        <option value="L">L</option>
-                        <option value="g">g</option>
-                        <option value="ml">ml</option>
-                    </select>
                 </div>
                 <div>
                     <label for="itemCategory">Catégorie :</label>
@@ -540,6 +802,25 @@
             </div>
         </section>
 
+        <section class="stock-management-options">
+            <div>
+                <label for="category-filter">Filtrer par Catégorie :</label>
+                <select id="category-filter">
+                    <option value="">-- Toutes --</option>
+                </select>
+            </div>
+            <div>
+                <label for="supplier-filter">Filtrer par Fournisseur :</label>
+                <select id="supplier-filter">
+                    <option value="">-- Tous --</option>
+                </select>
+            </div>
+            <div>
+                <input type="checkbox" id="out-of-stock-filter">
+                <label for="out-of-stock-filter">Afficher uniquement les articles en rupture de stock</label>
+            </div>
+        </section>
+
         <section>
             <h2>Stock Actuel</h2>
             <table id="stockTable">
@@ -548,9 +829,10 @@
                         <th scope="col">Image</th>
                         <th scope="col" data-sort="name">Article</th>
                         <th scope="col" data-sort="quantity">Quantité</th>
-                        <th scope="col">Unité</th>
-                        <th scope="col">Catégorie</th>
+                        <th scope="col" data-sort="category">Catégorie</th>
                         <th scope="col" data-sort="lowStockThreshold">Seuil Bas</th>
+                        <th scope="col" data-sort="supplier">Fournisseur</th>
+                        <th scope="col" data-sort="dateAdded">Date d'ajout</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -573,6 +855,35 @@
             </table>
         </section>
 
+        <div class="bottom-sections">
+            <section class="user-management-section">
+                <h2>Gestion des Utilisateurs</h2>
+                <form id="addUserForm">
+                    <label for="newUsername">Nouveau Nom d'utilisateur :</label>
+                    <input type="text" id="newUsername" placeholder="Nom d'utilisateur">
+                    <label for="newPassword">Nouveau Mot de passe :</label>
+                    <input type="password" id="newPassword" placeholder="Mot de passe">
+                    <button type="button" id="addUserBtn">Ajouter Utilisateur</button>
+                </form>
+                <h3>Liste des Utilisateurs</h3>
+                <ul id="usersList">
+                    </ul>
+                <div id="user-feedback-message" style="display:none;"></div>
+            </section>
+
+            <section class="suppliers-section">
+                <h2>Gestion des Fournisseurs</h2>
+                <form id="addSupplierForm">
+                    <label for="addSupplierName">Nouveau Fournisseur :</label>
+                    <input type="text" id="addSupplierName" placeholder="Nom du fournisseur">
+                    <button type="button" id="addSupplierBtn">Ajouter Fournisseur</button>
+                </form>
+                <h3>Liste des Fournisseurs</h3>
+                <ul id="suppliersList">
+                    </ul>
+            </section>
+        </div>
+
         <div id="deleteModal" class="modal">
             <div class="modal-content">
                 <span class="close-button" onclick="closeDeleteModal()">&times;</span>
@@ -591,7 +902,6 @@
         const itemForm = document.querySelector('.form-ajout');
         const itemNameInput = document.getElementById('itemName');
         const itemQuantityInput = document.getElementById('itemQuantity');
-        const itemUnitInput = document.getElementById('itemUnit');
         const itemCategoryInput = document.getElementById('itemCategory');
         const lowStockThresholdInput = document.getElementById('lowStockThreshold');
         const itemImageInput = document.getElementById('itemImage');
@@ -612,6 +922,7 @@
         const addSupplierBtn = document.getElementById('addSupplierBtn');
         const suppliersListElement = document.getElementById('suppliersList');
         let suppliers = JSON.parse(localStorage.getItem('restaurantSuppliers')) || [];
+        const suppliersSection = document.querySelector('.suppliers-section');
 
         // --- Stock et Fournisseurs des Produits (utilise le localStorage) ---
         let stock = JSON.parse(localStorage.getItem('restaurantStock')) || [];
@@ -624,19 +935,110 @@
         const passwordInput = document.getElementById('password');
         const loginErrorDiv = document.getElementById('login-error');
         const mainContainer = document.querySelector('.container');
-        const logoutBtn = document.getElementById('logout-btn');
+        const logoutLink = document.getElementById('logout-link');
         const ADMIN_USERNAME = 'AidenWellington';
         const ADMIN_PASSWORD = 'Delight2205';
-        let isLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
+        let isLoggedIn = false; // Initialiser à false
+
+        // --- Variables pour la gestion des utilisateurs ---
+        const addUserForm = document.getElementById('addUserForm');
+        const newUsernameInput = document.getElementById('newUsername');
+        const newPasswordInput = document.getElementById('newPassword');
+        const addUserBtn = document.getElementById('addUserBtn');
+        const usersListElement = document.getElementById('usersList');
+        const userFeedbackMessageDiv = document.getElementById('user-feedback-message');
+        const usersSection = document.querySelector('.user-management-section');
+        const USERS_KEY = 'restaurantUsers';
+        let users = loadUsers();
+
+        // --- Variables pour le mode sombre ---
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const DARK_MODE_KEY = 'darkModeEnabled';
+
+        // --- Fonctions de gestion des utilisateurs ---
+        function loadUsers() {
+            const storedUsers = localStorage.getItem(USERS_KEY);
+            return storedUsers ? JSON.parse(storedUsers) : [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }];
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            renderUsersList();
+        }
+
+        function renderUsersList() {
+            usersListElement.innerHTML = '';
+            users.forEach((user, index) => {
+                const li = document.createElement('li');
+                li.textContent = user.username;
+                if (user.username !== ADMIN_USERNAME) { // Empêcher la suppression de l'utilisateur admin initial
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Supprimer';
+                    deleteButton.classList.add('delete-user-btn');
+                    deleteButton.addEventListener('click', () => deleteUser(index));
+                    li.appendChild(deleteButton);
+                }
+                usersListElement.appendChild(li);
+            });
+        }
+
+        function addUser() {
+            const newUsername = newUsernameInput.value.trim();
+            const newPassword = newPasswordInput.value.trim();
+
+            if (!newUsername || !newPassword) {
+                displayUserFeedback('Veuillez entrer un nom d\'utilisateur et un mot de passe.', 'error');
+                return;
+            }
+
+            if (users.some(user => user.username === newUsername)) {
+                displayUserFeedback('Ce nom d\'utilisateur existe déjà.', 'error');
+                return;
+            }
+
+            users.push({ username: newUsername, password: newPassword });
+            saveUsers(users);
+            newUsernameInput.value = '';
+            newPasswordInput.value = '';
+            displayUserFeedback(`L'utilisateur "${escapeHtml(newUsername)}" a été créé.`, 'success');
+        }
+
+        function deleteUser(index) {
+            const userToDelete = users[index];
+            if (userToDelete.username === ADMIN_USERNAME) {
+                displayUserFeedback('Vous ne pouvez pas supprimer l\'utilisateur administrateur initial.', 'error');
+                return;
+            }
+            if (confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur "${userToDelete.username}" ?`)) {
+                users.splice(index, 1);
+                saveUsers(users);
+                displayUserFeedback(`L'utilisateur "${escapeHtml(userToDelete.username)}" a été supprimé.`, 'success');
+            }
+        }
+
+        function displayUserFeedback(message, type = 'success') {
+            userFeedbackMessageDiv.textContent = message;
+            userFeedbackMessageDiv.className = `feedback-message feedback-${type}`;
+            userFeedbackMessageDiv.style.display = 'block';
+            setTimeout(() => {
+                userFeedbackMessageDiv.style.display = 'none';
+            }, 3000);
+        }
 
         // --- Fonction pour vérifier l'état de connexion ---
         function checkLoginStatus() {
             if (isLoggedIn) {
                 loginContainer.style.display = 'none';
                 mainContainer.style.display = 'block';
+                if (usersSection) usersSection.style.display = 'block'; // Afficher la gestion des utilisateurs après connexion
+                if (suppliersSection) suppliersSection.style.display = 'block'; // Afficher la gestion des fournisseurs après connexion
+                renderUsersList(); // Afficher la liste des utilisateurs après la connexion
+                renderSuppliersList(); // Afficher la liste des fournisseurs après la connexion
             } else {
                 loginContainer.style.display = 'block';
                 mainContainer.style.display = 'none';
+                if (usersSection) usersSection.style.display = 'none';
+                if (suppliersSection) suppliersSection.style.display = 'none';
             }
         }
 
@@ -646,9 +1048,10 @@
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
                 isLoggedIn = true;
-                localStorage.setItem('isAdminLoggedIn', 'true');
                 checkLoginStatus();
                 loginErrorDiv.style.display = 'none';
             } else {
@@ -659,11 +1062,13 @@
         });
 
         // --- Fonction pour gérer la déconnexion ---
-        logoutBtn.addEventListener('click', function() {
+        function logout() {
             isLoggedIn = false;
-            localStorage.removeItem('isAdminLoggedIn');
             checkLoginStatus();
-        });
+            // Réinitialiser l'affichage des sections admin
+            if (usersSection) usersSection.style.display = 'none';
+            if (suppliersSection) suppliersSection.style.display = 'none';
+        }
 
         // --- Fonction pour sauvegarder les fournisseurs ---
         function saveSuppliers() {
@@ -732,12 +1137,38 @@
         function renderStock(sortColumn = null, sortDirection = 'asc') {
             stockTableBody.innerHTML = ''; // Vide le tableau
 
-            let sortedStock = [...stock];
+            // Filtrage
+            const categoryFilterValue = categoryFilter.value;
+            const supplierFilterValue = supplierFilter.value;
+            const showOutOfStockOnly = outOfStockFilter.checked;
+
+            let filteredStock = stock.filter(item => {
+                const categoryMatch = !categoryFilterValue || item.category === categoryFilterValue;
+                const supplierMatch = !supplierFilterValue || productSuppliers.some(ps => ps.productId === item.id && ps.supplier === supplierFilterValue);
+                const outOfStockMatch = !showOutOfStockOnly || item.quantity === 0;
+                return categoryMatch && supplierMatch && outOfStockMatch;
+            });
+
+            // Recherche
+            const searchTerm = searchInput.value.toLowerCase();
+            filteredStock = filteredStock.filter(item => item.name.toLowerCase().includes(searchTerm));
+
+            // Tri
+            let sortedStock = [...filteredStock];
             if (sortColumn) {
                 sortedStock.sort((a, b) => {
                     const aValue = a[sortColumn];
                     const bValue = b[sortColumn];
-                    if (typeof aValue === 'string') {
+
+                    if (sortColumn === 'supplier') {
+                        const supplierA = productSuppliers.find(ps => ps.productId === a.id)?.supplier || '';
+                        const supplierB = productSuppliers.find(ps => ps.productId === b.id)?.supplier || '';
+                        return sortDirection === 'asc' ? supplierA.localeCompare(supplierB) : supplierB.localeCompare(supplierA);
+                    } else if (sortColumn === 'dateAdded') {
+                        const dateA = new Date(aValue);
+                        const dateB = new Date(bValue);
+                        return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
+                    } else if (typeof aValue === 'string') {
                         return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
                     } else {
                         return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
@@ -745,15 +1176,12 @@
                 });
             }
 
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredStock = sortedStock.filter(item => item.name.toLowerCase().includes(searchTerm));
-
-            if (filteredStock.length === 0) {
-                stockTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Aucun article en stock pour le moment.</td></tr>';
+            if (sortedStock.length === 0) {
+                stockTableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Aucun article en stock correspondant aux critères.</td></tr>';
                 return;
             }
 
-            filteredStock.forEach(item => {
+            sortedStock.forEach(item => {
                 const row = document.createElement('tr');
                 row.dataset.id = item.id; // ID sur la ligne
 
@@ -763,13 +1191,16 @@
                     row.classList.add('low-stock');
                 }
 
+                const supplierForItem = productSuppliers.find(ps => ps.productId === item.id)?.supplier || '';
+
                 row.innerHTML = `
                     <td><img src="${escapeHtml(item.imageUrl || '')}" alt="${escapeHtml(item.name)}" class="stock-image"></td>
                     <td>${escapeHtml(item.name)}</td>
                     <td class="quantity-cell" title="Cliquez pour modifier">${item.quantity}</td>
-                    <td>${escapeHtml(item.unit || '')}</td>
                     <td>${escapeHtml(item.category || '')}</td>
                     <td>${item.lowStockThreshold}</td>
+                    <td>${escapeHtml(supplierForItem)}</td>
+                    <td>${item.dateAdded || ''}</td>
                     <td class="action-buttons">
                         <button class="btn-increase" data-action="increase" title="Augmenter de 1">+</button>
                         <button class="btn-decrease" data-action="decrease" title="Diminuer de 1">-</button>
@@ -787,12 +1218,12 @@
         function addItem() {
             const name = itemNameInput.value.trim();
             const quantity = parseInt(itemQuantityInput.value, 10);
-            const unit = itemUnitInput.value;
             const category = itemCategoryInput.value;
             const lowStockThreshold = parseInt(lowStockThresholdInput.value, 10) || 0;
             const imageUrl = itemImageInput.value.trim();
             const supplier = itemSupplierInput.value;
             const itemIdToEdit = itemIdToEditInput.value;
+            const currentDate = new Date().toLocaleDateString();
 
             if (!name || isNaN(quantity) || quantity < 0 || isNaN(lowStockThreshold) || lowStockThreshold < 0) {
                 displayFeedback('Veuillez remplir tous les champs correctement (Nom, Quantité >= 0, Seuil >= 0).', 'error');
@@ -805,7 +1236,6 @@
                 if (itemIndex > -1) {
                     stock[itemIndex].name = name;
                     stock[itemIndex].quantity = quantity;
-                    stock[itemIndex].unit = unit;
                     stock[itemIndex].category = category;
                     stock[itemIndex].lowStockThreshold = lowStockThreshold;
                     stock[itemIndex].imageUrl = imageUrl;
@@ -842,10 +1272,10 @@
                         id: Date.now().toString(),
                         name: name,
                         quantity: quantity,
-                        unit: unit,
                         category: category,
                         lowStockThreshold: lowStockThreshold,
-                        imageUrl: imageUrl
+                        imageUrl: imageUrl,
+                        dateAdded: currentDate // Ajout de la date
                     };
                     stock.push(newItem);
                     newItemId = newItem.id;
@@ -872,7 +1302,6 @@
         function resetForm() {
             itemNameInput.value = '';
             itemQuantityInput.value = '';
-            itemUnitInput.value = '';
             itemCategoryInput.value = '';
             itemImageInput.value = '';
             itemSupplierInput.value = '';
@@ -920,32 +1349,6 @@
         }
 
         /**
-         * Permet de retirer une quantité spécifique du stock (fonction non utilisée directement maintenant).
-         * @param {string} id - L'ID de l'article.
-         */
-        function removeQuantity(id) {
-            const itemIndex = stock.findIndex(item => item.id === id);
-            if (itemIndex > -1) {
-                const currentQuantity = stock[itemIndex].quantity;
-                const quantityToRemove = prompt(`Entrez la quantité à retirer de "${escapeHtml(stock[itemIndex].name)}" (Stock actuel: ${currentQuantity}):`, '1');
-
-                if (quantityToRemove !== null) {
-                    const qtyToRemove = parseInt(quantityToRemove, 10);
-                    if (!isNaN(qtyToRemove) && qtyToRemove > 0 && qtyToRemove <= currentQuantity) {
-                        stock[itemIndex].quantity -= qtyToRemove;
-                        saveStock();
-                        renderStock();
-                        displayFeedback(`Retiré ${qtyToRemove} de "${escapeHtml(stock[itemIndex].name)}".`, 'success');
-                    } else if (isNaN(qtyToRemove) || qtyToRemove <= 0) {
-                        displayFeedback('Veuillez entrer une quantité valide (nombre supérieur à zéro).', 'error');
-                    } else {
-                        displayFeedback('La quantité à retirer est supérieure au stock actuel.', 'error');
-                    }
-                }
-            }
-        }
-
-        /**
          * Met à jour la quantité d'un article directement dans le tableau.
          * @param {string} id - L'ID de l'article.
          * @param {number} newValue - La nouvelle quantité.
@@ -974,7 +1377,6 @@
             if (itemToEdit) {
                 itemNameInput.value = itemToEdit.name;
                 itemQuantityInput.value = itemToEdit.quantity;
-                itemUnitInput.value = itemToEdit.unit || '';
                 itemCategoryInput.value = itemToEdit.category || '';
                 lowStockThresholdInput.value = itemToEdit.lowStockThreshold;
                 itemImageInput.value = itemToEdit.imageUrl || '';
@@ -1041,18 +1443,81 @@
             renderStock(currentSortColumn, currentSortDirection);
         }
 
+        function enableDarkMode() {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem(DARK_MODE_KEY, 'true');
+            darkModeToggle.textContent = 'Mode Clair';
+        }
+
+        function disableDarkMode() {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem(DARK_MODE_KEY, 'false');
+            darkModeToggle.textContent = 'Mode Sombre';
+        }
+
+        function toggleDarkMode() {
+            if (document.body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        }
+
         // --- Initialisation ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Vérifier si l'utilisateur était connecté lors de la session précédente
+            const storedLoginState = localStorage.getItem('isAdminLoggedIn');
+            if (storedLoginState === 'true') {
+                // Si c'était le cas, ne pas rétablir la connexion automatiquement
+                localStorage.removeItem('isAdminLoggedIn');
+            }
             checkLoginStatus();
             renderSuppliersList();
             renderSupplierDropdown();
+            renderUsersList(); // Initialiser la liste des utilisateurs
+
+            // Ajouter la date d'ajout aux éléments existants dans le localStorage s'ils n'en ont pas
+            stock = stock.map(item => ({ ...item, dateAdded: item.dateAdded || new Date().toLocaleDateString() }));
+            saveStock();
+
             renderStock();
             renderProductSuppliersTable();
+
+            // Peupler les filtres
+            const categories = [...new Set(stock.map(item => item.category).filter(Boolean))];
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                categoryFilter.appendChild(option);
+            });
+
+            const suppliersFromStock = [...new Set(productSuppliers.map(ps => ps.supplier).filter(Boolean))];
+            suppliersFromStock.forEach(sup => {
+                const option = document.createElement('option');
+                option.value = sup;
+                option.textContent = sup;
+                supplierFilter.appendChild(option);
+            });
+
+            // Gestion du mode sombre au chargement
+            const darkModePreference = localStorage.getItem(DARK_MODE_KEY);
+            if (darkModePreference === 'true') {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
         });
 
         // Écouteurs d'événements
         addSupplierBtn.addEventListener('click', addSupplier);
         searchInput.addEventListener('input', () => renderStock(currentSortColumn, currentSortDirection));
+        categoryFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
+        supplierFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
+        outOfStockFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
+        addUserBtn.addEventListener('click', addUser); // Écouteur pour l'ajout d'utilisateur
+        logoutLink.addEventListener('click', logout); // Écouteur pour la déconnexion
+        darkModeToggle.addEventListener('click', toggleDarkMode); // L'écouteur reste
 
         // Écouteurs pour le tri des colonnes
         document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
@@ -1072,6 +1537,12 @@
             if (event.key === 'Enter') {
                 event.preventDefault();
                 addItem();
+            }
+        });
+        newPasswordInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addUser();
             }
         });
 
