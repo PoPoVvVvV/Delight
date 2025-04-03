@@ -132,10 +132,10 @@
         }
 
         #addSupplierForm {
-            display: grid;
+            /*display: grid;
             grid-template-columns: auto 1fr auto;
             gap: 5px; /* Réduit l'espacement */
-            align-items: center;
+            /*align-items: center;
             margin-bottom: 5px; /* Réduit la marge */
         }
 
@@ -143,9 +143,11 @@
             font-weight: normal;
             font-size: 0.9em;
             transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 5px;
         }
 
-        #addSupplierName {
+        #addSupplierName, #addSupplierPhone {
             padding: 6px; /* Réduit le padding */
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -153,6 +155,8 @@
             background-color: #fff;
             font-size: 0.9em;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            width: calc(100% - 12px); /* Ajustement pour le padding et la bordure */
+            margin-bottom: 10px;
         }
 
         #addSupplierBtn {
@@ -359,6 +363,10 @@
             transition: background-color 0.3s ease;
         }
 
+        #productSuppliersTable tr:hover {
+            background-color: #e8f5e9;
+        }
+
         #feedback-message {
             margin-top: 20px;
             padding: 10px;
@@ -547,172 +555,6 @@
             margin-top: 30px; /* Espacement avec le contenu précédent */
         }
 
-        /* --- Dark Mode Styles --- */
-        .dark-mode body {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
-        .dark-mode .container {
-            background: #1e1e1e;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        .dark-mode h1, .dark-mode h2 {
-            color: #8bc34a; /* Vert plus clair pour le mode sombre */
-        }
-
-        .dark-mode #login-container {
-            background: #1e1e1e;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        .dark-mode #login-form label {
-            color: #e0e0e0;
-        }
-
-        .dark-mode #login-form input[type="text"],
-        .dark-mode #login-form input[type="password"] {
-            color: #e0e0e0;
-            background-color: #303030;
-            border-color: #555;
-        }
-
-        .dark-mode .logout-button {
-            background-color: #424242;
-        }
-
-        .dark-mode .logout-button:hover {
-            background-color: #303030;
-        }
-
-        .dark-mode .suppliers-section {
-            background-color: #2e3d29;
-            border-color: #558b2f;
-        }
-
-        .dark-mode .suppliers-section h2 {
-            color: #aed581;
-        }
-
-        .dark-mode #addSupplierForm label {
-            color: #e0e0e0;
-        }
-
-        .dark-mode #addSupplierName {
-            color: #e0e0e0;
-            background-color: #303030;
-            border-color: #555;
-        }
-
-        .dark-mode #suppliersList li {
-            color: #e0e0e0;
-            border-color: #555;
-        }
-
-        .dark-mode .filter-section label {
-            color: #e0e0e0;
-        }
-
-        .dark-mode .filter-section input[type="text"],
-        .dark-mode .filter-section select {
-            color: #e0e0e0;
-            background-color: #303030;
-            border-color: #555;
-        }
-
-        .dark-mode #stockTable th {
-            background-color: #689f38;
-            color: #e0e0e0;
-        }
-
-        .dark-mode #stockTable th, .dark-mode #stockTable td {
-            border-color: #555;
-            color: #e0e0e0;
-        }
-
-        .dark-mode #stockTable tr:nth-child(even) {
-            background-color: #212121;
-        }
-
-        .dark-mode #stockTable tr:hover {
-            background-color: #424242;
-        }
-
-        .dark-mode .quantity-input {
-            color: #e0e0e0;
-            background-color: #303030;
-            border-color: #8bc34a;
-        }
-
-        .dark-mode #productSuppliersTable th {
-            background-color: #424242;
-            color: #e0e0e0;
-        }
-
-        .dark-mode #productSuppliersTable th, .dark-mode #productSuppliersTable td {
-            border-color: #555;
-            color: #e0e0e0;
-        }
-
-        .dark-mode #productSuppliersTable tr:nth-child(even) {
-            background-color: #212121;
-        }
-
-        .dark-mode .modal-content {
-            background-color: #303030;
-            border-color: #555;
-            color: #e0e0e0;
-        }
-
-        .dark-mode .close-button {
-            color: #ccc;
-        }
-
-        .dark-mode .user-management-section {
-            background-color: #263238;
-            border-color: #455a64;
-        }
-
-        .dark-mode .user-management-section h2 {
-            color: #64b5f6;
-        }
-
-        .dark-mode #addUserForm label {
-            color: #e0e0e0;
-        }
-
-        .dark-mode #newUsername, .dark-mode #newPassword {
-            color: #e0e0e0;
-            background-color: #37474f;
-            border-color: #546e7a;
-        }
-
-        .dark-mode #usersList li {
-            color: #e0e0e0;
-            border-color: #555;
-        }
-
-        .dark-mode .bottom-sections .user-management-section {
-            background-color: #f8f9fa; /* Gris très clair */
-            border: 1px solid #dee2e6; /* Bordure légère */
-        }
-
-        .dark-mode .bottom-sections .suppliers-section {
-            background-color: #f0f8ea;
-            border: 1px solid #c3e6cb;
-        }
-
-        .dark-mode.dark-mode .bottom-sections .user-management-section {
-            background-color: #263238;
-            border-color: #455a64;
-        }
-
-        .dark-mode.dark-mode .bottom-sections .suppliers-section {
-            background-color: #2e3d29;
-            border-color: #558b2f;
-        }
-
         @media (max-width: 768px) {
             .bottom-sections {
                 flex-direction: column; /* Empiler les sections sur les écrans plus petits */
@@ -876,6 +718,8 @@
                 <form id="addSupplierForm">
                     <label for="addSupplierName">Nouveau Fournisseur :</label>
                     <input type="text" id="addSupplierName" placeholder="Nom du fournisseur">
+                    <label for="addSupplierPhone">Numéro de téléphone :</label>
+                    <input type="tel" id="addSupplierPhone" placeholder="Numéro de téléphone">
                     <button type="button" id="addSupplierBtn">Ajouter Fournisseur</button>
                 </form>
                 <h3>Liste des Fournisseurs</h3>
@@ -915,18 +759,53 @@
         const deleteModal = document.getElementById('deleteModal');
         const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
         let currentItemToDeleteId = null;
+        const addSupplierPhoneInput = document.getElementById('addSupplierPhone'); // Nouvelle variable
+        const categoryFilter = document.getElementById('category-filter'); // Déclaration de categoryFilter
+        const supplierFilter = document.getElementById('supplier-filter'); // Déclaration de supplierFilter
+        const outOfStockFilter = document.getElementById('out-of-stock-filter'); // Déclaration de outOfStockFilter
 
         // --- Gestion des Fournisseurs ---
         const addSupplierForm = document.getElementById('addSupplierForm');
         const addSupplierNameInput = document.getElementById('addSupplierName');
         const addSupplierBtn = document.getElementById('addSupplierBtn');
         const suppliersListElement = document.getElementById('suppliersList');
-        let suppliers = JSON.parse(localStorage.getItem('restaurantSuppliers')) || [];
+        let suppliers = loadSuppliers();
+
+        function loadSuppliers() {
+            try {
+                const storedSuppliers = localStorage.getItem('restaurantSuppliers');
+                return storedSuppliers ? JSON.parse(storedSuppliers) : [];
+            } catch (error) {
+                console.error("Erreur lors du chargement des fournisseurs depuis le localStorage:", error);
+                displayFeedback("Erreur lors du chargement des données des fournisseurs.", 'error');
+                return [];
+            }
+        }
         const suppliersSection = document.querySelector('.suppliers-section');
 
         // --- Stock et Fournisseurs des Produits (utilise le localStorage) ---
-        let stock = JSON.parse(localStorage.getItem('restaurantStock')) || [];
-        let productSuppliers = JSON.parse(localStorage.getItem('productSuppliers')) || [];
+        let stock = loadStock();
+        function loadStock() {
+            try {
+                const storedStock = localStorage.getItem('restaurantStock');
+                return storedStock ? JSON.parse(storedStock) : [];
+            } catch (error) {
+                console.error("Erreur lors du chargement du stock depuis le localStorage:", error);
+                displayFeedback("Erreur lors du chargement des données de stock.", 'error');
+                return [];
+            }
+        }
+        let productSuppliers = loadProductSuppliers();
+        function loadProductSuppliers() {
+            try {
+                const storedProductSuppliers = localStorage.getItem('productSuppliers');
+                return storedProductSuppliers ? JSON.parse(storedProductSuppliers) : [];
+            } catch (error) {
+                console.error("Erreur lors du chargement des fournisseurs de produits depuis le localStorage:", error);
+                displayFeedback("Erreur lors du chargement des données des fournisseurs de produits.", 'error');
+                return [];
+            }
+        }
 
         // --- Variables pour la gestion de l'admin login ---
         const loginContainer = document.getElementById('login-container');
@@ -951,19 +830,38 @@
         const USERS_KEY = 'restaurantUsers';
         let users = loadUsers();
 
-        // --- Variables pour le mode sombre ---
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const DARK_MODE_KEY = 'darkModeEnabled';
+        // --- Variables Globales (Retrait des recettes) ---
+        const recipeManagementSection = null; // Suppression de la référence
+        const addRecipeForm = null;
+        const recipeNameInput = null;
+        const recipeIngredientsDiv = null;
+        const addIngredientBtn = null;
+        const saveRecipeBtn = null;
+        const recipesListElement = null;
+        const recipeFeedbackMessageDiv = null;
+        const RECIPES_KEY = null;
+        let recipes = [];
 
         // --- Fonctions de gestion des utilisateurs ---
         function loadUsers() {
-            const storedUsers = localStorage.getItem(USERS_KEY);
-            return storedUsers ? JSON.parse(storedUsers) : [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }];
+            try {
+                const storedUsers = localStorage.getItem(USERS_KEY);
+                return storedUsers ? JSON.parse(storedUsers) : [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }];
+            } catch (error) {
+                console.error("Erreur lors du chargement des utilisateurs depuis le localStorage:", error);
+                displayUserFeedback("Erreur lors du chargement des données des utilisateurs.", 'error');
+                return [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }];
+            }
         }
 
         function saveUsers(users) {
-            localStorage.setItem(USERS_KEY, JSON.stringify(users));
-            renderUsersList();
+            try {
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                renderUsersList();
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde des utilisateurs dans le localStorage:", error);
+                displayUserFeedback("Erreur lors de la sauvegarde des données des utilisateurs.", 'error');
+            }
         }
 
         function renderUsersList() {
@@ -1025,20 +923,174 @@
             }, 3000);
         }
 
+        // --- Fonctions de gestion des recettes (Retrait) ---
+        // function loadRecipes() {
+        //     try {
+        //         const storedRecipes = localStorage.getItem(RECIPES_KEY);
+        //         return storedRecipes ? JSON.parse(storedRecipes) : [];
+        //     } catch (error) {
+        //         console.error("Erreur lors du chargement des recettes depuis le localStorage:", error);
+        //         displayRecipeFeedback("Erreur lors du chargement des données des recettes.", 'error');
+        //         return [];
+        //     }
+        // }
+
+        // function saveRecipes(recipes) {
+        //     try {
+        //         localStorage.setItem(RECIPES_KEY, JSON.stringify(recipes));
+        //         renderRecipesList();
+        //         renderStock(); // Mise à jour du tableau des stocks pour afficher les recettes
+        //     } catch (error) {
+        //         console.error("Erreur lors de la sauvegarde des recettes dans le localStorage:", error);
+        //         displayRecipeFeedback("Erreur lors de la sauvegarde des données des recettes.", 'error');
+        //     }
+        // }
+
+        // function renderRecipesList() {
+        //     recipesListElement.innerHTML = '';
+        //     recipes.forEach((recipe, index) => {
+        //         const li = document.createElement('li');
+        //         li.innerHTML = `
+        //             <strong>${escapeHtml(recipe.name)}</strong>
+        //             <ul>
+        //                 ${recipe.ingredients.map(ing => `<li>${escapeHtml(ing.name)}: ${ing.quantity}</li>`).join('')}
+        //             </ul>
+        //             <button type="button" class="use-recipe-btn" data-index="${index}">Utiliser la Recette</button>
+        //             <button type="button" class="delete-recipe-btn" data-index="${index}">Supprimer</button>
+        //         `;
+        //         recipesListElement.appendChild(li);
+        //     });
+        // }
+
+        // function displayRecipeFeedback(message, type = 'success') {
+        //     recipeFeedbackMessageDiv.textContent = message;
+        //     recipeFeedbackMessageDiv.className = `feedback-message feedback-${type}`;
+        //     recipeFeedbackMessageDiv.style.display = 'block';
+        //     setTimeout(() => {
+        //         recipeFeedbackMessageDiv.style.display = 'none';
+        //     }, 3000);
+        // }
+
+        // function addIngredientRow() {
+        //     const newRow = document.createElement('div');
+        //     newRow.classList.add('ingredient-row');
+        //     newRow.innerHTML = `
+        //         <select class="ingredient-select">
+        //             <option value="">-- Sélectionner un ingrédient --</option>
+        //             ${stock.map(item => `<option value="${escapeHtml(item.name)}">${escapeHtml(item.name)}</option>`).join('')}
+        //         </select>
+        //         <input type="number" class="ingredient-quantity" placeholder="Quantité" min="0" value="1">
+        //         <button type="button" class="remove-ingredient-btn">Supprimer</button>
+        //     `;
+        //     recipeIngredientsDiv.appendChild(newRow);
+        // }
+
+        // function saveRecipe(event) {
+        //     event.preventDefault();
+        //     const recipeName = recipeNameInput.value.trim();
+        //     const ingredientsRows = recipeIngredientsDiv.querySelectorAll('.ingredient-row');
+        //     const ingredients = [];
+
+        //     ingredientsRows.forEach(row => {
+        //         const ingredientSelect = row.querySelector('.ingredient-select');
+        //         const quantityInput = row.querySelector('.ingredient-quantity');
+
+        //         if (ingredientSelect.value && !isNaN(parseFloat(quantityInput.value)) && parseFloat(quantityInput.value) >= 0) {
+        //             ingredients.push({
+        //                 name: ingredientSelect.value,
+        //                 quantity: parseFloat(quantityInput.value)
+        //             });
+        //         }
+        //     });
+
+        //     if (recipeName && ingredients.length > 0) {
+        //         const newRecipe = {
+        //             id: Date.now().toString(),
+        //             name: recipeName,
+        //             ingredients: ingredients
+        //         };
+        //         recipes.push(newRecipe);
+        //         saveRecipes(recipes);
+        //         recipeNameInput.value = '';
+        //         recipeIngredientsDiv.innerHTML = `
+        //             <label>Ingrédients :</label>
+        //             <div class="ingredient-row">
+        //                 <select class="ingredient-select">
+        //                     <option value="">-- Sélectionner un ingrédient --</option>
+        //                 </select>
+        //                 <input type="number" class="ingredient-quantity" placeholder="Quantité" min="0" value="1">
+        //                 <button type="button" class="remove-ingredient-btn">Supprimer</button>
+        //             </div>
+        //         `;
+        //         displayRecipeFeedback(`La recette "${escapeHtml(recipeName)}" a été enregistrée.`, 'success');
+        //     } else {
+        //         displayRecipeFeedback('Veuillez entrer un nom de recette et au moins un ingrédient valide.', 'error');
+        //     }
+        // }
+
+        // function useRecipe(index) {
+        //     const recipeToUse = recipes[index];
+        //     if (recipeToUse) {
+        //         let canUseRecipe = true;
+        //         const ingredientsToRemove = {};
+
+        //         recipeToUse.ingredients.forEach(recipeIngredient => {
+        //             const stockItem = stock.find(item => item.name === recipeIngredient.name);
+        //             if (stockItem) {
+        //                 if (stockItem.quantity >= recipeIngredient.quantity) {
+        //                     ingredientsToRemove[recipeIngredient.name] = (ingredientsToRemove[recipeIngredient.name] || 0) + recipeIngredient.quantity;
+        //                 } else {
+        //                     canUseRecipe = false;
+        //                     displayRecipeFeedback(`Stock insuffisant pour "${escapeHtml(recipeIngredient.name)}" dans la recette "${escapeHtml(recipeToUse.name)}".`, 'error');
+        //                 }
+        //             } else {
+        //                 canUseRecipe = false;
+        //                 displayRecipeFeedback(`L'ingrédient "${escapeHtml(recipeIngredient.name)}" n'est pas trouvé dans le stock.`, 'error');
+        //             }
+        //         });
+
+        //         if (canUseRecipe) {
+        //             for (const ingredientName in ingredientsToRemove) {
+        //                 const stockItemIndex = stock.findIndex(item => item.name === ingredientName);
+        //                 if (stockItemIndex > -1) {
+        //                     stock[stockItemIndex].quantity -= ingredientsToRemove[ingredientName];
+        //                 }
+        //             }
+        //             saveStock();
+        //             renderStock();
+        //             displayRecipeFeedback(`Les ingrédients de la recette "${escapeHtml(recipeToUse.name)}" ont été déduits du stock.`, 'success');
+        //         }
+        //     }
+        // }
+
+        // function deleteRecipe(index) {
+        //     if (confirm(`Êtes-vous sûr de vouloir supprimer la recette "${escapeHtml(recipes[index].name)}" ?`)) {
+        //         recipes.splice(index, 1);
+        //         saveRecipes(recipes);
+        //         displayRecipeFeedback(`La recette a été supprimée.`, 'success');
+        //     }
+        // }
+
         // --- Fonction pour vérifier l'état de connexion ---
         function checkLoginStatus() {
-            if (isLoggedIn) {
+            const storedLoginState = localStorage.getItem('isAdminLoggedIn');
+            if (storedLoginState === 'true') {
+                isLoggedIn = true;
                 loginContainer.style.display = 'none';
                 mainContainer.style.display = 'block';
                 if (usersSection) usersSection.style.display = 'block'; // Afficher la gestion des utilisateurs après connexion
                 if (suppliersSection) suppliersSection.style.display = 'block'; // Afficher la gestion des fournisseurs après connexion
+                // if (recipeManagementSection) recipeManagementSection.style.display = 'block'; // Afficher la gestion des recettes
                 renderUsersList(); // Afficher la liste des utilisateurs après la connexion
                 renderSuppliersList(); // Afficher la liste des fournisseurs après la connexion
+                // renderRecipesList(); // Afficher la liste des recettes après la connexion
             } else {
+                isLoggedIn = false; // S'assurer que isLoggedIn est false si non trouvé dans localStorage
                 loginContainer.style.display = 'block';
                 mainContainer.style.display = 'none';
                 if (usersSection) usersSection.style.display = 'none';
                 if (suppliersSection) suppliersSection.style.display = 'none';
+                // if (recipeManagementSection) recipeManagementSection.style.display = 'none'; // Cacher la gestion des recettes
             }
         }
 
@@ -1052,6 +1104,7 @@
 
             if (user) {
                 isLoggedIn = true;
+                localStorage.setItem('isAdminLoggedIn', 'true'); // Persister l'état de connexion
                 checkLoginStatus();
                 loginErrorDiv.style.display = 'none';
             } else {
@@ -1064,17 +1117,24 @@
         // --- Fonction pour gérer la déconnexion ---
         function logout() {
             isLoggedIn = false;
+            localStorage.removeItem('isAdminLoggedIn'); // Supprimer l'état de connexion
             checkLoginStatus();
             // Réinitialiser l'affichage des sections admin
             if (usersSection) usersSection.style.display = 'none';
             if (suppliersSection) suppliersSection.style.display = 'none';
+            // if (recipeManagementSection) recipeManagementSection.style.display = 'none'; // Cacher la gestion des recettes
         }
 
         // --- Fonction pour sauvegarder les fournisseurs ---
         function saveSuppliers() {
-            localStorage.setItem('restaurantSuppliers', JSON.stringify(suppliers));
-            renderSupplierDropdown();
-            renderSuppliersList();
+            try {
+                localStorage.setItem('restaurantSuppliers', JSON.stringify(suppliers));
+                renderSupplierDropdown();
+                renderSuppliersList();
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde des fournisseurs dans le localStorage:", error);
+                displayFeedback("Erreur lors de la sauvegarde des données des fournisseurs.", 'error');
+            }
         }
 
         // --- Fonction pour afficher la liste des fournisseurs ---
@@ -1082,7 +1142,15 @@
             suppliersListElement.innerHTML = '';
             suppliers.forEach(supplier => {
                 const li = document.createElement('li');
-                li.textContent = supplier.name;
+                li.style.display = 'flex';
+                li.style.justifyContent = 'space-between';
+                li.style.alignItems = 'center';
+                const supplierInfo = document.createElement('div');
+                supplierInfo.innerHTML = `<strong style="font-size: 1em;">${escapeHtml(supplier.name)}</strong>`;
+                if (supplier.phoneNumbers && supplier.phoneNumbers.length > 0) {
+                    supplierInfo.innerHTML += `<br><small>Tél: ${supplier.phoneNumbers.map(escapeHtml).join(', ')}</small>`;
+                }
+                li.appendChild(supplierInfo);
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Supprimer';
                 deleteButton.classList.add('delete-supplier-btn');
@@ -1095,11 +1163,13 @@
         // --- Fonction pour ajouter un fournisseur ---
         function addSupplier() {
             const name = addSupplierNameInput.value.trim();
+            const phone = addSupplierPhoneInput.value.trim();
             if (name) {
-                const newSupplier = { id: Date.now().toString(), name: name };
+                const newSupplier = { id: Date.now().toString(), name: name, phoneNumbers: phone ? [phone] : [] };
                 suppliers.push(newSupplier);
                 saveSuppliers();
                 addSupplierNameInput.value = '';
+                addSupplierPhoneInput.value = '';
             }
         }
 
@@ -1124,11 +1194,21 @@
 
         // --- Fonctions de sauvegarde pour le stock et les fournisseurs de produits ---
         function saveStock() {
-            localStorage.setItem('restaurantStock', JSON.stringify(stock));
+            try {
+                localStorage.setItem('restaurantStock', JSON.stringify(stock));
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde du stock dans le localStorage:", error);
+                displayFeedback("Erreur lors de la sauvegarde des données de stock.", 'error');
+            }
         }
 
         function saveProductSuppliers() {
-            localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
+            try {
+                localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde des fournisseurs de produits dans le localStorage:", error);
+                displayFeedback("Erreur lors de la sauvegarde des données des fournisseurs de produits.", 'error');
+            }
         }
 
         /**
@@ -1156,24 +1236,22 @@
             // Tri
             let sortedStock = [...filteredStock];
             if (sortColumn) {
-                sortedStock.sort((a, b) => {
-                    const aValue = a[sortColumn];
-                    const bValue = b[sortColumn];
+                const aValue = a[sortColumn];
+                const bValue = b[sortColumn];
 
-                    if (sortColumn === 'supplier') {
-                        const supplierA = productSuppliers.find(ps => ps.productId === a.id)?.supplier || '';
-                        const supplierB = productSuppliers.find(ps => ps.productId === b.id)?.supplier || '';
-                        return sortDirection === 'asc' ? supplierA.localeCompare(supplierB) : supplierB.localeCompare(supplierA);
-                    } else if (sortColumn === 'dateAdded') {
-                        const dateA = new Date(aValue);
-                        const dateB = new Date(bValue);
-                        return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
-                    } else if (typeof aValue === 'string') {
-                        return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-                    } else {
-                        return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
-                    }
-                });
+                if (sortColumn === 'supplier') {
+                    const supplierA = productSuppliers.find(ps => ps.productId === a.id)?.supplier || '';
+                    const supplierB = productSuppliers.find(ps => ps.productId === b.id)?.supplier || '';
+                    return sortDirection === 'asc' ? supplierA.localeCompare(supplierB) : supplierB.localeCompare(supplierA);
+                } else if (sortColumn === 'dateAdded') {
+                    const dateA = new Date(aValue);
+                    const dateB = new Date(bValue);
+                    return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
+                } else if (typeof aValue === 'string') {
+                    return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                } else {
+                    return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+                }
             }
 
             if (sortedStock.length === 0) {
@@ -1443,34 +1521,8 @@
             renderStock(currentSortColumn, currentSortDirection);
         }
 
-        function enableDarkMode() {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem(DARK_MODE_KEY, 'true');
-            darkModeToggle.textContent = 'Mode Clair';
-        }
-
-        function disableDarkMode() {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem(DARK_MODE_KEY, 'false');
-            darkModeToggle.textContent = 'Mode Sombre';
-        }
-
-        function toggleDarkMode() {
-            if (document.body.classList.contains('dark-mode')) {
-                disableDarkMode();
-            } else {
-                enableDarkMode();
-            }
-        }
-
         // --- Initialisation ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Vérifier si l'utilisateur était connecté lors de la session précédente
-            const storedLoginState = localStorage.getItem('isAdminLoggedIn');
-            if (storedLoginState === 'true') {
-                // Si c'était le cas, ne pas rétablir la connexion automatiquement
-                localStorage.removeItem('isAdminLoggedIn');
-            }
             checkLoginStatus();
             renderSuppliersList();
             renderSupplierDropdown();
@@ -1499,14 +1551,6 @@
                 option.textContent = sup;
                 supplierFilter.appendChild(option);
             });
-
-            // Gestion du mode sombre au chargement
-            const darkModePreference = localStorage.getItem(DARK_MODE_KEY);
-            if (darkModePreference === 'true') {
-                enableDarkMode();
-            } else {
-                disableDarkMode();
-            }
         });
 
         // Écouteurs d'événements
@@ -1517,7 +1561,6 @@
         outOfStockFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
         addUserBtn.addEventListener('click', addUser); // Écouteur pour l'ajout d'utilisateur
         logoutLink.addEventListener('click', logout); // Écouteur pour la déconnexion
-        darkModeToggle.addEventListener('click', toggleDarkMode); // L'écouteur reste
 
         // Écouteurs pour le tri des colonnes
         document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
