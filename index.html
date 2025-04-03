@@ -625,8 +625,8 @@
         const loginErrorDiv = document.getElementById('login-error');
         const mainContainer = document.querySelector('.container');
         const logoutBtn = document.getElementById('logout-btn');
-        const ADMIN_USERNAME = 'AidenWellington'; // **IMPORTANT: Ceci est pour démonstration uniquement. Ne jamais coder en dur des identifiants dans une application réelle.**
-        const ADMIN_PASSWORD = 'Delight2205'; // **Utiliser des méthodes de stockage et d'authentification sécurisées côté serveur.**
+        const ADMIN_USERNAME = 'AidenWellington';
+        const ADMIN_PASSWORD = 'Delight2205';
         let isLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
 
         // --- Fonction pour vérifier l'état de connexion ---
@@ -920,7 +920,7 @@
         }
 
         /**
-         * Permet de retirer une quantité spécifique du stock.
+         * Permet de retirer une quantité spécifique du stock (fonction non utilisée directement maintenant).
          * @param {string} id - L'ID de l'article.
          */
         function removeQuantity(id) {
@@ -941,6 +941,26 @@
                     } else {
                         displayFeedback('La quantité à retirer est supérieure au stock actuel.', 'error');
                     }
+                }
+            }
+        }
+
+        /**
+         * Met à jour la quantité d'un article directement dans le tableau.
+         * @param {string} id - L'ID de l'article.
+         * @param {number} newValue - La nouvelle quantité.
+         */
+        function updateQuantityDirectly(id, newValue) {
+            const itemIndex = stock.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                if (!isNaN(newValue) && newValue >= 0) {
+                    stock[itemIndex].quantity = newValue;
+                    saveStock();
+                    renderStock(); // Redessine pour mettre à jour l'affichage et retirer l'input
+                    displayFeedback(`Quantité de "${escapeHtml(stock[itemIndex].name)}" mise à jour à ${newValue}.`, 'success');
+                } else {
+                    renderStock(); // Redessine pour retirer l'input et afficher l'ancienne valeur
+                    displayFeedback('Veuillez entrer une quantité valide (nombre >= 0).', 'error');
                 }
             }
         }
@@ -1070,7 +1090,11 @@
                 } else if (action === 'decrease') {
                     updateQuantityByButton(id, -1);
                 } else if (action === 'remove-qty') {
-                    removeQuantity(id);
+                    // Au clic sur "Retirer", on simule un clic sur la cellule de quantité
+                    const quantityCell = row.querySelector('.quantity-cell');
+                    if (quantityCell) {
+                        quantityCell.click();
+                    }
                 } else if (action === 'edit') {
                     editItem(id);
                 } else if (action === 'delete') {
