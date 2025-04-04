@@ -11,47 +11,72 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #121212; /* Dark background */
+            color: #f4f4f4; /* Light text */
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode body {
+            background-color: #121212;
+            color: #f4f4f4;
         }
 
         .container {
             max-width: 1200px;
             margin: 20px auto;
-            background: #fff;
+            background: #212121; /* Darker container */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
             position: relative; /* Pour positionner le bouton de déconnexion */
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        .dark-mode .container {
+            background: #212121;
+            color: #f4f4f4;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+        }
+
         h1, h2 {
-            color: #5a8d03; /* Vert olive */
+            color: #aed581; /* Light olive green */
             text-align: center;
             margin-bottom: 20px;
             transition: color 0.3s ease;
+        }
+
+        .dark-mode h1, .dark-mode h2 {
+            color: #aed581;
         }
 
         /* --- Style pour le formulaire de login --- */
         #login-container {
             max-width: 400px;
             margin: 50px auto;
-            background: #fff;
+            background: #212121; /* Darker container */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
             text-align: center;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode #login-container {
+            background: #212121;
+            color: #f4f4f4;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
         }
 
         #login-form label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #444;
+            color: #ccc; /* Light gray */
             transition: color 0.3s ease;
+        }
+
+        .dark-mode #login-form label {
+            color: #ccc;
         }
 
         #login-form input[type="text"],
@@ -59,17 +84,24 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #666; /* Darker border */
             border-radius: 4px;
             box-sizing: border-box;
-            color: #333;
-            background-color: #fff;
+            color: #f4f4f4;
+            background-color: #333; /* Darker input */
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark-mode #login-form input[type="text"],
+        .dark-mode #login-form input[type="password"] {
+            color: #f4f4f4;
+            background-color: #333;
+            border-color: #666;
         }
 
         #login-form button {
             padding: 12px 20px;
-            background-color: #007bff; /* Bleu */
+            background-color: #007bff; /* Blue */
             color: white;
             border: none;
             border-radius: 4px;
@@ -83,8 +115,12 @@
         }
 
         #login-error {
-            color: red;
+            color: #ff6666; /* Light red */
             margin-top: 10px;
+        }
+
+        .dark-mode #login-error {
+            color: #ff6666;
         }
 
         /* --- Style pour le bouton de déconnexion --- */
@@ -96,7 +132,7 @@
 
         .logout-button {
             padding: 8px 15px;
-            background-color: #6c757d; /* Gris */
+            background-color: #6c757d; /* Gray */
             color: white;
             border: none;
             border-radius: 4px;
@@ -114,21 +150,32 @@
         /* ... (Les styles existants restent ici) ... */
         .suppliers-section {
             padding: 10px; /* Réduit le padding */
-            background-color: #f0f8ea;
+            background-color: #388e3c; /* Darker olive */
             border-radius: 5px;
-            border: 1px solid #c3e6cb;
+            border: 1px solid #689f38; /* Darker border */
             display: none; /* Initialement caché */
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             font-size: 0.9em; /* Réduit la taille de la police */
             flex: 1; /* Prend la moitié de l'espace disponible */
+            color: #f0f8ea;
+        }
+
+        .dark-mode .suppliers-section {
+            background-color: #388e3c;
+            color: #f0f8ea;
+            border-color: #689f38;
         }
 
         .suppliers-section h2 {
-            color: #28a745;
+            color: #aed581;
             text-align: left;
             margin-bottom: 10px; /* Réduit la marge */
             font-size: 1.1em; /* Réduit la taille du titre */
             transition: color 0.3s ease;
+        }
+
+        .dark-mode .suppliers-section h2 {
+            color: #aed581;
         }
 
         #addSupplierForm {
@@ -145,24 +192,35 @@
             transition: color 0.3s ease;
             display: block;
             margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .dark-mode #addSupplierForm label {
+            color: #ccc;
         }
 
         #addSupplierName, #addSupplierPhone {
             padding: 6px; /* Réduit le padding */
-            border: 1px solid #ccc;
+            border: 1px solid #666; /* Darker border */
             border-radius: 4px;
-            color: #333;
-            background-color: #fff;
+            color: #f4f4f4;
+            background-color: #333; /* Darker input */
             font-size: 0.9em;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             width: calc(100% - 12px); /* Ajustement pour le padding et la bordure */
             margin-bottom: 10px;
         }
 
+        .dark-mode #addSupplierName, .dark-mode #addSupplierPhone {
+            color: #f4f4f4;
+            background-color: #333;
+            border-color: #666;
+        }
+
         #addSupplierBtn {
             padding: 6px 10px; /* Réduit le padding */
-            background-color: #28a745;
-            color: white;
+            background-color: #aed581; /* Light olive green */
+            color: #333;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -171,7 +229,7 @@
         }
 
         #addSupplierBtn:hover {
-            background-color: #1e7e34;
+            background-color: #8bc34a;
         }
 
         #suppliersList {
@@ -182,13 +240,18 @@
 
         #suppliersList li {
             padding: 6px 0; /* Réduit le padding */
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #666; /* Darker border */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #333;
+            color: #f4f4f4;
             font-size: 0.9em;
             transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark-mode #suppliersList li {
+            color: #f4f4f4;
+            border-color: #666;
         }
 
         #suppliersList li:last-child {
@@ -198,7 +261,7 @@
         .delete-supplier-btn {
             background: none;
             border: none;
-            color: #dc3545;
+            color: #ff6666; /* Light red */
             cursor: pointer;
             font-size: 0.8em; /* Encore plus petit */
             margin-left: 5px; /* Réduit la marge */
@@ -206,7 +269,7 @@
         }
 
         .delete-supplier-btn:hover {
-            color: #c82333;
+            color: #cc0000;
         }
 
         .filter-section {
@@ -219,24 +282,41 @@
         .filter-section label {
             font-weight: bold;
             transition: color 0.3s ease;
+            color: #ccc;
+        }
+
+        .dark-mode .filter-section label {
+            color: #ccc;
         }
 
         .filter-section input[type="text"] {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #666; /* Darker border */
             border-radius: 4px;
-            color: #333;
-            background-color: #fff;
+            color: #f4f4f4;
+            background-color: #333; /* Darker input */
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark-mode .filter-section input[type="text"] {
+            color: #f4f4f4;
+            background-color: #333;
+            border-color: #666;
         }
 
         .filter-section select {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #666; /* Darker border */
             border-radius: 4px;
-            color: #333;
-            background-color: #fff;
+            color: #f4f4f4;
+            background-color: #333; /* Darker select */
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark-mode .filter-section select {
+            color: #f4f4f4;
+            background-color: #333;
+            border-color: #666;
         }
 
         #stockTable {
@@ -246,46 +326,59 @@
         }
 
         #stockTable th {
-            background-color: #a5d6a7;
-            color: #333;
+            background-color: #689f38; /* Darker olive green */
+            color: #f4f4f4;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        .dark-mode #stockTable th {
+            background-color: #689f38;
+            color: #f4f4f4;
+        }
+
         #stockTable th, #stockTable td {
-            border: 1px solid #ddd;
+            border: 1px solid #666; /* Darker border */
             padding: 12px;
             text-align: left;
             transition: border-color 0.3s ease, color 0.3s ease;
         }
 
+        .dark-mode #stockTable th, .dark-mode #stockTable td {
+            border-color: #666;
+            color: #f4f4f4;
+        }
+
         #stockTable tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #333; /* Darker row */
             transition: background-color 0.3s ease;
         }
 
         #stockTable tr:hover {
-            background-color: #e8f5e9;
+            background-color: #444; /* Slightly lighter dark */
         }
 
         .quantity-cell {
             cursor: pointer;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Espacement entre le texte et les boutons */
         }
         .quantity-cell:hover {
-             background-color: #dcedc8;
+            background-color: #8bc34a; /* Lighter olive */
         }
 
         .quantity-input {
             width: 80%;
             padding: 5px;
             text-align: right;
-            border: 1px solid #7cb342;
+            border: 1px solid #aed581; /* Light olive border */
             border-radius: 3px;
             box-sizing: border-box;
-            color: #333;
-            background-color: #fff;
+            color: #f4f4f4;
+            background-color: #333; /* Darker input */
             transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
         }
 
@@ -311,24 +404,41 @@
         .btn-remove-qty:hover { background-color: #1976D2; }
         .btn-edit:hover { background-color: #0077A3; }
 
-        .low-stock .quantity-cell,
-        .low-stock td:nth-child(3) {
-            color: #e65100;
-            font-weight: bold;
+        .low-stock {
+            background-color: #424242 !important; /* Darker background for low stock */
+            color: #ffcc80 !important; /* Lighter orange text */
         }
-        .low-stock td:not(.action-buttons) {
-            background-color: #fff3e0 !important;
+        .low-stock .quantity-cell {
+            color: #ff9800; /* Orange */
+            font-weight: bold;
         }
         .low-stock td:first-child::before {
             content: "⚠️ ";
-            color: orange;
+            color: #ffcc80;
             font-weight: bold;
         }
         .low-stock .quantity-cell {
-             cursor: pointer;
+            cursor: pointer;
         }
          .low-stock .quantity-cell:hover {
-             background-color: #ffe0b2 !important;
+            background-color: #ffb74d !important; /* Lighter orange hover */
+        }
+
+        .out-of-stock {
+            background-color: #b71c1c !important; /* Dark red background for out of stock */
+            color: #ffdddd !important; /* Light red text for out of stock */
+            font-weight: bold;
+        }
+        .out-of-stock td:first-child::before {
+            content: "🔴 "; /* Red circle for out of stock */
+            color: #ffdddd;
+            font-weight: bold;
+        }
+        .out-of-stock .quantity-cell {
+            color: #ffdddd !important;
+        }
+        .out-of-stock .quantity-cell:hover {
+            background-color: #e57373 !important; /* Lighter red hover */
         }
 
         .stock-image {
@@ -345,26 +455,37 @@
         }
 
         #productSuppliersTable th, #productSuppliersTable td {
-            border: 1px solid #ddd;
+            border: 1px solid #666; /* Darker border */
             padding: 12px;
             text-align: left;
             transition: border-color 0.3s ease, color 0.3s ease;
+            color: #f4f4f4;
+        }
+
+        .dark-mode #productSuppliersTable th, .dark-mode #productSuppliersTable td {
+            border-color: #666;
+            color: #f4f4f4;
         }
 
         #productSuppliersTable th {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #333; /* Darker background */
+            color: #f4f4f4;
             font-weight: bold;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        .dark-mode #productSuppliersTable th {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+
         #productSuppliersTable tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #444; /* Slightly lighter dark */
             transition: background-color 0.3s ease;
         }
 
         #productSuppliersTable tr:hover {
-            background-color: #e8f5e9;
+            background-color: #555;
         }
 
         #feedback-message {
@@ -375,14 +496,14 @@
             text-align: center;
         }
         .feedback-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background-color: #81c784; /* Darker green */
+            color: #1b5e20; /* Lighter green text */
+            border: 1px solid #66bb6a;
         }
         .feedback-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background-color: #e57373; /* Darker red */
+            color: #b71c1c; /* Lighter red text */
+            border: 1px solid #e53935;
         }
 
         .modal {
@@ -394,17 +515,24 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.7); /* Darker overlay */
         }
 
         .modal-content {
-            background-color: #fefefe;
+            background-color: #333; /* Darker modal */
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            color: #f4f4f4;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #333;
+            color: #f4f4f4;
+            border-color: #888;
         }
 
         .modal-buttons {
@@ -420,27 +548,27 @@
         }
 
         .modal-confirm {
-            background-color: #dc3545;
+            background-color: #d32f2f; /* Darker red */
             color: white;
             border: none;
         }
 
         .modal-confirm:hover {
-            background-color: #c82333;
+            background-color: #b71c1c;
         }
 
         .modal-cancel {
-            background-color: #6c757d;
+            background-color: #5a6268; /* Darker gray */
             color: white;
             border: none;
         }
 
         .modal-cancel:hover {
-            background-color: #5a6268;
+            background-color: #424b50;
         }
 
         .close-button {
-            color: #aaa;
+            color: #ccc;
             float: right;
             font-size: 28px;
             font-weight: bold;
@@ -449,7 +577,7 @@
 
         .close-button:hover,
         .close-button:focus {
-            color: black;
+            color: #fff;
             text-decoration: none;
             cursor: pointer;
         }
@@ -457,21 +585,32 @@
         /* --- Style pour la gestion des utilisateurs (Réduit et en bas) --- */
         .user-management-section {
             padding: 10px; /* Réduit le padding */
-            background-color: #f8f9fa; /* Gris très clair */
+            background-color: #303f9f; /* Darker blue */
             border-radius: 5px;
-            border: 1px solid #dee2e6; /* Bordure légère */
+            border: 1px solid #3949ab; /* Darker border */
             display: none; /* Initialement caché */
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             font-size: 0.9em; /* Réduit la taille de la police */
             flex: 1; /* Prend la moitié de l'espace disponible */
+            color: #e0f7fa;
+        }
+
+        .dark-mode .user-management-section {
+            background-color: #303f9f;
+            color: #e0f7fa;
+            border-color: #3949ab;
         }
 
         .user-management-section h2 {
-            color: #007bff; /* Bleu */
+            color: #90caf9; /* Light blue */
             text-align: left;
             margin-bottom: 10px; /* Réduit la marge */
             font-size: 1.1em; /* Réduit la taille du titre */
             transition: color 0.3s ease;
+        }
+
+        .dark-mode .user-management-section h2 {
+            color: #90caf9;
         }
 
         #addUserForm {
@@ -486,22 +625,33 @@
             font-weight: normal;
             font-size: 0.9em;
             transition: color 0.3s ease;
+            color: #ccc;
+        }
+
+        .dark-mode #addUserForm label {
+            color: #ccc;
         }
 
         #newUsername, #newPassword {
             padding: 6px; /* Réduit le padding */
-            border: 1px solid #ccc;
+            border: 1px solid #666; /* Darker border */
             border-radius: 4px;
-            color: #333;
-            background-color: #fff;
+            color: #f4f4f4;
+            background-color: #333; /* Darker input */
             font-size: 0.9em;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
+        .dark-mode #newUsername, .dark-mode #newPassword {
+            color: #f4f4f4;
+            background-color: #333;
+            border-color: #666;
+        }
+
         #addUserBtn {
             padding: 6px 10px; /* Réduit le padding */
-            background-color: #007bff;
-            color: white;
+            background-color: #90caf9; /* Light blue */
+            color: #333;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -510,7 +660,7 @@
         }
 
         #addUserBtn:hover {
-            background-color: #0056b3;
+            background-color: #64b5f6;
         }
 
         #usersList {
@@ -521,13 +671,18 @@
 
         #usersList li {
             padding: 6px 0; /* Réduit le padding */
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #666; /* Darker border */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #333;
+            color: #f4f4f4;
             font-size: 0.9em;
             transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark-mode #usersList li {
+            color: #f4f4f4;
+            border-color: #666;
         }
 
         #usersList li:last-child {
@@ -537,7 +692,7 @@
         .delete-user-btn {
             background: none;
             border: none;
-            color: #dc3545;
+            color: #ff6666; /* Light red */
             cursor: pointer;
             font-size: 0.8em; /* Encore plus petit */
             margin-left: 5px; /* Réduit la marge */
@@ -545,7 +700,7 @@
         }
 
         .delete-user-btn:hover {
-            color: #c82333;
+            color: #cc0000;
         }
 
         /* --- Style pour le container des sections du bas --- */
@@ -568,9 +723,53 @@
             /* ... (Styles existants) ... */
         }
 
+        /* Style pour le bouton d'historique des mouvements de stock */
+        #stockHistoryBtn {
+            padding: 10px 15px;
+            background-color: #546e7a; /* Grayish blue */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #stockHistoryBtn:hover {
+            background-color: #455a64;
+        }
+
+        /* Style pour le modal d'historique des mouvements de stock */
+        #stockHistoryModal .modal-content {
+            width: 90%; /* Agrandir le modal si nécessaire */
+            max-height: 80vh; /* Limiter la hauteur */
+            overflow-y: auto; /* Ajouter une barre de défilement si le contenu est trop long */
+        }
+
+        #stockHistoryTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        #stockHistoryTable th, #stockHistoryTable td {
+            border: 1px solid #666;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #stockHistoryTable th {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+
+        #stockHistoryTable tr:nth-child(even) {
+            background-color: #444;
+        }
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
     <div id="login-container">
         <h2>Connexion Administrateur</h2>
@@ -681,6 +880,9 @@
                 <tbody id="stockBody">
                     </tbody>
             </table>
+            <p>Les articles dont la quantité est inférieure au seuil de stock bas seront affichés en <span style="color: #ff9800; font-weight: bold;">orange</span> avec un <span style="color: #ffcc80; font-weight: bold;">⚠️</span>.</p>
+            <p>Les articles en rupture de stock seront affichés en <span style="color: #ffdddd; font-weight: bold;">rouge</span> avec un <span style="color: #ffdddd; font-weight: bold;">🔴</span>.</p>
+            <button id="stockHistoryBtn">Afficher l'Historique des Mouvements de Stock</button>
         </section>
 
         <section>
@@ -715,6 +917,11 @@
 
             <section class="suppliers-section">
                 <h2>Gestion des Fournisseurs</h2>
+                <form id="discordWebhookForm">
+                    <label for="discordWebhookUrl">URL du Webhook Discord :</label>
+                    <input type="url" id="discordWebhookUrl" placeholder="Entrez l'URL du webhook Discord">
+                    <button type="button" id="saveWebhookBtn">Enregistrer l'URL du Webhook</button>
+                </form>
                 <form id="addSupplierForm">
                     <label for="addSupplierName">Nouveau Fournisseur :</label>
                     <input type="text" id="addSupplierName" placeholder="Nom du fournisseur">
@@ -736,6 +943,26 @@
                     <button type="button" class="modal-confirm" id="confirmDeleteBtn">Supprimer</button>
                     <button type="button" class="modal-cancel" onclick="closeDeleteModal()">Annuler</button>
                 </div>
+            </div>
+        </div>
+
+        <div id="stockHistoryModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeStockHistoryModal()">&times;</span>
+                <h2>Historique des Mouvements de Stock</h2>
+                <table id="stockHistoryTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Article</th>
+                            <th scope="col">Type de Mouvement</th>
+                            <th scope="col">Quantité Modifiée</th>
+                            <th scope="col">Quantité Totale</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockHistoryBody">
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -763,6 +990,13 @@
         const categoryFilter = document.getElementById('category-filter'); // Déclaration de categoryFilter
         const supplierFilter = document.getElementById('supplier-filter'); // Déclaration de supplierFilter
         const outOfStockFilter = document.getElementById('out-of-stock-filter'); // Déclaration de outOfStockFilter
+        const stockHistoryBtn = document.getElementById('stockHistoryBtn');
+        const stockHistoryModal = document.getElementById('stockHistoryModal');
+        const stockHistoryBody = document.getElementById('stockHistoryBody');
+        const STOCK_HISTORY_KEY = 'restaurantStockHistory';
+        let stockHistory = loadStockHistory();
+        let pendingDiscordMessages = []; // Variable pour stocker les messages Discord en attente
+        let sendPendingMessagesTimeout; // Variable globale pour le timer d'envoi des messages
 
         // --- Gestion des Fournisseurs ---
         const addSupplierForm = document.getElementById('addSupplierForm');
@@ -770,6 +1004,105 @@
         const addSupplierBtn = document.getElementById('addSupplierBtn');
         const suppliersListElement = document.getElementById('suppliersList');
         let suppliers = loadSuppliers();
+
+        // --- Variables pour le webhook Discord ---
+        const discordWebhookUrlInput = document.getElementById('discordWebhookUrl');
+        const saveWebhookBtn = document.getElementById('saveWebhookBtn');
+        const DISCORD_WEBHOOK_URL_KEY = 'discordWebhookUrl';
+        let discordWebhookUrl = loadWebhookUrl();
+        const DISCORD_MESSAGE_QUEUE_KEY = 'discordMessageQueue';
+        let discordMessageQueue = loadDiscordMessageQueue();
+        let isSendingDiscordMessage = false;
+        const DISCORD_SEND_DELAY = 90000; // 1 minute 30 secondes en millisecondes
+
+        // Fonction pour charger la file d'attente des messages Discord depuis le localStorage
+        function loadDiscordMessageQueue() {
+            try {
+                const storedQueue = localStorage.getItem(DISCORD_MESSAGE_QUEUE_KEY);
+                return storedQueue ? JSON.parse(storedQueue) : [];
+            } catch (error) {
+                console.error("Erreur lors du chargement de la file d'attente des messages Discord depuis le localStorage:", error);
+                return [];
+            }
+        }
+
+        // Fonction pour sauvegarder la file d'attente des messages Discord dans le localStorage
+        function saveDiscordMessageQueue() {
+            try {
+                localStorage.setItem(DISCORD_MESSAGE_QUEUE_KEY, JSON.stringify(discordMessageQueue));
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde de la file d'attente des messages Discord dans le localStorage:", error);
+            }
+        }
+
+        // Fonction pour charger l'URL du webhook depuis le localStorage
+        function loadWebhookUrl() {
+            return localStorage.getItem(DISCORD_WEBHOOK_URL_KEY) || '';
+        }
+
+        // Fonction pour sauvegarder l'URL du webhook dans le localStorage
+        function saveWebhookUrl() {
+            const url = discordWebhookUrlInput.value.trim();
+            localStorage.setItem(DISCORD_WEBHOOK_URL_KEY, url);
+            discordWebhookUrl = url;
+            displayFeedback('URL du webhook Discord enregistrée.', 'success');
+        }
+
+        // Fonction pour ajouter un message à la file d'attente Discord
+        function enqueueDiscordMessage(message) {
+            discordMessageQueue.push(message);
+            saveDiscordMessageQueue();
+            if (!isSendingDiscordMessage) {
+                processDiscordMessageQueue();
+            }
+        }
+
+        // Fonction pour envoyer le prochain message de la file d'attente avec un délai
+        async function processDiscordMessageQueue() {
+            if (discordMessageQueue.length === 0) {
+                isSendingDiscordMessage = false;
+                return;
+            }
+
+            isSendingDiscordMessage = true;
+            const messageToSend = discordMessageQueue.shift();
+            saveDiscordMessageQueue();
+
+            if (!discordWebhookUrl) {
+                console.warn("L'URL du webhook Discord n'est pas configurée.");
+                setTimeout(processDiscordMessageQueue, DISCORD_SEND_DELAY); // Essayer d'envoyer le prochain après le délai
+                return;
+            }
+
+            const payload = {
+                content: messageToSend
+            };
+
+            try {
+                const response = await fetch(discordWebhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    console.log('Message Discord envoyé avec succès:', messageToSend);
+                } else {
+                    console.error('Erreur lors de l\'envoi du message Discord:', response.status, response.statusText, messageToSend);
+                }
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi du message Discord:', error, messageToSend);
+            } finally {
+                setTimeout(processDiscordMessageQueue, DISCORD_SEND_DELAY);
+            }
+        }
+
+        // Fonction pour envoyer un message à Discord via le webhook (utilise maintenant la file d'attente)
+        function sendDiscordMessage(message) {
+            enqueueDiscordMessage(message);
+        }
 
         function loadSuppliers() {
             try {
@@ -830,18 +1163,6 @@
         const USERS_KEY = 'restaurantUsers';
         let users = loadUsers();
 
-        // --- Variables Globales (Retrait des recettes) ---
-        const recipeManagementSection = null; // Suppression de la référence
-        const addRecipeForm = null;
-        const recipeNameInput = null;
-        const recipeIngredientsDiv = null;
-        const addIngredientBtn = null;
-        const saveRecipeBtn = null;
-        const recipesListElement = null;
-        const recipeFeedbackMessageDiv = null;
-        const RECIPES_KEY = null;
-        let recipes = [];
-
         // --- Fonctions de gestion des utilisateurs ---
         function loadUsers() {
             try {
@@ -890,11 +1211,12 @@
             }
 
             if (users.some(user => user.username === newUsername)) {
-                displayUserFeedback('Ce nom d\'utilisateur existe déjà.', 'error');
+                displayUserFeedback(`L'utilisateur "${newUsername}" existe déjà.`, 'error');
                 return;
             }
 
-            users.push({ username: newUsername, password: newPassword });
+            const newUser = { username: newUsername, password: newPassword };
+            users.push(newUser);
             saveUsers(users);
             newUsernameInput.value = '';
             newPasswordInput.value = '';
@@ -902,16 +1224,14 @@
         }
 
         function deleteUser(index) {
-            const userToDelete = users[index];
-            if (userToDelete.username === ADMIN_USERNAME) {
-                displayUserFeedback('Vous ne pouvez pas supprimer l\'utilisateur administrateur initial.', 'error');
+            if (users[index].username === ADMIN_USERNAME && users.length === 1) {
+                displayUserFeedback('Impossible de supprimer le seul administrateur.', 'error');
                 return;
             }
-            if (confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur "${userToDelete.username}" ?`)) {
-                users.splice(index, 1);
-                saveUsers(users);
-                displayUserFeedback(`L'utilisateur "${escapeHtml(userToDelete.username)}" a été supprimé.`, 'success');
-            }
+            const usernameToDelete = users[index].username;
+            users.splice(index, 1);
+            saveUsers(users);
+            displayUserFeedback(`L'utilisateur "${escapeHtml(usernameToDelete)}" a été supprimé.`, 'success');
         }
 
         function displayUserFeedback(message, type = 'success') {
@@ -923,213 +1243,56 @@
             }, 3000);
         }
 
-        // --- Fonctions de gestion des recettes (Retrait) ---
-        // function loadRecipes() {
-        //     try {
-        //         const storedRecipes = localStorage.getItem(RECIPES_KEY);
-        //         return storedRecipes ? JSON.parse(storedRecipes) : [];
-        //     } catch (error) {
-        //         console.error("Erreur lors du chargement des recettes depuis le localStorage:", error);
-        //         displayRecipeFeedback("Erreur lors du chargement des données des recettes.", 'error');
-        //         return [];
-        //     }
-        // }
+        // --- Gestion des fournisseurs ---
+        function renderSuppliersList() {
+            suppliersListElement.innerHTML = '';
+            suppliers.forEach((supplier, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${escapeHtml(supplier.name)} - ${escapeHtml(supplier.phone || 'Non renseigné')}</span>
+                    <button class="delete-supplier-btn" data-index="${index}">Supprimer</button>
+                `;
+                suppliersListElement.appendChild(li);
+            });
 
-        // function saveRecipes(recipes) {
-        //     try {
-        //         localStorage.setItem(RECIPES_KEY, JSON.stringify(recipes));
-        //         renderRecipesList();
-        //         renderStock(); // Mise à jour du tableau des stocks pour afficher les recettes
-        //     } catch (error) {
-        //         console.error("Erreur lors de la sauvegarde des recettes dans le localStorage:", error);
-        //         displayRecipeFeedback("Erreur lors de la sauvegarde des données des recettes.", 'error');
-        //     }
-        // }
+            document.querySelectorAll('.delete-supplier-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const indexToDelete = parseInt(this.dataset.index);
+                    deleteSupplier(indexToDelete);
+                });
+            });
 
-        // function renderRecipesList() {
-        //     recipesListElement.innerHTML = '';
-        //     recipes.forEach((recipe, index) => {
-        //         const li = document.createElement('li');
-        //         li.innerHTML = `
-        //             <strong>${escapeHtml(recipe.name)}</strong>
-        //             <ul>
-        //                 ${recipe.ingredients.map(ing => `<li>${escapeHtml(ing.name)}: ${ing.quantity}</li>`).join('')}
-        //             </ul>
-        //             <button type="button" class="use-recipe-btn" data-index="${index}">Utiliser la Recette</button>
-        //             <button type="button" class="delete-recipe-btn" data-index="${index}">Supprimer</button>
-        //         `;
-        //         recipesListElement.appendChild(li);
-        //     });
-        // }
-
-        // function displayRecipeFeedback(message, type = 'success') {
-        //     recipeFeedbackMessageDiv.textContent = message;
-        //     recipeFeedbackMessageDiv.className = `feedback-message feedback-${type}`;
-        //     recipeFeedbackMessageDiv.style.display = 'block';
-        //     setTimeout(() => {
-        //         recipeFeedbackMessageDiv.style.display = 'none';
-        //     }, 3000);
-        // }
-
-        // function addIngredientRow() {
-        //     const newRow = document.createElement('div');
-        //     newRow.classList.add('ingredient-row');
-        //     newRow.innerHTML = `
-        //         <select class="ingredient-select">
-        //             <option value="">-- Sélectionner un ingrédient --</option>
-        //             ${stock.map(item => `<option value="${escapeHtml(item.name)}">${escapeHtml(item.name)}</option>`).join('')}
-        //         </select>
-        //         <input type="number" class="ingredient-quantity" placeholder="Quantité" min="0" value="1">
-        //         <button type="button" class="remove-ingredient-btn">Supprimer</button>
-        //     `;
-        //     recipeIngredientsDiv.appendChild(newRow);
-        // }
-
-        // function saveRecipe(event) {
-        //     event.preventDefault();
-        //     const recipeName = recipeNameInput.value.trim();
-        //     const ingredientsRows = recipeIngredientsDiv.querySelectorAll('.ingredient-row');
-        //     const ingredients = [];
-
-        //     ingredientsRows.forEach(row => {
-        //         const ingredientSelect = row.querySelector('.ingredient-select');
-        //         const quantityInput = row.querySelector('.ingredient-quantity');
-
-        //         if (ingredientSelect.value && !isNaN(parseFloat(quantityInput.value)) && parseFloat(quantityInput.value) >= 0) {
-        //             ingredients.push({
-        //                 name: ingredientSelect.value,
-        //                 quantity: parseFloat(quantityInput.value)
-        //             });
-        //         }
-        //     });
-
-        //     if (recipeName && ingredients.length > 0) {
-        //         const newRecipe = {
-        //             id: Date.now().toString(),
-        //             name: recipeName,
-        //             ingredients: ingredients
-        //         };
-        //         recipes.push(newRecipe);
-        //         saveRecipes(recipes);
-        //         recipeNameInput.value = '';
-        //         recipeIngredientsDiv.innerHTML = `
-        //             <label>Ingrédients :</label>
-        //             <div class="ingredient-row">
-        //                 <select class="ingredient-select">
-        //                     <option value="">-- Sélectionner un ingrédient --</option>
-        //                 </select>
-        //                 <input type="number" class="ingredient-quantity" placeholder="Quantité" min="0" value="1">
-        //                 <button type="button" class="remove-ingredient-btn">Supprimer</button>
-        //             </div>
-        //         `;
-        //         displayRecipeFeedback(`La recette "${escapeHtml(recipeName)}" a été enregistrée.`, 'success');
-        //     } else {
-        //         displayRecipeFeedback('Veuillez entrer un nom de recette et au moins un ingrédient valide.', 'error');
-        //     }
-        // }
-
-        // function useRecipe(index) {
-        //     const recipeToUse = recipes[index];
-        //     if (recipeToUse) {
-        //         let canUseRecipe = true;
-        //         const ingredientsToRemove = {};
-
-        //         recipeToUse.ingredients.forEach(recipeIngredient => {
-        //             const stockItem = stock.find(item => item.name === recipeIngredient.name);
-        //             if (stockItem) {
-        //                 if (stockItem.quantity >= recipeIngredient.quantity) {
-        //                     ingredientsToRemove[recipeIngredient.name] = (ingredientsToRemove[recipeIngredient.name] || 0) + recipeIngredient.quantity;
-        //                 } else {
-        //                     canUseRecipe = false;
-        //                     displayRecipeFeedback(`Stock insuffisant pour "${escapeHtml(recipeIngredient.name)}" dans la recette "${escapeHtml(recipeToUse.name)}".`, 'error');
-        //                 }
-        //             } else {
-        //                 canUseRecipe = false;
-        //                 displayRecipeFeedback(`L'ingrédient "${escapeHtml(recipeIngredient.name)}" n'est pas trouvé dans le stock.`, 'error');
-        //             }
-        //         });
-
-        //         if (canUseRecipe) {
-        //             for (const ingredientName in ingredientsToRemove) {
-        //                 const stockItemIndex = stock.findIndex(item => item.name === ingredientName);
-        //                 if (stockItemIndex > -1) {
-        //                     stock[stockItemIndex].quantity -= ingredientsToRemove[ingredientName];
-        //                 }
-        //             }
-        //             saveStock();
-        //             renderStock();
-        //             displayRecipeFeedback(`Les ingrédients de la recette "${escapeHtml(recipeToUse.name)}" ont été déduits du stock.`, 'success');
-        //         }
-        //     }
-        // }
-
-        // function deleteRecipe(index) {
-        //     if (confirm(`Êtes-vous sûr de vouloir supprimer la recette "${escapeHtml(recipes[index].name)}" ?`)) {
-        //         recipes.splice(index, 1);
-        //         saveRecipes(recipes);
-        //         displayRecipeFeedback(`La recette a été supprimée.`, 'success');
-        //     }
-        // }
-
-        // --- Fonction pour vérifier l'état de connexion ---
-        function checkLoginStatus() {
-            const storedLoginState = localStorage.getItem('isAdminLoggedIn');
-            if (storedLoginState === 'true') {
-                isLoggedIn = true;
-                loginContainer.style.display = 'none';
-                mainContainer.style.display = 'block';
-                if (usersSection) usersSection.style.display = 'block'; // Afficher la gestion des utilisateurs après connexion
-                if (suppliersSection) suppliersSection.style.display = 'block'; // Afficher la gestion des fournisseurs après connexion
-                // if (recipeManagementSection) recipeManagementSection.style.display = 'block'; // Afficher la gestion des recettes
-                renderUsersList(); // Afficher la liste des utilisateurs après la connexion
-                renderSuppliersList(); // Afficher la liste des fournisseurs après la connexion
-                // renderRecipesList(); // Afficher la liste des recettes après la connexion
-            } else {
-                isLoggedIn = false; // S'assurer que isLoggedIn est false si non trouvé dans localStorage
-                loginContainer.style.display = 'block';
-                mainContainer.style.display = 'none';
-                if (usersSection) usersSection.style.display = 'none';
-                if (suppliersSection) suppliersSection.style.display = 'none';
-                // if (recipeManagementSection) recipeManagementSection.style.display = 'none'; // Cacher la gestion des recettes
-            }
+            // Mettre à jour la liste des fournisseurs dans le formulaire d'ajout d'article
+            updateSupplierOptions();
         }
 
-        // --- Fonction pour gérer la connexion ---
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = usernameInput.value;
-            const password = passwordInput.value;
+        function addSupplier() {
+            const name = addSupplierNameInput.value.trim();
+            const phone = addSupplierPhoneInput.value.trim();
 
-            const user = users.find(u => u.username === username && u.password === password);
-
-            if (user) {
-                isLoggedIn = true;
-                localStorage.setItem('isAdminLoggedIn', 'true'); // Persister l'état de connexion
-                checkLoginStatus();
-                loginErrorDiv.style.display = 'none';
-            } else {
-                loginErrorDiv.style.display = 'block';
+            if (!name) {
+                displayFeedback('Veuillez entrer le nom du fournisseur.', 'error');
+                return;
             }
-            usernameInput.value = '';
-            passwordInput.value = '';
-        });
 
-        // --- Fonction pour gérer la déconnexion ---
-        function logout() {
-            isLoggedIn = false;
-            localStorage.removeItem('isAdminLoggedIn'); // Supprimer l'état de connexion
-            checkLoginStatus();
-            // Réinitialiser l'affichage des sections admin
-            if (usersSection) usersSection.style.display = 'none';
-            if (suppliersSection) suppliersSection.style.display = 'none';
-            // if (recipeManagementSection) recipeManagementSection.style.display = 'none'; // Cacher la gestion des recettes
+            const newSupplier = { name: name, phone: phone };
+            suppliers.push(newSupplier);
+            saveSuppliersList();
+            addSupplierNameInput.value = '';
+            addSupplierPhoneInput.value = '';
+            displayFeedback(`Le fournisseur "${escapeHtml(name)}" a été ajouté.`, 'success');
         }
 
-        // --- Fonction pour sauvegarder les fournisseurs ---
-        function saveSuppliers() {
+        function deleteSupplier(index) {
+            const supplierToDelete = suppliers[index].name;
+            suppliers.splice(index, 1);
+            saveSuppliersList();
+            displayFeedback(`Le fournisseur "${escapeHtml(supplierToDelete)}" a été supprimé.`, 'success');
+        }
+
+        function saveSuppliersList() {
             try {
                 localStorage.setItem('restaurantSuppliers', JSON.stringify(suppliers));
-                renderSupplierDropdown();
                 renderSuppliersList();
             } catch (error) {
                 console.error("Erreur lors de la sauvegarde des fournisseurs dans le localStorage:", error);
@@ -1137,52 +1300,7 @@
             }
         }
 
-        // --- Fonction pour afficher la liste des fournisseurs ---
-        function renderSuppliersList() {
-            suppliersListElement.innerHTML = '';
-            suppliers.forEach(supplier => {
-                const li = document.createElement('li');
-                li.style.display = 'flex';
-                li.style.justifyContent = 'space-between';
-                li.style.alignItems = 'center';
-                const supplierInfo = document.createElement('div');
-                supplierInfo.innerHTML = `<strong style="font-size: 1em;">${escapeHtml(supplier.name)}</strong>`;
-                if (supplier.phoneNumbers && supplier.phoneNumbers.length > 0) {
-                    supplierInfo.innerHTML += `<br><small>Tél: ${supplier.phoneNumbers.map(escapeHtml).join(', ')}</small>`;
-                }
-                li.appendChild(supplierInfo);
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Supprimer';
-                deleteButton.classList.add('delete-supplier-btn');
-                deleteButton.addEventListener('click', () => deleteSupplier(supplier.id));
-                li.appendChild(deleteButton);
-                suppliersListElement.appendChild(li);
-            });
-        }
-
-        // --- Fonction pour ajouter un fournisseur ---
-        function addSupplier() {
-            const name = addSupplierNameInput.value.trim();
-            const phone = addSupplierPhoneInput.value.trim();
-            if (name) {
-                const newSupplier = { id: Date.now().toString(), name: name, phoneNumbers: phone ? [phone] : [] };
-                suppliers.push(newSupplier);
-                saveSuppliers();
-                addSupplierNameInput.value = '';
-                addSupplierPhoneInput.value = '';
-            }
-        }
-
-        // --- Fonction pour supprimer un fournisseur ---
-        function deleteSupplier(id) {
-            if (confirm('Êtes-vous sûr de vouloir supprimer ce fournisseur ? (Cela ne supprimera pas les produits déjà associés)')) {
-                suppliers = suppliers.filter(supplier => supplier.id !== id);
-                saveSuppliers();
-            }
-        }
-
-        // --- Fonction pour remplir le dropdown des fournisseurs dans le formulaire ---
-        function renderSupplierDropdown() {
+        function updateSupplierOptions() {
             itemSupplierInput.innerHTML = '<option value="">-- Sélectionner --</option>';
             suppliers.forEach(supplier => {
                 const option = document.createElement('option');
@@ -1190,280 +1308,332 @@
                 option.textContent = supplier.name;
                 itemSupplierInput.appendChild(option);
             });
+            // Mettre à jour également le filtre par fournisseur
+            updateSupplierFilterOptions();
         }
 
-        // --- Fonctions de sauvegarde pour le stock et les fournisseurs de produits ---
-        function saveStock() {
+        function updateSupplierFilterOptions() {
+            supplierFilter.innerHTML = '<option value="">-- Tous --</option>';
+            suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.name;
+                option.textContent = supplier.name;
+                supplierFilter.appendChild(option);
+            });
+        }
+
+        // --- Gestion du stock ---
+        function loadStockHistory() {
             try {
-                localStorage.setItem('restaurantStock', JSON.stringify(stock));
+                const storedHistory = localStorage.getItem(STOCK_HISTORY_KEY);
+                return storedHistory ? JSON.parse(storedHistory) : [];
             } catch (error) {
-                console.error("Erreur lors de la sauvegarde du stock dans le localStorage:", error);
-                displayFeedback("Erreur lors de la sauvegarde des données de stock.", 'error');
+                console.error("Erreur lors du chargement de l'historique des mouvements de stock depuis le localStorage:", error);
+                displayFeedback("Erreur lors du chargement de l'historique des mouvements de stock.", 'error');
+                return [];
             }
         }
 
-        function saveProductSuppliers() {
+        function saveStockHistory() {
             try {
-                localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
+                localStorage.setItem(STOCK_HISTORY_KEY, JSON.stringify(stockHistory));
+                renderStockHistory();
             } catch (error) {
-                console.error("Erreur lors de la sauvegarde des fournisseurs de produits dans le localStorage:", error);
-                displayFeedback("Erreur lors de la sauvegarde des données des fournisseurs de produits.", 'error');
+                console.error("Erreur lors de la sauvegarde de l'historique des mouvements de stock dans le localStorage:", error);
+                displayFeedback("Erreur lors de la sauvegarde de l'historique des mouvements de stock.", 'error');
             }
         }
 
-        /**
-         * Affiche les articles du stock dans le tableau HTML.
-         */
+        function recordStockMovement(itemId, itemName, type, quantityChange, currentQuantity) {
+            const timestamp = new Date().toISOString();
+            stockHistory.push({
+                timestamp: timestamp,
+                itemId: itemId,
+                itemName: itemName,
+                type: type,
+                quantityChange: quantityChange,
+                currentQuantity: currentQuantity
+            });
+            saveStockHistory();
+        }
+
+        function renderStockHistory() {
+            stockHistoryBody.innerHTML = '';
+            stockHistory.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Trier par date la plus récente
+
+            stockHistory.forEach(record => {
+                const row = stockHistoryBody.insertRow();
+                const dateCell = row.insertCell();
+                const itemCell = row.insertCell();
+                const typeCell = row.insertCell();
+                const quantityChangeCell = row.insertCell();
+                const currentQuantityCell = row.insertCell();
+
+                const date = new Date(record.timestamp);
+                dateCell.textContent = date.toLocaleString();
+                itemCell.textContent = record.itemName;
+                typeCell.textContent = record.type;
+                quantityChangeCell.textContent = record.quantityChange > 0 ? `+${record.quantityChange}` : record.quantityChange;
+                currentQuantityCell.textContent = record.currentQuantity;
+            });
+        }
+
+        function openStockHistoryModal() {
+            renderStockHistory();
+            stockHistoryModal.style.display = "block";
+        }
+
+        function closeStockHistoryModal() {
+            stockHistoryModal.style.display = "none";
+        }
+
+        function debounce(func, delay) {
+            let timeoutId;
+            return function(...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
         function renderStock(sortColumn = null, sortDirection = 'asc') {
-            stockTableBody.innerHTML = ''; // Vide le tableau
+            stockTableBody.innerHTML = '';
+            productSuppliersTableBody.innerHTML = '';
 
-            // Filtrage
             const categoryFilterValue = categoryFilter.value;
             const supplierFilterValue = supplierFilter.value;
             const showOutOfStockOnly = outOfStockFilter.checked;
+            const searchTerm = searchInput.value.toLowerCase();
 
             let filteredStock = stock.filter(item => {
                 const categoryMatch = !categoryFilterValue || item.category === categoryFilterValue;
                 const supplierMatch = !supplierFilterValue || productSuppliers.some(ps => ps.productId === item.id && ps.supplier === supplierFilterValue);
                 const outOfStockMatch = !showOutOfStockOnly || item.quantity === 0;
-                return categoryMatch && supplierMatch && outOfStockMatch;
+                const searchMatch = !searchTerm || item.name.toLowerCase().includes(searchTerm);
+                return categoryMatch && supplierMatch && outOfStockMatch && searchMatch;
             });
 
-            // Recherche
-            const searchTerm = searchInput.value.toLowerCase();
-            filteredStock = filteredStock.filter(item => item.name.toLowerCase().includes(searchTerm));
-
-            // Tri
-            let sortedStock = [...filteredStock];
             if (sortColumn) {
-                const aValue = a[sortColumn];
-                const bValue = b[sortColumn];
+                filteredStock.sort((a, b) => {
+                    let aValue = a[sortColumn];
+                    let bValue = b[sortColumn];
 
-                if (sortColumn === 'supplier') {
-                    const supplierA = productSuppliers.find(ps => ps.productId === a.id)?.supplier || '';
-                    const supplierB = productSuppliers.find(ps => ps.productId === b.id)?.supplier || '';
-                    return sortDirection === 'asc' ? supplierA.localeCompare(supplierB) : supplierB.localeCompare(supplierA);
-                } else if (sortColumn === 'dateAdded') {
-                    const dateA = new Date(aValue);
-                    const dateB = new Date(bValue);
-                    return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
-                } else if (typeof aValue === 'string') {
-                    return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-                } else {
-                    return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
-                }
+                    if (sortColumn === 'supplier') {
+                        const supplierA = productSuppliers.find(ps => ps.productId === a.id)?.supplier || '';
+                        const supplierB = productSuppliers.find(ps => ps.productId === b.id)?.supplier || '';
+                        return sortDirection === 'asc' ? supplierA.localeCompare(supplierB) : supplierB.localeCompare(supplierA);
+                    } else if (sortColumn === 'dateAdded') {
+                        const dateA = new Date(aValue);
+                        const dateB = new Date(bValue);
+                        return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
+                    } else if (typeof aValue === 'string') {
+                        return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                    } else {
+                        return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+                    }
+                });
             }
 
-            if (sortedStock.length === 0) {
-                stockTableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Aucun article en stock correspondant aux critères.</td></tr>';
-                return;
-            }
-
-            sortedStock.forEach(item => {
-                const row = document.createElement('tr');
-                row.dataset.id = item.id; // ID sur la ligne
-
-                // Vérification stock bas AVANT de générer le HTML des cellules
-                const isLowStock = item.quantity <= item.lowStockThreshold;
-                if (isLowStock) {
+            filteredStock.forEach(item => {
+                const row = stockTableBody.insertRow();
+                if (item.quantity < item.lowStockThreshold && item.quantity > 0) {
                     row.classList.add('low-stock');
+                } else if (item.quantity === 0) {
+                    row.classList.add('out-of-stock');
                 }
 
-                const supplierForItem = productSuppliers.find(ps => ps.productId === item.id)?.supplier || '';
+                const imageCell = row.insertCell();
+                imageCell.innerHTML = item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="stock-image">` : '';
 
-                row.innerHTML = `
-                    <td><img src="${escapeHtml(item.imageUrl || '')}" alt="${escapeHtml(item.name)}" class="stock-image"></td>
-                    <td>${escapeHtml(item.name)}</td>
-                    <td class="quantity-cell" title="Cliquez pour modifier">${item.quantity}</td>
-                    <td>${escapeHtml(item.category || '')}</td>
-                    <td>${item.lowStockThreshold}</td>
-                    <td>${escapeHtml(supplierForItem)}</td>
-                    <td>${item.dateAdded || ''}</td>
-                    <td class="action-buttons">
-                        <button class="btn-increase" data-action="increase" title="Augmenter de 1">+</button>
-                        <button class="btn-decrease" data-action="decrease" title="Diminuer de 1">-</button>
-                        <button class="btn-remove-qty" data-action="remove-qty" title="Retirer une quantité spécifique">Retirer</button>
-                        <button class="btn-edit" data-action="edit" title="Modifier l'article">Modifier</button>
-                        <button class="btn-delete" data-action="delete" title="Supprimer l'article">Supprimer</button>
-                    </td>
+                const nameCell = row.insertCell();
+                nameCell.textContent = item.name;
+
+                const quantityCell = row.insertCell();
+                quantityCell.classList.add('quantity-cell');
+                quantityCell.innerHTML = `
+                    <button class="btn-decrease" data-id="${item.id}">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="btn-increase" data-id="${item.id}">+</button>
+                    <div class="action-buttons" style="display:none;">
+                        <input type="number" class="quantity-input" data-id="${item.id}">
+                        <button class="btn-remove-qty" data-id="${item.id}">OK</button>
+                    </div>
                 `;
-                stockTableBody.appendChild(row);
+                const debouncedDecreaseQuantity = debounce((event, id, change) => {
+                    changeQuantity(event, id, change);
+                }, 300); // Délai de 300 millisecondes
+
+                quantityCell.querySelector('.btn-decrease').addEventListener('click', (event) => debouncedDecreaseQuantity(event, item.id, -1));
+                quantityCell.querySelector('.btn-increase').addEventListener('click', (event) => changeQuantity(event, item.id, 1));
+                const qtyInput = quantityCell.querySelector('.quantity-input');
+                quantityCell.addEventListener('click', function(event) {
+                    // N'ouvrir le input que si on ne clique pas sur les boutons +/-
+                    if (!event.target.classList.contains('btn-increase') && !event.target.classList.contains('btn-decrease')) {
+                        this.querySelector('.action-buttons').style.display = 'inline-block';
+                    }
+                });
+                quantityCell.querySelector('.btn-remove-qty').addEventListener('click', (event) => {
+                    const newQty = parseInt(qtyInput.value);
+                    if (!isNaN(newQty)) {
+                        changeQuantity(event, item.id, newQty - item.quantity);
+                        qtyInput.value = '';
+                        quantityCell.querySelector('.action-buttons').style.display = 'none';
+                    } else {
+                        alert('Veuillez entrer une quantité valide.');
+                    }
+                });
+
+                const categoryCell = row.insertCell();
+                categoryCell.textContent = item.category;
+
+                const lowStockThresholdCell = row.insertCell();
+                lowStockThresholdCell.textContent = item.lowStockThreshold;
+
+                const supplierCell = row.insertCell();
+                const supplierInfo = productSuppliers.find(ps => ps.productId === item.id);
+                supplierCell.textContent = supplierInfo ? supplierInfo.supplier : 'Non renseigné';
+
+                const dateAddedCell = row.insertCell();
+                const date = new Date(item.dateAdded);
+                dateAddedCell.textContent = date.toLocaleDateString();
+
+                const actionsCell = row.insertCell();
+                actionsCell.innerHTML = `
+                    <button class="btn-edit" data-id="${item.id}">Modifier</button>
+                    <button class="btn-delete" data-id="${item.id}">Supprimer</button>
+                `;
+                actionsCell.querySelector('.btn-edit').addEventListener('click', () => populateEditForm(item.id));
+                actionsCell.querySelector('.btn-delete').addEventListener('click', () => openDeleteModal(item.id));
             });
 
-            renderProductSuppliersTable(); // Mettre à jour le tableau des fournisseurs à chaque rendu du stock
+            // Rendre la table des fournisseurs de produits
+            const productSuppliersMap = {};
+            productSuppliers.forEach(ps => {
+                const product = stock.find(item => item.id === ps.productId);
+                if (product) {
+                    if (!productSuppliersMap[product.name]) {
+                        productSuppliersMap[product.name] = [];
+                    }
+                    productSuppliersMap[product.name].push(ps.supplier);
+                }
+            });
+
+            for (const productName in productSuppliersMap) {
+                const row = productSuppliersTableBody.insertRow();
+                const productCell = row.insertCell();
+                productCell.textContent = productName;
+                const suppliersCell = row.insertCell();
+                suppliersCell.textContent = productSuppliersMap[productName].join(', ');
+            }
         }
 
-        function addItem() {
-            const name = itemNameInput.value.trim();
-            const quantity = parseInt(itemQuantityInput.value, 10);
-            const category = itemCategoryInput.value;
-            const lowStockThreshold = parseInt(lowStockThresholdInput.value, 10) || 0;
-            const imageUrl = itemImageInput.value.trim();
-            const supplier = itemSupplierInput.value;
-            const itemIdToEdit = itemIdToEditInput.value;
-            const currentDate = new Date().toLocaleDateString();
+        function populateCategoryFilter() {
+            const categories = [...new Set(stock.map(item => item.category).filter(Boolean))];
+            categoryFilter.innerHTML = '<option value="">-- Toutes --</option>';
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                categoryFilter.appendChild(option);
+            });
+        }
 
-            if (!name || isNaN(quantity) || quantity < 0 || isNaN(lowStockThreshold) || lowStockThreshold < 0) {
-                displayFeedback('Veuillez remplir tous les champs correctement (Nom, Quantité >= 0, Seuil >= 0).', 'error');
+        function addItemToStock(event) {
+            event.preventDefault();
+            const itemName = itemNameInput.value.trim();
+            const itemQuantity = parseInt(itemQuantityInput.value);
+            const itemCategory = itemCategoryInput.value;
+            const lowStockThreshold = parseInt(lowStockThresholdInput.value);
+            const itemImage = itemImageInput.value.trim();
+            const itemSupplier = itemSupplierInput.value;
+            const itemIdToEdit = itemIdToEditInput.value;
+
+            if (!itemName || isNaN(itemQuantity) || isNaN(lowStockThreshold)) {
+                displayFeedback('Veuillez remplir tous les champs obligatoires.', 'error');
                 return;
             }
+
+            const newItem = {
+                id: itemIdToEdit || Date.now(),
+                name: itemName,
+                quantity: itemQuantity,
+                category: itemCategory,
+                lowStockThreshold: lowStockThreshold,
+                image: itemImage,
+                dateAdded: itemIdToEdit ? stock.find(item => item.id === itemIdToEdit)?.dateAdded : new Date().toISOString()
+            };
 
             if (itemIdToEdit) {
-                // Mode édition
-                const itemIndex = stock.findIndex(item => item.id === itemIdToEdit);
-                if (itemIndex > -1) {
-                    stock[itemIndex].name = name;
-                    stock[itemIndex].quantity = quantity;
-                    stock[itemIndex].category = category;
-                    stock[itemIndex].lowStockThreshold = lowStockThreshold;
-                    stock[itemIndex].imageUrl = imageUrl;
-
-                    const supplierLinkIndex = productSuppliers.findIndex(link => link.productId === itemIdToEdit);
-                    if (supplier) {
-                        if (supplierLinkIndex > -1) {
-                            productSuppliers[supplierLinkIndex].supplier = supplier;
-                        } else {
-                            productSuppliers.push({ productId: itemIdToEdit, supplier: supplier });
-                        }
-                    } else if (supplierLinkIndex > -1) {
-                        productSuppliers.splice(supplierLinkIndex, 1); // Supprimer le lien si le fournisseur est vidé
+                const originalItem = stock.find(item => item.id === itemIdToEdit);
+                const index = stock.findIndex(item => item.id === itemIdToEdit);
+                if (index !== -1) {
+                    stock[index] = newItem;
+                    const quantityChange = newItem.quantity - (originalItem ? originalItem.quantity : 0);
+                    if (quantityChange !== 0) {
+                        recordStockMovement(newItem.id, newItem.name, 'Mise à jour', quantityChange, newItem.quantity);
                     }
-
-                    saveStock();
-                    saveProductSuppliers();
-                    renderStock();
-                    resetForm();
-                    addItemBtn.textContent = 'Ajouter au Stock';
-                    displayFeedback(`L'article "${escapeHtml(name)}" a été mis à jour.`, 'success');
+                    // Mettre à jour le fournisseur si nécessaire
+                    const existingSupplierIndex = productSuppliers.findIndex(ps => ps.productId === itemIdToEdit);
+                    if (existingSupplierIndex !== -1 && productSuppliers[existingSupplierIndex].supplier !== itemSupplier) {
+                        productSuppliers[existingSupplierIndex].supplier = itemSupplier;
+                    } else if (existingSupplierIndex === -1 && itemSupplier) {
+                        productSuppliers.push({ productId: newItem.id, supplier: itemSupplier });
+                    } else if (existingSupplierIndex !== -1 && !itemSupplier) {
+                        productSuppliers.splice(existingSupplierIndex, 1);
+                    }
+                    displayFeedback(`L'article "${escapeHtml(itemName)}" a été mis à jour.`, 'success');
                 }
+                itemIdToEditInput.value = ''; // Réinitialiser l'ID d'édition
+                addItemBtn.textContent = 'Ajouter au Stock'; // Réinitialiser le texte du bouton
             } else {
-                // Mode ajout
-                const existingItemIndex = stock.findIndex(item => item.name.toLowerCase() === name.toLowerCase());
-                let newItemId;
-
-                if (existingItemIndex > -1) {
-                     stock[existingItemIndex].quantity += quantity;
-                     displayFeedback(`Quantité ajoutée à l'article existant "${escapeHtml(name)}".`, 'success');
-                     newItemId = stock[existingItemIndex].id;
-                } else {
-                     const newItem = {
-                        id: Date.now().toString(),
-                        name: name,
-                        quantity: quantity,
-                        category: category,
-                        lowStockThreshold: lowStockThreshold,
-                        imageUrl: imageUrl,
-                        dateAdded: currentDate // Ajout de la date
-                    };
-                    stock.push(newItem);
-                    newItemId = newItem.id;
+                stock.push(newItem);
+                recordStockMovement(newItem.id, newItem.name, 'Ajout', newItem.quantity, newItem.quantity);
+                if (itemSupplier) {
+                    productSuppliers.push({ productId: newItem.id, supplier: itemSupplier });
                 }
-
-                saveStock();
-
-                if (supplier) {
-                    const existingSupplierLink = productSuppliers.find(link => link.productId === newItemId);
-                    if (existingSupplierLink) {
-                        existingSupplierLink.supplier = supplier;
-                    } else {
-                        productSuppliers.push({ productId: newItemId, supplier: supplier });
-                    }
-                    saveProductSuppliers();
-                }
-
-                renderStock();
-                resetForm();
-                displayFeedback(`L'article "${escapeHtml(name)}" a été ajouté au stock.`, 'success');
+                displayFeedback(`L'article "${escapeHtml(itemName)}" a été ajouté.`, 'success');
             }
-        }
 
-        function resetForm() {
+            saveStock();
             itemNameInput.value = '';
             itemQuantityInput.value = '';
             itemCategoryInput.value = '';
+            lowStockThresholdInput.value = '5';
             itemImageInput.value = '';
             itemSupplierInput.value = '';
-            lowStockThresholdInput.value = '5';
-            itemIdToEditInput.value = '';
-            addItemBtn.textContent = 'Ajouter au Stock';
-            document.querySelector('.form-ajout h2').textContent = 'Ajouter un Article';
-            feedbackMessageDiv.style.display = 'none';
         }
 
-        /**
-         * Affiche les fournisseurs des produits dans le tableau HTML.
-         */
-        function renderProductSuppliersTable() {
-            productSuppliersTableBody.innerHTML = ''; // Vide le tableau des fournisseurs
-
-            productSuppliers.forEach(link => {
-                const product = stock.find(item => item.id === link.productId);
-                if (product) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${escapeHtml(product.name)}</td>
-                        <td>${escapeHtml(link.supplier)}</td>
-                    `;
-                    productSuppliersTableBody.appendChild(row);
-                }
-            });
-        }
-
-        /**
-         * Met à jour la quantité d'un article via les boutons + ou -.
-         * @param {string} id - L'ID de l'article.
-         * @param {number} change - La quantité à ajouter (+1) ou à retirer (-1).
-         */
-        function updateQuantityByButton(id, change) {
-            const itemIndex = stock.findIndex(item => item.id === id);
-            if (itemIndex > -1) {
-                stock[itemIndex].quantity += change;
-                if (stock[itemIndex].quantity < 0) {
-                    stock[itemIndex].quantity = 0;
-                }
-                saveStock();
-                renderStock(); // Redessine pour mettre à jour visuellement
-            }
-        }
-
-        /**
-         * Met à jour la quantité d'un article directement dans le tableau.
-         * @param {string} id - L'ID de l'article.
-         * @param {number} newValue - La nouvelle quantité.
-         */
-        function updateQuantityDirectly(id, newValue) {
-            const itemIndex = stock.findIndex(item => item.id === id);
-            if (itemIndex > -1) {
-                if (!isNaN(newValue) && newValue >= 0) {
-                    stock[itemIndex].quantity = newValue;
-                    saveStock();
-                    renderStock(); // Redessine pour mettre à jour l'affichage et retirer l'input
-                    displayFeedback(`Quantité de "${escapeHtml(stock[itemIndex].name)}" mise à jour à ${newValue}.`, 'success');
-                } else {
-                    renderStock(); // Redessine pour retirer l'input et afficher l'ancienne valeur
-                    displayFeedback('Veuillez entrer une quantité valide (nombre >= 0).', 'error');
-                }
-            }
-        }
-
-        /**
-         * Prépare le formulaire pour l'édition d'un article.
-         * @param {string} id - L'ID de l'article à éditer.
-         */
-        function editItem(id) {
+        function populateEditForm(id) {
             const itemToEdit = stock.find(item => item.id === id);
             if (itemToEdit) {
                 itemNameInput.value = itemToEdit.name;
                 itemQuantityInput.value = itemToEdit.quantity;
-                itemCategoryInput.value = itemToEdit.category || '';
+                itemCategoryInput.value = itemToEdit.category;
                 lowStockThresholdInput.value = itemToEdit.lowStockThreshold;
-                itemImageInput.value = itemToEdit.imageUrl || '';
-                itemIdToEditInput.value = itemToEdit.id;
-                addItemBtn.textContent = 'Enregistrer les Modifications';
-                document.querySelector('.form-ajout h2').textContent = `Modifier "${escapeHtml(itemToEdit.name)}"`;
+                itemImageInput.value = itemToEdit.image || '';
+                const supplierInfo = productSuppliers.find(ps => ps.productId === id);
+                itemSupplierInput.value = supplierInfo ? supplierInfo.supplier : '';
+                itemIdToEditInput.value = id;
+                addItemBtn.textContent = 'Modifier l\'Article';
+            }
+        }
 
-                const supplierLink = productSuppliers.find(link => link.productId === id);
-                itemSupplierInput.value = supplierLink ? supplierLink.supplier : '';
+        function changeQuantity(event, id, change) {
+            event.stopPropagation();
+            const item = stock.find(item => item.id === id);
+            if (item) {
+                const oldQuantity = item.quantity;
+                item.quantity += change;
+                if (item.quantity < 0) item.quantity = 0;
+                const quantityChange = item.quantity - oldQuantity;
+                if (quantityChange !== 0) {
+                    recordStockMovement(item.id, item.name, 'Mise à jour', quantityChange, item.quantity);
+                }
+                saveStock();
+                // Envoyer les messages en attente après un délai (par exemple, 1 seconde)
+                clearTimeout(sendPendingMessagesTimeout); // Annuler tout timer précédent
+                sendPendingMessagesTimeout = setTimeout(sendAllPendingDiscordMessages, 1000); // 1000 ms = 1 seconde
             }
         }
 
@@ -1477,26 +1647,66 @@
             currentItemToDeleteId = null;
         }
 
-        function deleteItem() {
-            if (currentItemToDeleteId) {
-                stock = stock.filter(item => item.id !== currentItemToDeleteId);
-                productSuppliers = productSuppliers.filter(link => link.productId !== currentItemToDeleteId);
-                saveStock();
-                saveProductSuppliers();
-                renderStock();
+        confirmDeleteBtn.addEventListener('click', deleteStockItem);
+
+        function deleteStockItem() {
+            if (currentItemToDeleteId !== null) {
+                const index = stock.findIndex(item => item.id === currentItemToDeleteId);
+                if (index !== -1) {
+                    const itemName = stock[index].name;
+                    const quantityBeforeDeletion = stock[index].quantity;
+                    recordStockMovement(currentItemToDeleteId, itemName, 'Suppression', -quantityBeforeDeletion, 0);
+                    stock.splice(index, 1);
+                    const supplierIndex = productSuppliers.findIndex(ps => ps.productId === currentItemToDeleteId);
+                    if (supplierIndex !== -1) {
+                        productSuppliers.splice(supplierIndex, 1);
+                    }
+                    saveStock();
+                    displayFeedback(`L'article "${escapeHtml(itemName)}" a été supprimé.`, 'success');
+                    // Envoyer les messages en attente après un délai
+                    clearTimeout(sendPendingMessagesTimeout);
+                    sendPendingMessagesTimeout = setTimeout(sendAllPendingDiscordMessages, 1000);
+                }
                 closeDeleteModal();
-                displayFeedback("L'article a été supprimé.", 'success');
             }
         }
 
-        function escapeHtml(unsafe) {
-            if (!unsafe) return "";
-            return unsafe
-                 .replace(/&/g, "&amp;")
-                 .replace(/</g, "&lt;")
-                 .replace(/>/g, "&gt;")
-                 .replace(/"/g, "&quot;")
-                 .replace(/'/g, "&#039;");
+        function saveStock() {
+            try {
+                localStorage.setItem('restaurantStock', JSON.stringify(stock));
+                localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
+                renderStock();
+
+                // Collecter les messages à envoyer
+                stock.forEach(item => {
+                    const existingMessageLow = pendingDiscordMessages.find(msg => msg.includes(`Alerte Stock Bas : L'article **${escapeHtml(item.name)}**`));
+                    const existingMessageOut = pendingDiscordMessages.find(msg => msg.includes(`Alerte Rupture de Stock : L'article **${escapeHtml(item.name)}**`));
+
+                    if (item.quantity < item.lowStockThreshold && item.quantity > 0 && !existingMessageLow) {
+                        pendingDiscordMessages.push(`⚠️ **Alerte Stock Bas** : L'article **${escapeHtml(item.name)}** est en dessous du seuil de stock bas (${item.lowStockThreshold}). Quantité actuelle : ${item.quantity}`);
+                    } else if (item.quantity === 0 && !existingMessageOut) {
+                        pendingDiscordMessages.push(`🔴 **Alerte Rupture de Stock** : L'article **${escapeHtml(item.name)}** est en rupture de stock.`);
+                    } else if (item.quantity > 0 && existingMessageLow) {
+                        // Retirer l'alerte si le stock est remonté
+                        pendingDiscordMessages = pendingDiscordMessages.filter(msg => !msg.includes(`Alerte Stock Bas : L'article **${escapeHtml(item.name)}**`));
+                    } else if (item.quantity > 0 && existingMessageOut) {
+                        // Retirer l'alerte si le stock est revenu
+                        pendingDiscordMessages = pendingDiscordMessages.filter(msg => !msg.includes(`Alerte Rupture de Stock : L'article **${escapeHtml(item.name)}**`));
+                    }
+                });
+
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde du stock dans le localStorage:", error);
+                displayFeedback("Erreur lors de la sauvegarde des données de stock.", 'error');
+            }
+        }
+
+        function sendAllPendingDiscordMessages() {
+            if (pendingDiscordMessages.length > 0) {
+                const messageToSend = pendingDiscordMessages.join("\n");
+                sendDiscordMessage(messageToSend);
+                pendingDiscordMessages = []; // Vider la liste après l'envoi
+            }
         }
 
         function displayFeedback(message, type = 'success') {
@@ -1508,150 +1718,135 @@
             }, 3000);
         }
 
-        let currentSortColumn = null;
-        let currentSortDirection = 'asc';
-
-        function sortTable(column) {
-            if (currentSortColumn === column) {
-                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-            } else {
-                currentSortColumn = column;
-                currentSortDirection = 'asc';
-            }
-            renderStock(currentSortColumn, currentSortDirection);
+        // --- Gestion de l'admin login ---
+        function checkAdminLogin(username, password) {
+            return users.some(user => user.username === username && user.password === password);
         }
 
-        // --- Initialisation ---
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            if (checkAdminLogin(username, password)) {
+                isLoggedIn = true;
+                localStorage.setItem('isAdminLoggedIn', 'true');
+                loginContainer.style.display = 'none';
+                mainContainer.style.display = 'block';
+                suppliersSection.style.display = 'block';
+                usersSection.style.display = 'block';
+                renderStock();
+                renderSuppliersList();
+                renderUsersList();
+                populateCategoryFilter();
+                updateSupplierOptions();
+            } else {
+                loginErrorDiv.style.display = 'block';
+                setTimeout(() => {
+                    loginErrorDiv.style.display = 'none';
+                }, 3000);
+            }
+            usernameInput.value = '';
+            passwordInput.value = '';
+        });
+
+        logoutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLoggedIn = false;
+            localStorage.removeItem('isAdminLoggedIn');
+            loginContainer.style.display = 'block';
+            mainContainer.style.display = 'none';
+            suppliersSection.style.display = 'none';
+            usersSection.style.display = 'none';
+        });
+
+        function checkLoginStatus() {
+            const loggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
+            if (loggedIn) {
+                isLoggedIn = true;
+                loginContainer.style.display = 'none';
+                mainContainer.style.display = 'block';
+                suppliersSection.style.display = 'block';
+                usersSection.style.display = 'block';
+                renderStock();
+                renderSuppliersList();
+                renderUsersList();
+                populateCategoryFilter();
+                updateSupplierOptions();
+                // Démarrer le traitement de la file d'attente au chargement si des messages sont en attente
+                if (discordMessageQueue.length > 0 && !isSendingDiscordMessage) {
+                    processDiscordMessageQueue();
+                }
+            } else {
+                loginContainer.style.display = 'block';
+                mainContainer.style.display = 'none';
+                suppliersSection.style.display = 'none';
+                usersSection.style.display = 'none';
+            }
+        }
+
+        // --- Écouteurs d'événements ---
+        addItemBtn.addEventListener('click', addItemToStock);
+        searchInput.addEventListener('input', renderStock);
+        categoryFilter.addEventListener('change', renderStock);
+        supplierFilter.addEventListener('change', renderStock);
+        outOfStockFilter.addEventListener('change', renderStock);
+        addSupplierBtn.addEventListener('click', addSupplier);
+        addUserBtn.addEventListener('click', addUser);
+        stockHistoryBtn.addEventListener('click', openStockHistoryModal);
+        saveWebhookBtn.addEventListener('click', saveWebhookUrl); // Ajout de l'écouteur pour enregistrer l'URL du webhook
+
+        function closeStockHistoryModal() {
+            stockHistoryModal.style.display = "none";
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             checkLoginStatus();
             renderSuppliersList();
-            renderSupplierDropdown();
-            renderUsersList(); // Initialiser la liste des utilisateurs
-
-            // Ajouter la date d'ajout aux éléments existants dans le localStorage s'ils n'en ont pas
-            stock = stock.map(item => ({ ...item, dateAdded: item.dateAdded || new Date().toLocaleDateString() }));
-            saveStock();
-
+            renderUsersList();
             renderStock();
-            renderProductSuppliersTable();
+            populateCategoryFilter();
+            updateSupplierOptions();
+            renderStockHistory(); // Afficher l'historique au chargement si nécessaire
+            discordWebhookUrlInput.value = discordWebhookUrl; // Initialiser le champ de l'URL du webhook
 
-            // Peupler les filtres
-            const categories = [...new Set(stock.map(item => item.category).filter(Boolean))];
-            categories.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat;
-                option.textContent = cat;
-                categoryFilter.appendChild(option);
-            });
+            document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
+                th.addEventListener('click', () => {
+                    const column = th.dataset.sort;
+                    const currentSortColumn = localStorage.getItem('sortColumn');
+                    const currentSortDirection = localStorage.getItem('sortDirection') || 'asc';
+                    let newSortDirection = 'asc';
 
-            const suppliersFromStock = [...new Set(productSuppliers.map(ps => ps.supplier).filter(Boolean))];
-            suppliersFromStock.forEach(sup => {
-                const option = document.createElement('option');
-                option.value = sup;
-                option.textContent = sup;
-                supplierFilter.appendChild(option);
-            });
-        });
-
-        // Écouteurs d'événements
-        addSupplierBtn.addEventListener('click', addSupplier);
-        searchInput.addEventListener('input', () => renderStock(currentSortColumn, currentSortDirection));
-        categoryFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
-        supplierFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
-        outOfStockFilter.addEventListener('change', () => renderStock(currentSortColumn, currentSortDirection));
-        addUserBtn.addEventListener('click', addUser); // Écouteur pour l'ajout d'utilisateur
-        logoutLink.addEventListener('click', logout); // Écouteur pour la déconnexion
-
-        // Écouteurs pour le tri des colonnes
-        document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
-            th.addEventListener('click', () => sortTable(th.dataset.sort));
-        });
-
-        confirmDeleteBtn.addEventListener('click', deleteItem);
-        addItemBtn.addEventListener('click', addItem);
-
-        lowStockThresholdInput.addEventListener('keypress', function(event) {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            addItem();
-          }
-        });
-        itemSupplierInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                addItem();
-            }
-        });
-        newPasswordInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                addUser();
-            }
-        });
-
-        // Gestion des clics dans le tableau (Délégation d'événements)
-        stockTableBody.addEventListener('click', (event) => {
-            const target = event.target;
-            const row = target.closest('tr');
-            if (!row) return;
-
-            const id = row.dataset.id;
-
-            if (target.tagName === 'BUTTON' && target.closest('td.action-buttons')) {
-                const action = target.dataset.action;
-                if (action === 'increase') {
-                    updateQuantityByButton(id, 1);
-                } else if (action === 'decrease') {
-                    updateQuantityByButton(id, -1);
-                } else if (action === 'remove-qty') {
-                    // Au clic sur "Retirer", on simule un clic sur la cellule de quantité
-                    const quantityCell = row.querySelector('.quantity-cell');
-                    if (quantityCell) {
-                        quantityCell.click();
+                    if (currentSortColumn === column && currentSortDirection === 'asc') {
+                        newSortDirection = 'desc';
                     }
-                } else if (action === 'edit') {
-                    editItem(id);
-                } else if (action === 'delete') {
-                    openDeleteModal(id);
-                }
-            } else if (target.classList.contains('quantity-cell') && !target.querySelector('input')) {
-                const currentQuantity = target.textContent;
-                target.innerHTML = '';
-                const input = document.createElement('input');
-                input.type = 'number';
-                input.value = currentQuantity;
-                input.min = '0';
-                input.className = 'quantity-input';
-                target.appendChild(input);
-                input.focus();
-                input.select();
 
-                const saveEdit = () => {
-                    const newValue = parseInt(input.value, 10);
-                    updateQuantityDirectly(id, newValue);
-                };
-
-                input.addEventListener('blur', saveEdit);
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        saveEdit();
-                    } else if (e.key === 'Escape') {
-                        renderStock();
-                    }
+                    localStorage.setItem('sortColumn', column);
+                    localStorage.setItem('sortDirection', newSortDirection);
+                    renderStock(column, newSortDirection);
                 });
+            });
+
+            const initialSortColumn = localStorage.getItem('sortColumn');
+            const initialSortDirection = localStorage.getItem('sortDirection') || 'asc';
+            if (initialSortColumn) {
+                renderStock(initialSortColumn, initialSortDirection);
+            }
+
+            // Démarrer le traitement de la file d'attente au chargement si des messages sont en attente
+            if (discordMessageQueue.length > 0 && !isSendingDiscordMessage) {
+                processDiscordMessageQueue();
             }
         });
 
-        // Fermer le modal si l'utilisateur clique en dehors
-        window.onclick = function(event) {
-            if (event.target == deleteModal) {
-                closeDeleteModal();
-            }
-        }
-
-        // --- Initialisation de l'état de connexion ---
-        checkLoginStatus();
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+         }
 
     </script>
 
