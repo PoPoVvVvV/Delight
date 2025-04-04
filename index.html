@@ -30,6 +30,9 @@
             box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
             position: relative; /* Pour positionner le bouton de déconnexion */
             transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex; /* Added for layout */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
         }
 
         .dark-mode .container {
@@ -38,14 +41,38 @@
             box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
         }
 
-        h1, h2 {
+        .header-container {
+            width: 100%; /* Take full width of the container */
+            display: flex;
+            justify-content: flex-start; /* Align logo to the left */
+            align-items: center;
+            margin-bottom: 20px; /* Space between logo and centered text (removed centering of h1) */
+        }
+
+        .header-container img {
+            max-height: 200px; /* Agrandissement de la taille (4 * 50px) */
+            margin-right: 15px; /* Space between logo and text */
+        }
+
+        h1 {
+            color: #aed581; /* Light olive green */
+            text-align: left; /* Align the text to the left now that it's in the header container */
+            margin-bottom: 0; /* Remove default bottom margin that might cause spacing issues */
+            transition: color 0.3s ease;
+        }
+
+        .dark-mode h1 {
+            color: #aed581;
+        }
+
+        h2 {
             color: #aed581; /* Light olive green */
             text-align: center;
             margin-bottom: 20px;
             transition: color 0.3s ease;
         }
 
-        .dark-mode h1, .dark-mode h2 {
+        .dark-mode h2 {
             color: #aed581;
         }
 
@@ -791,7 +818,10 @@
     </div>
 
     <div class="container" style="display:none;">
-        <h1>Suivi des Stocks du Restaurant</h1>
+        <div class="header-container">
+            <img src="delight_2.png" alt="Delight Restaurant Logo" style="max-height: 200px;">
+            <h1>Suivi des Stocks</h1>
+        </div>
 
         <div class="logout-container">
             <a href="#" id="logout-link" class="logout-button">Déconnexion</a>
@@ -887,7 +917,7 @@
             </table>
             <p>Les articles dont la quantité est inférieure au seuil de stock bas seront affichés en <span style="color: #ff9800; font-weight: bold;">orange</span> avec un <span style="color: #ffcc80; font-weight: bold;">⚠️</span>.</p>
             <p>Les articles en rupture de stock seront affichés en <span style="color: #ffdddd; font-weight: bold;">rouge</span> avec un <span style="color: #ffdddd; font-weight: bold;">🔴</span>.</p>
-            <button id="stockHistoryBtn">Afficher l'Historique des Mouvements de Stock</button>
+            <button id="stockHistoryBtn" style="display: none;">Afficher l'Historique des Mouvements de Stock</button>
         </section>
 
         <section>
@@ -951,7 +981,7 @@
             </div>
         </div>
 
-        <div id="stockHistoryModal" class="modal">
+        <div id="stockHistoryModal" class="modal" style="display: none !important;">
             <div class="modal-content">
                 <span class="close-button" onclick="closeStockHistoryModal()">&times;</span>
                 <h2>Historique des Mouvements de Stock</h2>
@@ -999,8 +1029,6 @@
         const stockHistoryBtn = document.getElementById('stockHistoryBtn');
         const stockHistoryModal = document.getElementById('stockHistoryModal');
         const stockHistoryBody = document.getElementById('stockHistoryBody');
-        // const STOCK_HISTORY_KEY = 'restaurantStockHistory'; // Suppression de la constante
-        // let stockHistory = loadStockHistory(); // Suppression de la variable
         let pendingDiscordMessages = []; // Variable pour stocker les messages Discord en attente
         let sendPendingMessagesTimeout; // Variable globale pour le timer d'envoi des messages
         let loggedInUsername = ''; // Variable pour stocker le nom d'utilisateur connecté
@@ -1330,83 +1358,6 @@
         }
 
         // --- Gestion du stock ---
-        // function loadStockHistory() { // Suppression de la fonction
-        //     try {
-        //         const storedHistory = localStorage.getItem(STOCK_HISTORY_KEY);
-        //         return storedHistory ? JSON.parse(storedHistory) : [];
-        //     } catch (error) {
-        //         console.error("Erreur lors du chargement de l'historique des mouvements de stock depuis le localStorage:", error);
-        //         displayFeedback("Erreur lors du chargement de l'historique des mouvements de stock.", 'error');
-        //         return [];
-        //     }
-        // }
-
-        // function saveStockHistory() { // Suppression de la fonction
-        //     try {
-        //         localStorage.setItem(STOCK_HISTORY_KEY, JSON.stringify(stockHistory));
-        //         renderStockHistory();
-        //     } catch (error) {
-        //         console.error("Erreur lors de la sauvegarde de l'historique des mouvements de stock dans le localStorage:", error);
-        //         displayFeedback("Erreur lors de la sauvegarde de l'historique des mouvements de stock.", 'error');
-        //     }
-        // }
-
-        function recordStockMovement(itemId, itemName, type, quantityChange, currentQuantity, user) {
-            // Suppression du contenu de la fonction
-            // const timestamp = new Date().toISOString();
-            // stockHistory.push({
-            //     timestamp: timestamp,
-            //     itemId: itemId,
-            //     itemName: itemName,
-            //     type: type,
-            //     quantityChange: quantityChange,
-            //     currentQuantity: currentQuantity,
-            //     user: user
-            // });
-            // saveStockHistory();
-        }
-
-        // function renderStockHistory() { // Suppression de la fonction
-        //     stockHistoryBody.innerHTML = '';
-        //     stockHistory.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-        //     const headerRow = stockHistoryBody.createTHead().insertRow();
-        //     headerRow.insertCell().textContent = 'Date';
-        //     headerRow.insertCell().textContent = 'Article';
-        //     headerRow.insertCell().textContent = 'Type de Mouvement';
-        //     headerRow.insertCell().textContent = 'Quantité Modifiée';
-        //     headerRow.insertCell().textContent = 'Quantité Totale';
-        //     headerRow.insertCell().textContent = 'Utilisateur';
-
-        //     stockHistory.forEach(record => {
-        //         const row = stockHistoryBody.insertRow();
-        //         const dateCell = row.insertCell();
-        //         const itemCell = row.insertCell();
-        //         const typeCell = row.insertCell();
-        //         const quantityChangeCell = row.insertCell();
-        //         const currentQuantityCell = row.insertCell();
-        //         const userCell = row.insertCell();
-
-        //         const date = new Date(record.timestamp);
-        //         dateCell.textContent = date.toLocaleString();
-        //         itemCell.textContent = record.itemName;
-        //         typeCell.textContent = record.type;
-        //         quantityChangeCell.textContent = record.quantityChange > 0 ? `+${record.quantityChange}` : record.quantityChange;
-        //         currentQuantityCell.textContent = record.currentQuantity;
-        //         userCell.textContent = record.user;
-        //     });
-        //     stockHistoryBody.createTFoot();
-        // }
-
-        // function openStockHistoryModal() { // Suppression de la fonction
-        //     renderStockHistory();
-        //     stockHistoryModal.style.display = "block";
-        // }
-
-        function closeStockHistoryModal() {
-            stockHistoryModal.style.display = "none";
-        }
-
         function debounce(func, delay) {
             let timeoutId;
             return function(...args) {
@@ -1590,25 +1541,12 @@
                 if (index !== -1) {
                     stock[index] = newItem;
                     const quantityChange = newItem.quantity - (originalItem ? originalItem.quantity : 0);
-                    if (quantityChange !== 0) {
-                        recordStockMovement(newItem.id, newItem.name, 'Mise à jour', quantityChange, newItem.quantity, loggedInUsername);
-                    }
-                    // Mettre à jour le fournisseur si nécessaire
-                    const existingSupplierIndex = productSuppliers.findIndex(ps => ps.productId === itemIdToEdit);
-                    if (existingSupplierIndex !== -1 && productSuppliers[existingSupplierIndex].supplier !== itemSupplier) {
-                        productSuppliers[existingSupplierIndex].supplier = itemSupplier;
-                    } else if (existingSupplierIndex === -1 && itemSupplier) {
-                        productSuppliers.push({ productId: newItem.id, supplier: itemSupplier });
-                    } else if (existingSupplierIndex !== -1 && !itemSupplier) {
-                        productSuppliers.splice(existingSupplierIndex, 1);
-                    }
                     displayFeedback(`L'article "${escapeHtml(itemName)}" a été mis à jour.`, 'success');
                 }
                 itemIdToEditInput.value = ''; // Réinitialiser l'ID d'édition
                 addItemBtn.textContent = 'Ajouter au Stock'; // Réinitialiser le texte du bouton
             } else {
                 stock.push(newItem);
-                recordStockMovement(newItem.id, newItem.name, 'Ajout', newItem.quantity, newItem.quantity, loggedInUsername);
                 if (itemSupplier) {
                     productSuppliers.push({ productId: newItem.id, supplier: itemSupplier });
                 }
@@ -1646,14 +1584,11 @@
                 const oldQuantity = item.quantity;
                 item.quantity += change;
                 if (item.quantity < 0) item.quantity = 0;
-                const quantityChange = item.quantity - oldQuantity;
-                if (quantityChange !== 0) {
-                    recordStockMovement(item.id, item.name, 'Mise à jour', quantityChange, item.quantity, loggedInUsername);
-                }
                 saveStock();
-                // Envoyer les messages en attente après un délai
+                // Réinitialiser le délai précédent si une nouvelle modification survient
                 clearTimeout(sendPendingMessagesTimeout);
-                sendPendingMessagesTimeout = setTimeout(sendAllPendingDiscordMessages, 1000);
+                // Planifier l'envoi des messages après une période d'inactivité (par exemple, 2 secondes)
+                sendPendingMessagesTimeout = setTimeout(sendDiscordNotificationDigest, 2000);
             }
         }
 
@@ -1675,7 +1610,6 @@
                 if (index !== -1) {
                     const itemName = stock[index].name;
                     const quantityBeforeDeletion = stock[index].quantity;
-                    recordStockMovement(currentItemToDeleteId, itemName, 'Suppression', -quantityBeforeDeletion, 0, loggedInUsername);
                     stock.splice(index, 1);
                     const supplierIndex = productSuppliers.findIndex(ps => ps.productId === currentItemToDeleteId);
                     if (supplierIndex !== -1) {
@@ -1683,13 +1617,16 @@
                     }
                     saveStock();
                     displayFeedback(`L'article "${escapeHtml(itemName)}" a été supprimé.`, 'success');
-                    // Envoyer les messages en attente après un délai
+                    // Réinitialiser le délai précédent si une nouvelle modification survient
                     clearTimeout(sendPendingMessagesTimeout);
-                    sendPendingMessagesTimeout = setTimeout(sendAllPendingDiscordMessages, 1000);
+                    // Planifier l'envoi des messages après une période d'inactivité (par exemple, 2 secondes)
+                    sendPendingMessagesTimeout = setTimeout(sendDiscordNotificationDigest, 2000);
                 }
                 closeDeleteModal();
             }
         }
+
+        let stockChangeSummary = {}; // Objet pour stocker les changements de stock
 
         function saveStock() {
             try {
@@ -1697,21 +1634,28 @@
                 localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
                 renderStock();
 
-                // Collecter les messages à envoyer
-                stock.forEach(item => {
-                    const existingMessageLow = pendingDiscordMessages.find(msg => msg.includes(`Alerte Stock Bas : L'article **${escapeHtml(item.name)}**`));
-                    const existingMessageOut = pendingDiscordMessages.find(msg => msg.includes(`Alerte Rupture de Stock : L'article **${escapeHtml(item.name)}**`));
+                pendingDiscordMessages = []; // Réinitialiser les messages en attente pour reconstruire la liste
 
-                    if (item.quantity < item.lowStockThreshold && item.quantity > 0 && !existingMessageLow) {
+                stock.forEach(item => {
+                    const existingLowAlertIndex = pendingDiscordMessages.findIndex(msg => msg.includes(`Alerte Stock Bas : L'article **${escapeHtml(item.name)}**`));
+                    const existingOutAlertIndex = pendingDiscordMessages.findIndex(msg => msg.includes(`Alerte Rupture de Stock : L'article **${escapeHtml(item.name)}**`));
+
+                    if (item.quantity < item.lowStockThreshold && item.quantity > 0 && existingLowAlertIndex === -1) {
                         pendingDiscordMessages.push(`⚠️ **Alerte Stock Bas** : L'article **${escapeHtml(item.name)}** est en dessous du seuil de stock bas (${item.lowStockThreshold}). Quantité actuelle : ${item.quantity}`);
-                    } else if (item.quantity === 0 && !existingMessageOut) {
+                    } else if (item.quantity === 0 && existingOutAlertIndex === -1) {
                         pendingDiscordMessages.push(`🔴 **Alerte Rupture de Stock** : L'article **${escapeHtml(item.name)}** est en rupture de stock.`);
-                    } else if (item.quantity > 0 && existingMessageLow) {
+                    } else if (item.quantity > 0 && existingLowAlertIndex !== -1) {
                         // Retirer l'alerte si le stock est remonté
-                        pendingDiscordMessages = pendingDiscordMessages.filter(msg => !msg.includes(`Alerte Stock Bas : L'article **${escapeHtml(item.name)}**`));
-                    } else if (item.quantity > 0 && existingMessageOut) {
+                        const itemName = pendingDiscordMessages[existingLowAlertIndex].match(/Alerte Stock Bas : L'article \*\*([^*]+)\*\*/)[1];
+                        if (itemName === item.name) {
+                            pendingDiscordMessages.splice(existingLowAlertIndex, 1);
+                        }
+                    } else if (item.quantity > 0 && existingOutAlertIndex !== -1) {
                         // Retirer l'alerte si le stock est revenu
-                        pendingDiscordMessages = pendingDiscordMessages.filter(msg => !msg.includes(`Alerte Rupture de Stock : L'article **${escapeHtml(item.name)}**`));
+                        const itemName = pendingDiscordMessages[existingOutAlertIndex].match(/Alerte Rupture de Stock : L'article \*\*([^*]+)\*\*/)[1];
+                        if (itemName === item.name) {
+                            pendingDiscordMessages.splice(existingOutAlertIndex, 1);
+                        }
                     }
                 });
 
@@ -1721,7 +1665,7 @@
             }
         }
 
-        function sendAllPendingDiscordMessages() {
+        function sendDiscordNotificationDigest() {
             if (pendingDiscordMessages.length > 0) {
                 const messageToSend = pendingDiscordMessages.join("\n");
                 sendDiscordMessage(messageToSend);
@@ -1815,7 +1759,6 @@
         outOfStockFilter.addEventListener('change', renderStock);
         addSupplierBtn.addEventListener('click', addSupplier);
         addUserBtn.addEventListener('click', addUser);
-        // stockHistoryBtn.addEventListener('click', openStockHistoryModal); // Suppression de l'écouteur
         saveWebhookBtn.addEventListener('click', saveWebhookUrl); // Ajout de l'écouteur pour enregistrer l'URL du webhook
 
         function closeStockHistoryModal() {
@@ -1829,7 +1772,6 @@
             renderStock();
             populateCategoryFilter();
             updateSupplierOptions();
-            // renderStockHistory(); // Suppression de l'appel
             discordWebhookUrlInput.value = discordWebhookUrl; // Initialiser le champ de l'URL du webhook
 
             document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
