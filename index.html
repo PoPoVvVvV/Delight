@@ -734,6 +734,7 @@
             font-size: 1em;
             margin-top: 10px;
             transition: background-color 0.3s ease;
+            display: none; /* Cacher le bouton */
         }
 
         #stockHistoryBtn:hover {
@@ -741,6 +742,10 @@
         }
 
         /* Style pour le modal d'historique des mouvements de stock */
+        #stockHistoryModal {
+            display: none !important; /* Cacher le modal */
+        }
+
         #stockHistoryModal .modal-content {
             width: 90%; /* Agrandir le modal si nécessaire */
             max-height: 80vh; /* Limiter la hauteur */
@@ -958,6 +963,7 @@
                             <th scope="col">Type de Mouvement</th>
                             <th scope="col">Quantité Modifiée</th>
                             <th scope="col">Quantité Totale</th>
+                            <th scope="col">Utilisateur</th>
                         </tr>
                     </thead>
                     <tbody id="stockHistoryBody">
@@ -993,10 +999,11 @@
         const stockHistoryBtn = document.getElementById('stockHistoryBtn');
         const stockHistoryModal = document.getElementById('stockHistoryModal');
         const stockHistoryBody = document.getElementById('stockHistoryBody');
-        const STOCK_HISTORY_KEY = 'restaurantStockHistory';
-        let stockHistory = loadStockHistory();
+        // const STOCK_HISTORY_KEY = 'restaurantStockHistory'; // Suppression de la constante
+        // let stockHistory = loadStockHistory(); // Suppression de la variable
         let pendingDiscordMessages = []; // Variable pour stocker les messages Discord en attente
         let sendPendingMessagesTimeout; // Variable globale pour le timer d'envoi des messages
+        let loggedInUsername = ''; // Variable pour stocker le nom d'utilisateur connecté
 
         // --- Gestion des Fournisseurs ---
         const addSupplierForm = document.getElementById('addSupplierForm');
@@ -1323,65 +1330,78 @@
         }
 
         // --- Gestion du stock ---
-        function loadStockHistory() {
-            try {
-                const storedHistory = localStorage.getItem(STOCK_HISTORY_KEY);
-                return storedHistory ? JSON.parse(storedHistory) : [];
-            } catch (error) {
-                console.error("Erreur lors du chargement de l'historique des mouvements de stock depuis le localStorage:", error);
-                displayFeedback("Erreur lors du chargement de l'historique des mouvements de stock.", 'error');
-                return [];
-            }
+        // function loadStockHistory() { // Suppression de la fonction
+        //     try {
+        //         const storedHistory = localStorage.getItem(STOCK_HISTORY_KEY);
+        //         return storedHistory ? JSON.parse(storedHistory) : [];
+        //     } catch (error) {
+        //         console.error("Erreur lors du chargement de l'historique des mouvements de stock depuis le localStorage:", error);
+        //         displayFeedback("Erreur lors du chargement de l'historique des mouvements de stock.", 'error');
+        //         return [];
+        //     }
+        // }
+
+        // function saveStockHistory() { // Suppression de la fonction
+        //     try {
+        //         localStorage.setItem(STOCK_HISTORY_KEY, JSON.stringify(stockHistory));
+        //         renderStockHistory();
+        //     } catch (error) {
+        //         console.error("Erreur lors de la sauvegarde de l'historique des mouvements de stock dans le localStorage:", error);
+        //         displayFeedback("Erreur lors de la sauvegarde de l'historique des mouvements de stock.", 'error');
+        //     }
+        // }
+
+        function recordStockMovement(itemId, itemName, type, quantityChange, currentQuantity, user) {
+            // Suppression du contenu de la fonction
+            // const timestamp = new Date().toISOString();
+            // stockHistory.push({
+            //     timestamp: timestamp,
+            //     itemId: itemId,
+            //     itemName: itemName,
+            //     type: type,
+            //     quantityChange: quantityChange,
+            //     currentQuantity: currentQuantity,
+            //     user: user
+            // });
+            // saveStockHistory();
         }
 
-        function saveStockHistory() {
-            try {
-                localStorage.setItem(STOCK_HISTORY_KEY, JSON.stringify(stockHistory));
-                renderStockHistory();
-            } catch (error) {
-                console.error("Erreur lors de la sauvegarde de l'historique des mouvements de stock dans le localStorage:", error);
-                displayFeedback("Erreur lors de la sauvegarde de l'historique des mouvements de stock.", 'error');
-            }
-        }
+        // function renderStockHistory() { // Suppression de la fonction
+        //     stockHistoryBody.innerHTML = '';
+        //     stockHistory.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
-        function recordStockMovement(itemId, itemName, type, quantityChange, currentQuantity) {
-            const timestamp = new Date().toISOString();
-            stockHistory.push({
-                timestamp: timestamp,
-                itemId: itemId,
-                itemName: itemName,
-                type: type,
-                quantityChange: quantityChange,
-                currentQuantity: currentQuantity
-            });
-            saveStockHistory();
-        }
+        //     const headerRow = stockHistoryBody.createTHead().insertRow();
+        //     headerRow.insertCell().textContent = 'Date';
+        //     headerRow.insertCell().textContent = 'Article';
+        //     headerRow.insertCell().textContent = 'Type de Mouvement';
+        //     headerRow.insertCell().textContent = 'Quantité Modifiée';
+        //     headerRow.insertCell().textContent = 'Quantité Totale';
+        //     headerRow.insertCell().textContent = 'Utilisateur';
 
-        function renderStockHistory() {
-            stockHistoryBody.innerHTML = '';
-            stockHistory.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Trier par date la plus récente
+        //     stockHistory.forEach(record => {
+        //         const row = stockHistoryBody.insertRow();
+        //         const dateCell = row.insertCell();
+        //         const itemCell = row.insertCell();
+        //         const typeCell = row.insertCell();
+        //         const quantityChangeCell = row.insertCell();
+        //         const currentQuantityCell = row.insertCell();
+        //         const userCell = row.insertCell();
 
-            stockHistory.forEach(record => {
-                const row = stockHistoryBody.insertRow();
-                const dateCell = row.insertCell();
-                const itemCell = row.insertCell();
-                const typeCell = row.insertCell();
-                const quantityChangeCell = row.insertCell();
-                const currentQuantityCell = row.insertCell();
+        //         const date = new Date(record.timestamp);
+        //         dateCell.textContent = date.toLocaleString();
+        //         itemCell.textContent = record.itemName;
+        //         typeCell.textContent = record.type;
+        //         quantityChangeCell.textContent = record.quantityChange > 0 ? `+${record.quantityChange}` : record.quantityChange;
+        //         currentQuantityCell.textContent = record.currentQuantity;
+        //         userCell.textContent = record.user;
+        //     });
+        //     stockHistoryBody.createTFoot();
+        // }
 
-                const date = new Date(record.timestamp);
-                dateCell.textContent = date.toLocaleString();
-                itemCell.textContent = record.itemName;
-                typeCell.textContent = record.type;
-                quantityChangeCell.textContent = record.quantityChange > 0 ? `+${record.quantityChange}` : record.quantityChange;
-                currentQuantityCell.textContent = record.currentQuantity;
-            });
-        }
-
-        function openStockHistoryModal() {
-            renderStockHistory();
-            stockHistoryModal.style.display = "block";
-        }
+        // function openStockHistoryModal() { // Suppression de la fonction
+        //     renderStockHistory();
+        //     stockHistoryModal.style.display = "block";
+        // }
 
         function closeStockHistoryModal() {
             stockHistoryModal.style.display = "none";
@@ -1571,7 +1591,7 @@
                     stock[index] = newItem;
                     const quantityChange = newItem.quantity - (originalItem ? originalItem.quantity : 0);
                     if (quantityChange !== 0) {
-                        recordStockMovement(newItem.id, newItem.name, 'Mise à jour', quantityChange, newItem.quantity);
+                        recordStockMovement(newItem.id, newItem.name, 'Mise à jour', quantityChange, newItem.quantity, loggedInUsername);
                     }
                     // Mettre à jour le fournisseur si nécessaire
                     const existingSupplierIndex = productSuppliers.findIndex(ps => ps.productId === itemIdToEdit);
@@ -1588,7 +1608,7 @@
                 addItemBtn.textContent = 'Ajouter au Stock'; // Réinitialiser le texte du bouton
             } else {
                 stock.push(newItem);
-                recordStockMovement(newItem.id, newItem.name, 'Ajout', newItem.quantity, newItem.quantity);
+                recordStockMovement(newItem.id, newItem.name, 'Ajout', newItem.quantity, newItem.quantity, loggedInUsername);
                 if (itemSupplier) {
                     productSuppliers.push({ productId: newItem.id, supplier: itemSupplier });
                 }
@@ -1628,12 +1648,12 @@
                 if (item.quantity < 0) item.quantity = 0;
                 const quantityChange = item.quantity - oldQuantity;
                 if (quantityChange !== 0) {
-                    recordStockMovement(item.id, item.name, 'Mise à jour', quantityChange, item.quantity);
+                    recordStockMovement(item.id, item.name, 'Mise à jour', quantityChange, item.quantity, loggedInUsername);
                 }
                 saveStock();
-                // Envoyer les messages en attente après un délai (par exemple, 1 seconde)
-                clearTimeout(sendPendingMessagesTimeout); // Annuler tout timer précédent
-                sendPendingMessagesTimeout = setTimeout(sendAllPendingDiscordMessages, 1000); // 1000 ms = 1 seconde
+                // Envoyer les messages en attente après un délai
+                clearTimeout(sendPendingMessagesTimeout);
+                sendPendingMessagesTimeout = setTimeout(sendAllPendingDiscordMessages, 1000);
             }
         }
 
@@ -1655,7 +1675,7 @@
                 if (index !== -1) {
                     const itemName = stock[index].name;
                     const quantityBeforeDeletion = stock[index].quantity;
-                    recordStockMovement(currentItemToDeleteId, itemName, 'Suppression', -quantityBeforeDeletion, 0);
+                    recordStockMovement(currentItemToDeleteId, itemName, 'Suppression', -quantityBeforeDeletion, 0, loggedInUsername);
                     stock.splice(index, 1);
                     const supplierIndex = productSuppliers.findIndex(ps => ps.productId === currentItemToDeleteId);
                     if (supplierIndex !== -1) {
@@ -1729,6 +1749,7 @@
             const password = passwordInput.value;
 
             if (checkAdminLogin(username, password)) {
+                loggedInUsername = username;
                 isLoggedIn = true;
                 localStorage.setItem('isAdminLoggedIn', 'true');
                 loginContainer.style.display = 'none';
@@ -1758,6 +1779,7 @@
             mainContainer.style.display = 'none';
             suppliersSection.style.display = 'none';
             usersSection.style.display = 'none';
+            loggedInUsername = ''; // Réinitialiser le nom d'utilisateur
         });
 
         function checkLoginStatus() {
@@ -1793,7 +1815,7 @@
         outOfStockFilter.addEventListener('change', renderStock);
         addSupplierBtn.addEventListener('click', addSupplier);
         addUserBtn.addEventListener('click', addUser);
-        stockHistoryBtn.addEventListener('click', openStockHistoryModal);
+        // stockHistoryBtn.addEventListener('click', openStockHistoryModal); // Suppression de l'écouteur
         saveWebhookBtn.addEventListener('click', saveWebhookUrl); // Ajout de l'écouteur pour enregistrer l'URL du webhook
 
         function closeStockHistoryModal() {
@@ -1807,7 +1829,7 @@
             renderStock();
             populateCategoryFilter();
             updateSupplierOptions();
-            renderStockHistory(); // Afficher l'historique au chargement si nécessaire
+            // renderStockHistory(); // Suppression de l'appel
             discordWebhookUrlInput.value = discordWebhookUrl; // Initialiser le champ de l'URL du webhook
 
             document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
