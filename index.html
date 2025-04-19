@@ -3,1816 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suivi des Stocks Restaurant</title>
+    <title>Carnet de Vente</title>
     <style>
-        /* --- Styles Généraux --- */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #121212; /* Dark background */
-            color: #f4f4f4; /* Light text */
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: sans-serif;
+            margin-bottom: 80px; /* Add space at the bottom for the fixed button */
+            padding: 20px; /* Add some padding around content */
         }
-
-        .dark-mode body {
-            background-color: #121212;
-            color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: #212121; /* Darker container */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
-            position: relative; /* Pour positionner le bouton de déconnexion */
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex; /* Added for layout */
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-        }
-
-        .dark-mode .container {
-            background: #212121;
-            color: #f4f4f4;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        .header-container {
-            width: 100%; /* Take full width of the container */
-            display: flex;
-            justify-content: flex-start; /* Align logo to the left */
-            align-items: center;
-            margin-bottom: 20px; /* Space between logo and centered text (removed centering of h1) */
-        }
-
-        .header-container img {
-            max-height: 200px; /* Agrandissement de la taille (4 * 50px) */
-            margin-right: 15px; /* Space between logo and text */
-        }
-
-        h1 {
-            color: #aed581; /* Light olive green */
-            text-align: left; /* Align the text to the left now that it's in the header container */
-            margin-bottom: 0; /* Remove default bottom margin that might cause spacing issues */
-            transition: color 0.3s ease;
-        }
-
-        .dark-mode h1 {
-            color: #aed581;
-        }
-
-        h2 {
-            color: #aed581; /* Light olive green */
-            text-align: center;
+        table {
+            border-collapse: collapse;
+            width: 100%;
             margin-bottom: 20px;
-            transition: color 0.3s ease;
         }
-
-        .dark-mode h2 {
-            color: #aed581;
-        }
-
-        /* --- Style pour le formulaire de login --- */
-        #login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: #212121; /* Darker container */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1); /* Light shadow */
-            text-align: center;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .dark-mode #login-container {
-            background: #212121;
-            color: #f4f4f4;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        #login-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #ccc; /* Light gray */
-            transition: color 0.3s ease;
-        }
-
-        .dark-mode #login-form label {
-            color: #ccc;
-        }
-
-        #login-form input[type="text"],
-        #login-form input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #666; /* Darker border */
-            border-radius: 4px;
-            box-sizing: border-box;
-            color: #f4f4f4;
-            background-color: #333; /* Darker input */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .dark-mode #login-form input[type="text"],
-        .dark-mode #login-form input[type="password"] {
-            color: #f4f4f4;
-            background-color: #333;
-            border-color: #666;
-        }
-
-        #login-form button {
-            padding: 12px 20px;
-            background-color: #007bff; /* Blue */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        #login-form button:hover {
-            background-color: #0056b3;
-        }
-
-        #login-error {
-            color: #ff6666; /* Light red */
-            margin-top: 10px;
-        }
-
-        .dark-mode #login-error {
-            color: #ff6666;
-        }
-
-        /* --- Style pour le bouton de déconnexion --- */
-        .logout-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-
-        .logout-button {
-            padding: 8px 15px;
-            background-color: #6c757d; /* Gray */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-            text-decoration: none; /* Pour le lien */
-        }
-
-        .logout-button:hover {
-            background-color: #5a6268;
-        }
-
-        /* --- Styles Généraux (suite) --- */
-        /* ... (Les styles existants restent ici) ... */
-        .suppliers-section {
-            padding: 10px; /* Réduit le padding */
-            background-color: #388e3c; /* Darker olive */
-            border-radius: 5px;
-            border: 1px solid #689f38; /* Darker border */
-            display: none; /* Initialement caché */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            font-size: 0.9em; /* Réduit la taille de la police */
-            flex: 1; /* Prend la moitié de l'espace disponible */
-            color: #f0f8ea;
-        }
-
-        .dark-mode .suppliers-section {
-            background-color: #388e3c;
-            color: #f0f8ea;
-            border-color: #689f38;
-        }
-
-        .suppliers-section h2 {
-            color: #aed581;
-            text-align: left;
-            margin-bottom: 10px; /* Réduit la marge */
-            font-size: 1.1em; /* Réduit la taille du titre */
-            transition: color 0.3s ease;
-        }
-
-        .dark-mode .suppliers-section h2 {
-            color: #aed581;
-        }
-
-        #addSupplierForm {
-            /*display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 5px; /* Réduit l'espacement */
-            /*align-items: center;
-            margin-bottom: 5px; /* Réduit la marge */
-        }
-
-        #addSupplierForm label {
-            font-weight: normal;
-            font-size: 0.9em;
-            transition: color 0.3s ease;
-            display: block;
-            margin-bottom: 5px;
-            color: #ccc;
-        }
-
-        .dark-mode #addSupplierForm label {
-            color: #ccc;
-        }
-
-        #addSupplierName, #addSupplierPhone {
-            padding: 6px; /* Réduit le padding */
-            border: 1px solid #666; /* Darker border */
-            border-radius: 4px;
-            color: #f4f4f4;
-            background-color: #333; /* Darker input */
-            font-size: 0.9em;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            width: calc(100% - 12px); /* Ajustement pour le padding et la bordure */
-            margin-bottom: 10px;
-        }
-
-        .dark-mode #addSupplierName, .dark-mode #addSupplierPhone {
-            color: #f4f4f4;
-            background-color: #333;
-            border-color: #666;
-        }
-
-        #addSupplierBtn {
-            padding: 6px 10px; /* Réduit le padding */
-            background-color: #aed581; /* Light olive green */
-            color: #333;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
-
-        #addSupplierBtn:hover {
-            background-color: #8bc34a;
-        }
-
-        #suppliersList {
-            list-style: none;
-            padding: 0;
-            margin-top: 5px; /* Réduit la marge */
-        }
-
-        #suppliersList li {
-            padding: 6px 0; /* Réduit le padding */
-            border-bottom: 1px solid #666; /* Darker border */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #f4f4f4;
-            font-size: 0.9em;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .dark-mode #suppliersList li {
-            color: #f4f4f4;
-            border-color: #666;
-        }
-
-        #suppliersList li:last-child {
-            border-bottom: none;
-        }
-
-        .delete-supplier-btn {
-            background: none;
-            border: none;
-            color: #ff6666; /* Light red */
-            cursor: pointer;
-            font-size: 0.8em; /* Encore plus petit */
-            margin-left: 5px; /* Réduit la marge */
-            transition: color 0.3s ease;
-        }
-
-        .delete-supplier-btn:hover {
-            color: #cc0000;
-        }
-
-        .filter-section {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            align-items: center;
-        }
-
-        .filter-section label {
-            font-weight: bold;
-            transition: color 0.3s ease;
-            color: #ccc;
-        }
-
-        .dark-mode .filter-section label {
-            color: #ccc;
-        }
-
-        .filter-section input[type="text"] {
-            padding: 10px;
-            border: 1px solid #666; /* Darker border */
-            border-radius: 4px;
-            color: #f4f4f4;
-            background-color: #333; /* Darker input */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .dark-mode .filter-section input[type="text"] {
-            color: #f4f4f4;
-            background-color: #333;
-            border-color: #666;
-        }
-
-        .filter-section select {
-            padding: 10px;
-            border: 1px solid #666; /* Darker border */
-            border-radius: 4px;
-            color: #f4f4f4;
-            background-color: #333; /* Darker select */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .dark-mode .filter-section select {
-            color: #f4f4f4;
-            background-color: #333;
-            border-color: #666;
-        }
-
-        #stockTable {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        #stockTable th {
-            background-color: #689f38; /* Darker olive green */
-            color: #f4f4f4;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .dark-mode #stockTable th {
-            background-color: #689f38;
-            color: #f4f4f4;
-        }
-
-        #stockTable th, #stockTable td {
-            border: 1px solid #666; /* Darker border */
-            padding: 12px;
-            text-align: left;
-            transition: border-color 0.3s ease, color 0.3s ease;
-        }
-
-        .dark-mode #stockTable th, .dark-mode #stockTable td {
-            border-color: #666;
-            color: #f4f4f4;
-        }
-
-        #stockTable tr:nth-child(even) {
-            background-color: #333; /* Darker row */
-            transition: background-color 0.3s ease;
-        }
-
-        #stockTable tr:hover {
-            background-color: #444; /* Slightly lighter dark */
-        }
-
-        .quantity-cell {
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 10px; /* Espacement entre le texte et les boutons */
-        }
-        .quantity-cell:hover {
-            background-color: #8bc34a; /* Lighter olive */
-        }
-
-        .quantity-input {
-            width: 80%;
-            padding: 5px;
-            text-align: right;
-            border: 1px solid #aed581; /* Light olive border */
-            border-radius: 3px;
-            box-sizing: border-box;
-            color: #f4f4f4;
-            background-color: #333; /* Darker input */
-            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-        }
-
-        .action-buttons button {
-            padding: 5px 8px;
-            margin: 0 3px;
-            cursor: pointer;
-            border: none;
-            border-radius: 3px;
-            color: white;
-            font-size: 0.9em;
-        }
-
-        .btn-increase { background-color: #4CAF50; }
-        .btn-decrease { background-color: #ff9800; }
-        .btn-delete { background-color: #f44336; }
-        .btn-remove-qty { background-color: #2196F3; }
-        .btn-edit { background-color: #008CBA; }
-
-        .btn-increase:hover { background-color: #388E3C; }
-        .btn-decrease:hover { background-color: #fb8c00; }
-        .btn-delete:hover { background-color: #d32f2f; }
-        .btn-remove-qty:hover { background-color: #1976D2; }
-        .btn-edit:hover { background-color: #0077A3; }
-
-        .low-stock {
-            background-color: #424242 !important; /* Darker background for low stock */
-            color: #ffcc80 !important; /* Lighter orange text */
-        }
-        .low-stock .quantity-cell {
-            color: #ff9800; /* Orange */
-            font-weight: bold;
-        }
-        .low-stock td:first-child::before {
-            content: "⚠️ ";
-            color: #ffcc80;
-            font-weight: bold;
-        }
-        .low-stock .quantity-cell {
-            cursor: pointer;
-        }
-         .low-stock .quantity-cell:hover {
-            background-color: #ffb74d !important; /* Lighter orange hover */
-        }
-
-        .out-of-stock {
-            background-color: #b71c1c !important; /* Dark red background for out of stock */
-            color: #ffdddd !important; /* Light red text for out of stock */
-            font-weight: bold;
-        }
-        .out-of-stock td:first-child::before {
-            content: "🔴 "; /* Red circle for out of stock */
-            color: #ffdddd;
-            font-weight: bold;
-        }
-        .out-of-stock .quantity-cell {
-            color: #ffdddd !important;
-        }
-        .out-of-stock .quantity-cell:hover {
-            background-color: #e57373 !important; /* Lighter red hover */
-        }
-
-        .stock-image {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            vertical-align: middle;
-        }
-
-        #productSuppliersTable {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        #productSuppliersTable th, #productSuppliersTable td {
-            border: 1px solid #666; /* Darker border */
-            padding: 12px;
-            text-align: left;
-            transition: border-color 0.3s ease, color 0.3s ease;
-            color: #f4f4f4;
-        }
-
-        .dark-mode #productSuppliersTable th, .dark-mode #productSuppliersTable td {
-            border-color: #666;
-            color: #f4f4f4;
-        }
-
-        #productSuppliersTable th {
-            background-color: #333; /* Darker background */
-            color: #f4f4f4;
-            font-weight: bold;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .dark-mode #productSuppliersTable th {
-            background-color: #333;
-            color: #f4f4f4;
-        }
-
-        #productSuppliersTable tr:nth-child(even) {
-            background-color: #444; /* Slightly lighter dark */
-            transition: background-color 0.3s ease;
-        }
-
-        #productSuppliersTable tr:hover {
-            background-color: #555;
-        }
-
-        #feedback-message {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .feedback-success {
-            background-color: #81c784; /* Darker green */
-            color: #1b5e20; /* Lighter green text */
-            border: 1px solid #66bb6a;
-        }
-        .feedback-error {
-            background-color: #e57373; /* Darker red */
-            color: #b71c1c; /* Lighter red text */
-            border: 1px solid #e53935;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7); /* Darker overlay */
-        }
-
-        .modal-content {
-            background-color: #333; /* Darker modal */
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            color: #f4f4f4;
-        }
-
-        .dark-mode .modal-content {
-            background-color: #333;
-            color: #f4f4f4;
-            border-color: #888;
-        }
-
-        .modal-buttons {
-            text-align: right;
-            margin-top: 15px;
-        }
-
-        .modal-buttons button {
-            padding: 8px 15px;
-            margin-left: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .modal-confirm {
-            background-color: #d32f2f; /* Darker red */
-            color: white;
-            border: none;
-        }
-
-        .modal-confirm:hover {
-            background-color: #b71c1c;
-        }
-
-        .modal-cancel {
-            background-color: #5a6268; /* Darker gray */
-            color: white;
-            border: none;
-        }
-
-        .modal-cancel:hover {
-            background-color: #424b50;
-        }
-
-        .close-button {
-            color: #ccc;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* --- Style pour la gestion des utilisateurs (Réduit et en bas) --- */
-        .user-management-section {
-            padding: 10px; /* Réduit le padding */
-            background-color: #303f9f; /* Darker blue */
-            border-radius: 5px;
-            border: 1px solid #3949ab; /* Darker border */
-            display: none; /* Initialement caché */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            font-size: 0.9em; /* Réduit la taille de la police */
-            flex: 1; /* Prend la moitié de l'espace disponible */
-            color: #e0f7fa;
-        }
-
-        .dark-mode .user-management-section {
-            background-color: #303f9f;
-            color: #e0f7fa;
-            border-color: #3949ab;
-        }
-
-        .user-management-section h2 {
-            color: #90caf9; /* Light blue */
-            text-align: left;
-            margin-bottom: 10px; /* Réduit la marge */
-            font-size: 1.1em; /* Réduit la taille du titre */
-            transition: color 0.3s ease;
-        }
-
-        .dark-mode .user-management-section h2 {
-            color: #90caf9;
-        }
-
-        #addUserForm {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 5px; /* Réduit l'espacement */
-            align-items: center;
-            margin-bottom: 5px; /* Réduit la marge */
-        }
-
-        #addUserForm label {
-            font-weight: normal;
-            font-size: 0.9em;
-            transition: color 0.3s ease;
-            color: #ccc;
-        }
-
-        .dark-mode #addUserForm label {
-            color: #ccc;
-        }
-
-        #newUsername, #newPassword {
-            padding: 6px; /* Réduit le padding */
-            border: 1px solid #666; /* Darker border */
-            border-radius: 4px;
-            color: #f4f4f4;
-            background-color: #333; /* Darker input */
-            font-size: 0.9em;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .dark-mode #newUsername, .dark-mode #newPassword {
-            color: #f4f4f4;
-            background-color: #333;
-            border-color: #666;
-        }
-
-        #addUserBtn {
-            padding: 6px 10px; /* Réduit le padding */
-            background-color: #90caf9; /* Light blue */
-            color: #333;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
-
-        #addUserBtn:hover {
-            background-color: #64b5f6;
-        }
-
-        #usersList {
-            list-style: none;
-            padding: 0;
-            margin-top: 5px; /* Réduit la marge */
-        }
-
-        #usersList li {
-            padding: 6px 0; /* Réduit le padding */
-            border-bottom: 1px solid #666; /* Darker border */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #f4f4f4;
-            font-size: 0.9em;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .dark-mode #usersList li {
-            color: #f4f4f4;
-            border-color: #666;
-        }
-
-        #usersList li:last-child {
-            border-bottom: none;
-        }
-
-        .delete-user-btn {
-            background: none;
-            border: none;
-            color: #ff6666; /* Light red */
-            cursor: pointer;
-            font-size: 0.8em; /* Encore plus petit */
-            margin-left: 5px; /* Réduit la marge */
-            transition: color 0.3s ease;
-        }
-
-        .delete-user-btn:hover {
-            color: #cc0000;
-        }
-
-        /* --- Style pour le container des sections du bas --- */
-        .bottom-sections {
-            display: flex;
-            gap: 20px;
-            margin-top: 30px; /* Espacement avec le contenu précédent */
-        }
-
-        @media (max-width: 768px) {
-            .bottom-sections {
-                flex-direction: column; /* Empiler les sections sur les écrans plus petits */
-            }
-            .user-management-section, .suppliers-section {
-                width: 100%; /* Prendre toute la largeur */
-            }
-            /* ... (Styles existants) ... */
-        }
-        @media (max-width: 600px) {
-            /* ... (Styles existants) ... */
-        }
-
-        /* Style pour le bouton d'historique des mouvements de stock */
-        #stockHistoryBtn {
-            padding: 10px 15px;
-            background-color: #546e7a; /* Grayish blue */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
-            display: none; /* Cacher le bouton */
-        }
-
-        #stockHistoryBtn:hover {
-            background-color: #455a64;
-        }
-
-        /* Style pour le modal d'historique des mouvements de stock */
-        #stockHistoryModal {
-            display: none !important; /* Cacher le modal */
-        }
-
-        #stockHistoryModal .modal-content {
-            width: 90%; /* Agrandir le modal si nécessaire */
-            max-height: 80vh; /* Limiter la hauteur */
-            overflow-y: auto; /* Ajouter une barre de défilement si le contenu est trop long */
-        }
-
-        #stockHistoryTable {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        #stockHistoryTable th, #stockHistoryTable td {
-            border: 1px solid #666;
+        th, td {
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
-
-        #stockHistoryTable th {
-            background-color: #333;
-            color: #f4f4f4;
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            font-weight: bold;
+        }
+        /* Style for the button container */
+        .button-container {
+            position: fixed; /* Fixed position relative to the viewport */
+            bottom: 20px;    /* 20px from the bottom */
+            right: 20px;     /* 20px from the right */
+            z-index: 1000;   /* Ensure it's above other content */
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .button-container button:hover {
+            background-color: #45a049;
         }
 
-        #stockHistoryTable tr:nth-child(even) {
-            background-color: #444;
-        }
+         /* Style for the date/time/check container */
+         .info-container {
+             margin-top: 10px;
+             text-align: right;
+             font-size: 0.9em;
+             color: #555;
+         }
+
+         .info-container span {
+             margin-left: 15px;
+         }
     </style>
 </head>
-<body class="dark-mode">
+<body>
+    <h1>Carnet de Vente</h1>
 
-    <div id="login-container">
-        <h2>Connexion Administrateur</h2>
-        <form id="login-form">
-            <label for="username">Nom d'utilisateur:</label>
-            <input type="text" id="username" name="username" required>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="6">Carnet</th>
+                <th colspan="1" id="salesperson-name">Aiden Wellington</th>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <th>Produit</th>
+                <th>Prix de prod</th>
+                <th>Prix de vente</th>
+                <th>Quantité</th>
+                <th>Montant</th>
+                <th>Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Nourriture</td>
+                <td>
+                    <select class="product-select" data-category="Nourriture">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                        <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                        <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                        <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                        <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                        <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                        <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                        <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                        <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                        <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                    </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Nourriture</td>
+                <td>
+                    <select class="product-select" data-category="Nourriture">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                        <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                        <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                        <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                        <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                        <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                        <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                        <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                        <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                        <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                    </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Nourriture</td>
+                <td>
+                    <select class="product-select" data-category="Nourriture">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                        <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                        <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                        <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                        <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                        <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                        <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                        <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                        <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                        <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                    </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Nourriture</td>
+                <td>
+                    <select class="product-select" data-category="Nourriture">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                        <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                        <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                        <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                        <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                        <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                        <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                        <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                        <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                        <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                    </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Nourriture</td>
+                <td>
+                    <select class="product-select" data-category="Nourriture">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                        <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                        <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                        <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                        <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                        <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                        <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                        <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                        <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                        <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                    </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Nourriture</td>
+                <td>
+                    <select class="product-select" data-category="Nourriture">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                        <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                        <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                        <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                        <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                        <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                        <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                        <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                        <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                        <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                    </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+            <tr>
+                <td>Boisson</td>
+                <td>
+                    <select class="product-select" data-category="Boisson">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                        <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                        <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                        <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                         <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option> <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option> </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+            <tr>
+                <td>Boisson</td>
+                <td>
+                    <select class="product-select" data-category="Boisson">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                        <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                        <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                        <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                         <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option> <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option> </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Boisson</td>
+                <td>
+                    <select class="product-select" data-category="Boisson">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                        <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                        <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                        <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                         <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option> <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option> </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Boisson</td>
+                <td>
+                    <select class="product-select" data-category="Boisson">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                        <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                        <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                        <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                         <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option> <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option> </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Boisson</td>
+                <td>
+                    <select class="product-select" data-category="Boisson">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                        <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                        <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                        <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                         <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option> <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option> </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+             <tr>
+                <td>Boisson</td>
+                <td>
+                    <select class="product-select" data-category="Boisson">
+                        <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                        <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                        <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                        <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                        <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                         <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option> <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option> </select>
+                </td>
+                <td class="product-prod-price"></td>
+                <td class="product-sell-price"></td>
+                <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                <td class="row-amount">$0.00</td>
+                <td class="row-profit">$0.00</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td class="total">Total à facturer</td>
+                <td id="total-amount" class="total">$0.00</td>
+                <td id="total-profit" class="total">$0.00</td>
+            </tr>
+        </tfoot>
+    </table>
 
-            <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Se connecter</button>
-            <div id="login-error" style="display:none;">Nom d'utilisateur ou mot de passe incorrect.</div>
-        </form>
+    <div class="info-container">
+        <span id="current-date"></span> <span id="current-time"></span> <span>✅</span>
     </div>
 
-    <div class="container" style="display:none;">
-        <div class="header-container">
-            <img src="delight_2.png" alt="Delight Restaurant Logo" style="max-height: 200px;">
-            <h1>Suivi des Stocks</h1>
-        </div>
-
-        <div class="logout-container">
-            <a href="#" id="logout-link" class="logout-button">Déconnexion</a>
-        </div>
-
-        <section class="form-ajout">
-            <h2>Ajouter un Article</h2>
-            <fieldset>
-                <legend>Informations sur l'article</legend>
-                <div>
-                    <label for="itemName">Nom de l'article :</label>
-                    <input type="text" id="itemName" placeholder="Ex: Tomates" required>
-                </div>
-                <div>
-                    <label for="itemQuantity">Quantité initiale :</label>
-                    <input type="number" id="itemQuantity" placeholder="Ex: 10" min="0" required>
-                </div>
-                <div>
-                    <label for="itemCategory">Catégorie :</label>
-                    <select id="itemCategory">
-                        <option value="">-- Sélectionner --</option>
-                        <option value="fruit">Fruit</option>
-                        <option value="legume">Légume</option>
-                        <option value="boisson">Boisson</option>
-                        <option value="viande">Viande</option>
-                        <option value="poisson">Poisson</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="lowStockThreshold">Seuil stock bas :</label>
-                    <input type="number" id="lowStockThreshold" placeholder="Ex: 5" min="0" value="5" required>
-                </div>
-                <div>
-                    <label for="itemImage">URL de l'image :</label>
-                    <input type="text" id="itemImage" placeholder="Ex: http://example.com/image.jpg">
-                </div>
-                <div>
-                    <label for="itemSupplier">Fournisseur :</label>
-                    <select id="itemSupplier">
-                        <option value="">-- Sélectionner --</option>
-                    </select>
-                </div>
-                <input type="hidden" id="itemIdToEdit">
-            </fieldset>
-            <button id="addItemBtn">Ajouter au Stock</button>
-            <div id="feedback-message" style="display:none;"></div>
-        </section>
-
-        <section class="filter-section">
-            <div>
-                <label for="search-input">Rechercher un article :</label>
-                <input type="text" id="search-input" placeholder="Nom de l'article">
-            </div>
-        </section>
-
-        <section class="stock-management-options">
-            <div>
-                <label for="category-filter">Filtrer par Catégorie :</label>
-                <select id="category-filter">
-                    <option value="">-- Toutes --</option>
-                </select>
-            </div>
-            <div>
-                <label for="supplier-filter">Filtrer par Fournisseur :</label>
-                <select id="supplier-filter">
-                    <option value="">-- Tous --</option>
-                </select>
-            </div>
-            <div>
-                <input type="checkbox" id="out-of-stock-filter">
-                <label for="out-of-stock-filter">Afficher uniquement les articles en rupture de stock</label>
-            </div>
-        </section>
-
-        <section>
-            <h2>Stock Actuel</h2>
-            <table id="stockTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col" data-sort="name">Article</th>
-                        <th scope="col" data-sort="quantity">Quantité</th>
-                        <th scope="col" data-sort="category">Catégorie</th>
-                        <th scope="col" data-sort="lowStockThreshold">Seuil Bas</th>
-                        <th scope="col" data-sort="supplier">Fournisseur</th>
-                        <th scope="col" data-sort="dateAdded">Date d'ajout</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="stockBody">
-                    </tbody>
-            </table>
-            <p>Les articles dont la quantité est inférieure au seuil de stock bas seront affichés en <span style="color: #ff9800; font-weight: bold;">orange</span> avec un <span style="color: #ffcc80; font-weight: bold;">⚠️</span>.</p>
-            <p>Les articles en rupture de stock seront affichés en <span style="color: #ffdddd; font-weight: bold;">rouge</span> avec un <span style="color: #ffdddd; font-weight: bold;">🔴</span>.</p>
-            <button id="stockHistoryBtn" style="display: none;">Afficher l'Historique des Mouvements de Stock</button>
-        </section>
-
-        <section>
-            <h2>Fournisseurs des Produits</h2>
-            <table id="productSuppliersTable">
-                <thead>
-                    <tr>
-                        <th scope="col">Article</th>
-                        <th scope="col">Fournisseur</th>
-                    </tr>
-                </thead>
-                <tbody id="productSuppliersBody">
-                </tbody>
-            </table>
-        </section>
-
-        <div class="bottom-sections">
-            <section class="user-management-section">
-                <h2>Gestion des Utilisateurs</h2>
-                <form id="addUserForm">
-                    <label for="newUsername">Nouveau Nom d'utilisateur :</label>
-                    <input type="text" id="newUsername" placeholder="Nom d'utilisateur">
-                    <label for="newPassword">Nouveau Mot de passe :</label>
-                    <input type="password" id="newPassword" placeholder="Mot de passe">
-                    <button type="button" id="addUserBtn">Ajouter Utilisateur</button>
-                </form>
-                <h3>Liste des Utilisateurs</h3>
-                <ul id="usersList">
-                    </ul>
-                <div id="user-feedback-message" style="display:none;"></div>
-            </section>
-
-            <section class="suppliers-section">
-                <h2>Gestion des Fournisseurs</h2>
-                <form id="discordWebhookForm">
-                    <label for="discordWebhookUrl">URL du Webhook Discord :</label>
-                    <input type="url" id="discordWebhookUrl" placeholder="Entrez l'URL du webhook Discord">
-                    <button type="button" id="saveWebhookBtn">Enregistrer l'URL du Webhook</button>
-                </form>
-                <form id="addSupplierForm">
-                    <label for="addSupplierName">Nouveau Fournisseur :</label>
-                    <input type="text" id="addSupplierName" placeholder="Nom du fournisseur">
-                    <label for="addSupplierPhone">Numéro de téléphone :</label>
-                    <input type="tel" id="addSupplierPhone" placeholder="Numéro de téléphone">
-                    <button type="button" id="addSupplierBtn">Ajouter Fournisseur</button>
-                </form>
-                <h3>Liste des Fournisseurs</h3>
-                <ul id="suppliersList">
-                    </ul>
-            </section>
-        </div>
-
-        <div id="deleteModal" class="modal">
-            <div class="modal-content">
-                <span class="close-button" onclick="closeDeleteModal()">&times;</span>
-                <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
-                <div class="modal-buttons">
-                    <button type="button" class="modal-confirm" id="confirmDeleteBtn">Supprimer</button>
-                    <button type="button" class="modal-cancel" onclick="closeDeleteModal()">Annuler</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="stockHistoryModal" class="modal" style="display: none !important;">
-            <div class="modal-content">
-                <span class="close-button" onclick="closeStockHistoryModal()">&times;</span>
-                <h2>Historique des Mouvements de Stock</h2>
-                <table id="stockHistoryTable">
-                    <thead>
-                        <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Article</th>
-                            <th scope="col">Type de Mouvement</th>
-                            <th scope="col">Quantité Modifiée</th>
-                            <th scope="col">Quantité Totale</th>
-                            <th scope="col">Utilisateur</th>
-                        </tr>
-                    </thead>
-                    <tbody id="stockHistoryBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+    <div class="button-container">
+        <button id="validate-button">Valider la sélection</button>
     </div>
 
     <script>
-        // --- Variables Globales ---
-        const itemForm = document.querySelector('.form-ajout');
-        const itemNameInput = document.getElementById('itemName');
-        const itemQuantityInput = document.getElementById('itemQuantity');
-        const itemCategoryInput = document.getElementById('itemCategory');
-        const lowStockThresholdInput = document.getElementById('lowStockThreshold');
-        const itemImageInput = document.getElementById('itemImage');
-        const itemSupplierInput = document.getElementById('itemSupplier');
-        const addItemBtn = document.getElementById('addItemBtn');
-        const stockTableBody = document.getElementById('stockBody');
-        const productSuppliersTableBody = document.getElementById('productSuppliersBody');
-        const itemIdToEditInput = document.getElementById('itemIdToEdit');
-        const searchInput = document.getElementById('search-input');
-        const feedbackMessageDiv = document.getElementById('feedback-message');
-        const deleteModal = document.getElementById('deleteModal');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        let currentItemToDeleteId = null;
-        const addSupplierPhoneInput = document.getElementById('addSupplierPhone'); // Nouvelle variable
-        const categoryFilter = document.getElementById('category-filter'); // Déclaration de categoryFilter
-        const supplierFilter = document.getElementById('supplier-filter'); // Déclaration de supplierFilter
-        const outOfStockFilter = document.getElementById('out-of-stock-filter'); // Déclaration de outOfStockFilter
-        const stockHistoryBtn = document.getElementById('stockHistoryBtn');
-        const stockHistoryModal = document.getElementById('stockHistoryModal');
-        const stockHistoryBody = document.getElementById('stockHistoryBody');
-        let pendingDiscordMessages = []; // Variable pour stocker les messages Discord en attente
-        let sendPendingMessagesTimeout; // Variable globale pour le timer d'envoi des messages
-        let loggedInUsername = ''; // Variable pour stocker le nom d'utilisateur connecté
+        const productSelects = document.querySelectorAll('.product-select');
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        // rowAmounts and rowProfits are not strictly needed as global consts for calculation logic
+        // but we keep them for potential direct access if needed elsewhere.
+        const rowAmounts = document.querySelectorAll('.row-amount');
+        const rowProfits = document.querySelectorAll('.row-profit');
 
-        // --- Gestion des Fournisseurs ---
-        const addSupplierForm = document.getElementById('addSupplierForm');
-        const addSupplierNameInput = document.getElementById('addSupplierName');
-        const addSupplierBtn = document.getElementById('addSupplierBtn');
-        const suppliersListElement = document.getElementById('suppliersList');
-        let suppliers = loadSuppliers();
+        const totalAmountDisplay = document.getElementById('total-amount');
+        const totalProfitDisplay = document.getElementById('total-profit');
+        const validateButton = document.getElementById('validate-button');
+        const salespersonNameElement = document.getElementById('salesperson-name');
+        const currentDateElement = document.getElementById('current-date');
+        const currentTimeElement = document.getElementById('current-time');
 
-        // --- Variables pour le webhook Discord ---
-        const discordWebhookUrlInput = document.getElementById('discordWebhookUrl');
-        const saveWebhookBtn = document.getElementById('saveWebhookBtn');
-        const DISCORD_WEBHOOK_URL_KEY = 'discordWebhookUrl';
-        let discordWebhookUrl = loadWebhookUrl();
-        const DISCORD_MESSAGE_QUEUE_KEY = 'discordMessageQueue';
-        let discordMessageQueue = loadDiscordMessageQueue();
-        let isSendingDiscordMessage = false;
-        const DISCORD_SEND_DELAY = 90000; // 1 minute 30 secondes en millisecondes
 
-        // Fonction pour charger la file d'attente des messages Discord depuis le localStorage
-        function loadDiscordMessageQueue() {
-            try {
-                const storedQueue = localStorage.getItem(DISCORD_MESSAGE_QUEUE_KEY);
-                return storedQueue ? JSON.parse(storedQueue) : [];
-            } catch (error) {
-                console.error("Erreur lors du chargement de la file d'attente des messages Discord depuis le localStorage:", error);
-                return [];
-            }
-        }
+        function calculateRowAmount(row) {
+            const productSelect = row.querySelector('.product-select');
+            const quantityInput = row.querySelector('.quantity-input');
+            const rowAmountDisplay = row.querySelector('.row-amount');
+            const rowProfitDisplay = row.querySelector('.row-profit');
+            const productProdPriceDisplay = row.querySelector('.product-prod-price');
+            const productSellPriceDisplay = row.querySelector('.product-sell-price');
 
-        // Fonction pour sauvegarder la file d'attente des messages Discord dans le localStorage
-        function saveDiscordMessageQueue() {
-            try {
-                localStorage.setItem(DISCORD_MESSAGE_QUEUE_KEY, JSON.stringify(discordMessageQueue));
-            } catch (error) {
-                console.error("Erreur lors de la sauvegarde de la file d'attente des messages Discord dans le localStorage:", error);
-            }
-        }
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const prodPrice = parseFloat(selectedOption.getAttribute('data-prod-price')) || 0;
+            const sellPrice = parseFloat(selectedOption.getAttribute('data-sell-price')) || 0;
+            const quantity = parseInt(quantityInput.value) || 0;
 
-        // Fonction pour charger l'URL du webhook depuis le localStorage
-        function loadWebhookUrl() {
-            return localStorage.getItem(DISCORD_WEBHOOK_URL_KEY) || '';
-        }
+            const amount = sellPrice * quantity;
+            const profit = (sellPrice - prodPrice) * quantity;
 
-        // Fonction pour sauvegarder l'URL du webhook dans le localStorage
-        function saveWebhookUrl() {
-            const url = discordWebhookUrlInput.value.trim();
-            localStorage.setItem(DISCORD_WEBHOOK_URL_KEY, url);
-            discordWebhookUrl = url;
-            displayFeedback('URL du webhook Discord enregistrée.', 'success');
-        }
-
-        // Fonction pour ajouter un message à la file d'attente Discord
-        function enqueueDiscordMessage(message) {
-            discordMessageQueue.push(message);
-            saveDiscordMessageQueue();
-            if (!isSendingDiscordMessage) {
-                processDiscordMessageQueue();
-            }
-        }
-
-        // Fonction pour envoyer le prochain message de la file d'attente avec un délai
-        async function processDiscordMessageQueue() {
-            if (discordMessageQueue.length === 0) {
-                isSendingDiscordMessage = false;
-                return;
-            }
-
-            isSendingDiscordMessage = true;
-            const messageToSend = discordMessageQueue.shift();
-            saveDiscordMessageQueue();
-
-            if (!discordWebhookUrl) {
-                console.warn("L'URL du webhook Discord n'est pas configurée.");
-                setTimeout(processDiscordMessageQueue, DISCORD_SEND_DELAY); // Essayer d'envoyer le prochain après le délai
-                return;
-            }
-
-            const payload = {
-                content: messageToSend
-            };
-
-            try {
-                const response = await fetch(discordWebhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (response.ok) {
-                    console.log('Message Discord envoyé avec succès:', messageToSend);
-                } else {
-                    console.error('Erreur lors de l\'envoi du message Discord:', response.status, response.statusText, messageToSend);
-                }
-            } catch (error) {
-                console.error('Erreur lors de l\'envoi du message Discord:', error, messageToSend);
-            } finally {
-                setTimeout(processDiscordMessageQueue, DISCORD_SEND_DELAY);
-            }
-        }
-
-        // Fonction pour envoyer un message à Discord via le webhook (utilise maintenant la file d'attente)
-        function sendDiscordMessage(message) {
-            enqueueDiscordMessage(message);
-        }
-
-        function loadSuppliers() {
-            try {
-                const storedSuppliers = localStorage.getItem('restaurantSuppliers');
-                return storedSuppliers ? JSON.parse(storedSuppliers) : [];
-            } catch (error) {
-                console.error("Erreur lors du chargement des fournisseurs depuis le localStorage:", error);
-                displayFeedback("Erreur lors du chargement des données des fournisseurs.", 'error');
-                return [];
-            }
-        }
-        const suppliersSection = document.querySelector('.suppliers-section');
-
-        // --- Stock et Fournisseurs des Produits (utilise le localStorage) ---
-        let stock = loadStock();
-        function loadStock() {
-            try {
-                const storedStock = localStorage.getItem('restaurantStock');
-                return storedStock ? JSON.parse(storedStock) : [];
-            } catch (error) {
-                console.error("Erreur lors du chargement du stock depuis le localStorage:", error);
-                displayFeedback("Erreur lors du chargement des données de stock.", 'error');
-                return [];
-            }
-        }
-        let productSuppliers = loadProductSuppliers();
-        function loadProductSuppliers() {
-            try {
-                const storedProductSuppliers = localStorage.getItem('productSuppliers');
-                return storedProductSuppliers ? JSON.parse(storedProductSuppliers) : [];
-            } catch (error) {
-                console.error("Erreur lors du chargement des fournisseurs de produits depuis le localStorage:", error);
-                displayFeedback("Erreur lors du chargement des données des fournisseurs de produits.", 'error');
-                return [];
-            }
-        }
-
-        // --- Variables pour la gestion de l'admin login ---
-        const loginContainer = document.getElementById('login-container');
-        const loginForm = document.getElementById('login-form');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const loginErrorDiv = document.getElementById('login-error');
-        const mainContainer = document.querySelector('.container');
-        const logoutLink = document.getElementById('logout-link');
-        const ADMIN_USERNAME = 'AidenWellington';
-        const ADMIN_PASSWORD = 'Delight2205';
-        let isLoggedIn = false; // Initialiser à false
-
-        // --- Variables pour la gestion des utilisateurs ---
-        const addUserForm = document.getElementById('addUserForm');
-        const newUsernameInput = document.getElementById('newUsername');
-        const newPasswordInput = document.getElementById('newPassword');
-        const addUserBtn = document.getElementById('addUserBtn');
-        const usersListElement = document.getElementById('usersList');
-        const userFeedbackMessageDiv = document.getElementById('user-feedback-message');
-        const usersSection = document.querySelector('.user-management-section');
-        const USERS_KEY = 'restaurantUsers';
-        let users = loadUsers();
-
-        // --- Fonctions de gestion des utilisateurs ---
-        function loadUsers() {
-            try {
-                const storedUsers = localStorage.getItem(USERS_KEY);
-                return storedUsers ? JSON.parse(storedUsers) : [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }];
-            } catch (error) {
-                console.error("Erreur lors du chargement des utilisateurs depuis le localStorage:", error);
-                displayUserFeedback("Erreur lors du chargement des données des utilisateurs.", 'error');
-                return [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD }];
-            }
-        }
-
-        function saveUsers(users) {
-            try {
-                localStorage.setItem(USERS_KEY, JSON.stringify(users));
-                renderUsersList();
-            } catch (error) {
-                console.error("Erreur lors de la sauvegarde des utilisateurs dans le localStorage:", error);
-                displayUserFeedback("Erreur lors de la sauvegarde des données des utilisateurs.", 'error');
-            }
-        }
-
-        function renderUsersList() {
-            usersListElement.innerHTML = '';
-            users.forEach((user, index) => {
-                const li = document.createElement('li');
-                li.textContent = user.username;
-                if (user.username !== ADMIN_USERNAME) { // Empêcher la suppression de l'utilisateur admin initial
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Supprimer';
-                    deleteButton.classList.add('delete-user-btn');
-                    deleteButton.addEventListener('click', () => deleteUser(index));
-                    li.appendChild(deleteButton);
-                }
-                usersListElement.appendChild(li);
-            });
-        }
-
-        function addUser() {
-            const newUsername = newUsernameInput.value.trim();
-            const newPassword = newPasswordInput.value.trim();
-
-            if (!newUsername || !newPassword) {
-                displayUserFeedback('Veuillez entrer un nom d\'utilisateur et un mot de passe.', 'error');
-                return;
-            }
-
-            if (users.some(user => user.username === newUsername)) {
-                displayUserFeedback(`L'utilisateur "${newUsername}" existe déjà.`, 'error');
-                return;
-            }
-
-            const newUser = { username: newUsername, password: newPassword };
-            users.push(newUser);
-            saveUsers(users);
-            newUsernameInput.value = '';
-            newPasswordInput.value = '';
-            displayUserFeedback(`L'utilisateur "${escapeHtml(newUsername)}" a été créé.`, 'success');
-        }
-
-        function deleteUser(index) {
-            if (users[index].username === ADMIN_USERNAME && users.length === 1) {
-                displayUserFeedback('Impossible de supprimer le seul administrateur.', 'error');
-                return;
-            }
-            const usernameToDelete = users[index].username;
-            users.splice(index, 1);
-            saveUsers(users);
-            displayUserFeedback(`L'utilisateur "${escapeHtml(usernameToDelete)}" a été supprimé.`, 'success');
-        }
-
-        function displayUserFeedback(message, type = 'success') {
-            userFeedbackMessageDiv.textContent = message;
-            userFeedbackMessageDiv.className = `feedback-message feedback-${type}`;
-            userFeedbackMessageDiv.style.display = 'block';
-            setTimeout(() => {
-                userFeedbackMessageDiv.style.display = 'none';
-            }, 3000);
-        }
-
-        // --- Gestion des fournisseurs ---
-        function renderSuppliersList() {
-            suppliersListElement.innerHTML = '';
-            suppliers.forEach((supplier, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <span>${escapeHtml(supplier.name)} - ${escapeHtml(supplier.phone || 'Non renseigné')}</span>
-                    <button class="delete-supplier-btn" data-index="${index}">Supprimer</button>
-                `;
-                suppliersListElement.appendChild(li);
-            });
-
-            document.querySelectorAll('.delete-supplier-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const indexToDelete = parseInt(this.dataset.index);
-                    deleteSupplier(indexToDelete);
-                });
-            });
-
-            // Mettre à jour la liste des fournisseurs dans le formulaire d'ajout d'article
-            updateSupplierOptions();
-        }
-
-        function addSupplier() {
-            const name = addSupplierNameInput.value.trim();
-            const phone = addSupplierPhoneInput.value.trim();
-
-            if (!name) {
-                displayFeedback('Veuillez entrer le nom du fournisseur.', 'error');
-                return;
-            }
-
-            const newSupplier = { name: name, phone: phone };
-            suppliers.push(newSupplier);
-            saveSuppliersList();
-            addSupplierNameInput.value = '';
-            addSupplierPhoneInput.value = '';
-            displayFeedback(`Le fournisseur "${escapeHtml(name)}" a été ajouté.`, 'success');
-        }
-
-        function deleteSupplier(index) {
-            const supplierToDelete = suppliers[index].name;
-            suppliers.splice(index, 1);
-            saveSuppliersList();
-            displayFeedback(`Le fournisseur "${escapeHtml(supplierToDelete)}" a été supprimé.`, 'success');
-        }
-
-        function saveSuppliersList() {
-            try {
-                localStorage.setItem('restaurantSuppliers', JSON.stringify(suppliers));
-                renderSuppliersList();
-            } catch (error) {
-                console.error("Erreur lors de la sauvegarde des fournisseurs dans le localStorage:", error);
-                displayFeedback("Erreur lors de la sauvegarde des données des fournisseurs.", 'error');
-            }
-        }
-
-        function updateSupplierOptions() {
-            itemSupplierInput.innerHTML = '<option value="">-- Sélectionner --</option>';
-            suppliers.forEach(supplier => {
-                const option = document.createElement('option');
-                option.value = supplier.name;
-                option.textContent = supplier.name;
-                itemSupplierInput.appendChild(option);
-            });
-            // Mettre à jour également le filtre par fournisseur
-            updateSupplierFilterOptions();
-        }
-
-        function updateSupplierFilterOptions() {
-            supplierFilter.innerHTML = '<option value="">-- Tous --</option>';
-            suppliers.forEach(supplier => {
-                const option = document.createElement('option');
-                option.value = supplier.name;
-                option.textContent = supplier.name;
-                supplierFilter.appendChild(option);
-            });
-        }
-
-        // --- Gestion du stock ---
-        function debounce(func, delay) {
-            let timeoutId;
-            return function(...args) {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-                    func.apply(this, args);
-                }, delay);
-            };
-        }
-
-        function renderStock(sortColumn = null, sortDirection = 'asc') {
-            stockTableBody.innerHTML = '';
-            productSuppliersTableBody.innerHTML = '';
-
-            const categoryFilterValue = categoryFilter.value;
-            const supplierFilterValue = supplierFilter.value;
-            const showOutOfStockOnly = outOfStockFilter.checked;
-            const searchTerm = searchInput.value.toLowerCase();
-
-            let filteredStock = stock.filter(item => {
-                const categoryMatch = !categoryFilterValue || item.category === categoryFilterValue;
-                const supplierMatch = !supplierFilterValue || productSuppliers.some(ps => ps.productId === item.id && ps.supplier === supplierFilterValue);
-                const outOfStockMatch = !showOutOfStockOnly || item.quantity === 0;
-                const searchMatch = !searchTerm || item.name.toLowerCase().includes(searchTerm);
-                return categoryMatch && supplierMatch && outOfStockMatch && searchMatch;
-            });
-
-            if (sortColumn) {
-                filteredStock.sort((a, b) => {
-                    let aValue = a[sortColumn];
-                    let bValue = b[sortColumn];
-
-                    if (sortColumn === 'supplier') {
-                        const supplierA = productSuppliers.find(ps => ps.productId === a.id)?.supplier || '';
-                        const supplierB = productSuppliers.find(ps => ps.productId === b.id)?.supplier || '';
-                        return sortDirection === 'asc' ? supplierA.localeCompare(supplierB) : supplierB.localeCompare(supplierA);
-                    } else if (sortColumn === 'dateAdded') {
-                        const dateA = new Date(aValue);
-                        const dateB = new Date(bValue);
-                        return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
-                    } else if (typeof aValue === 'string') {
-                        return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
-                    } else {
-                        return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
-                    }
-                });
-            }
-
-            filteredStock.forEach(item => {
-                const row = stockTableBody.insertRow();
-                if (item.quantity < item.lowStockThreshold && item.quantity > 0) {
-                    row.classList.add('low-stock');
-                } else if (item.quantity === 0) {
-                    row.classList.add('out-of-stock');
-                }
-
-                const imageCell = row.insertCell();
-                imageCell.innerHTML = item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="stock-image">` : '';
-
-                const nameCell = row.insertCell();
-                nameCell.textContent = item.name;
-
-                const quantityCell = row.insertCell();
-                quantityCell.classList.add('quantity-cell');
-                quantityCell.innerHTML = `
-                    <button class="btn-decrease" data-id="${item.id}">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="btn-increase" data-id="${item.id}">+</button>
-                    <div class="action-buttons" style="display:none;">
-                        <input type="number" class="quantity-input" data-id="${item.id}">
-                        <button class="btn-remove-qty" data-id="${item.id}">OK</button>
-                    </div>
-                `;
-                const debouncedDecreaseQuantity = debounce((event, id, change) => {
-                    changeQuantity(event, id, change);
-                }, 300); // Délai de 300 millisecondes
-
-                quantityCell.querySelector('.btn-decrease').addEventListener('click', (event) => debouncedDecreaseQuantity(event, item.id, -1));
-                quantityCell.querySelector('.btn-increase').addEventListener('click', (event) => changeQuantity(event, item.id, 1));
-                const qtyInput = quantityCell.querySelector('.quantity-input');
-                quantityCell.addEventListener('click', function(event) {
-                    // N'ouvrir le input que si on ne clique pas sur les boutons +/-
-                    if (!event.target.classList.contains('btn-increase') && !event.target.classList.contains('btn-decrease')) {
-                        this.querySelector('.action-buttons').style.display = 'inline-block';
-                    }
-                });
-                quantityCell.querySelector('.btn-remove-qty').addEventListener('click', (event) => {
-                    const newQty = parseInt(qtyInput.value);
-                    if (!isNaN(newQty)) {
-                        changeQuantity(event, item.id, newQty - item.quantity);
-                        qtyInput.value = '';
-                        quantityCell.querySelector('.action-buttons').style.display = 'none';
-                    } else {
-                        alert('Veuillez entrer une quantité valide.');
-                    }
-                });
-
-                const categoryCell = row.insertCell();
-                categoryCell.textContent = item.category;
-
-                const lowStockThresholdCell = row.insertCell();
-                lowStockThresholdCell.textContent = item.lowStockThreshold;
-
-                const supplierCell = row.insertCell();
-                const supplierInfo = productSuppliers.find(ps => ps.productId === item.id);
-                supplierCell.textContent = supplierInfo ? supplierInfo.supplier : 'Non renseigné';
-
-                const dateAddedCell = row.insertCell();
-                const date = new Date(item.dateAdded);
-                dateAddedCell.textContent = date.toLocaleDateString();
-
-                const actionsCell = row.insertCell();
-                actionsCell.innerHTML = `
-                    <button class="btn-edit" data-id="${item.id}">Modifier</button>
-                    <button class="btn-delete" data-id="${item.id}">Supprimer</button>
-                `;
-                actionsCell.querySelector('.btn-edit').addEventListener('click', () => populateEditForm(item.id));
-                actionsCell.querySelector('.btn-delete').addEventListener('click', () => openDeleteModal(item.id));
-            });
-
-            // Rendre la table des fournisseurs de produits
-            const productSuppliersMap = {};
-            productSuppliers.forEach(ps => {
-                const product = stock.find(item => item.id === ps.productId);
-                if (product) {
-                    if (!productSuppliersMap[product.name]) {
-                        productSuppliersMap[product.name] = [];
-                    }
-                    productSuppliersMap[product.name].push(ps.supplier);
-                }
-            });
-
-            for (const productName in productSuppliersMap) {
-                const row = productSuppliersTableBody.insertRow();
-                const productCell = row.insertCell();
-                productCell.textContent = productName;
-                const suppliersCell = row.insertCell();
-                suppliersCell.textContent = productSuppliersMap[productName].join(', ');
-            }
-        }
-
-        function populateCategoryFilter() {
-            const categories = [...new Set(stock.map(item => item.category).filter(Boolean))];
-            categoryFilter.innerHTML = '<option value="">-- Toutes --</option>';
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-                categoryFilter.appendChild(option);
-            });
-        }
-
-        function addItemToStock(event) {
-            event.preventDefault();
-            const itemName = itemNameInput.value.trim();
-            const itemQuantity = parseInt(itemQuantityInput.value);
-            const itemCategory = itemCategoryInput.value;
-            const lowStockThreshold = parseInt(lowStockThresholdInput.value);
-            const itemImage = itemImageInput.value.trim();
-            const itemSupplier = itemSupplierInput.value;
-            const itemIdToEdit = itemIdToEditInput.value;
-
-            if (!itemName || isNaN(itemQuantity) || isNaN(lowStockThreshold)) {
-                displayFeedback('Veuillez remplir tous les champs obligatoires.', 'error');
-                return;
-            }
-
-            const newItem = {
-                id: itemIdToEdit || Date.now(),
-                name: itemName,
-                quantity: itemQuantity,
-                category: itemCategory,
-                lowStockThreshold: lowStockThreshold,
-                image: itemImage,
-                dateAdded: itemIdToEdit ? stock.find(item => item.id === itemIdToEdit)?.dateAdded : new Date().toISOString()
-            };
-
-            if (itemIdToEdit) {
-                const originalItem = stock.find(item => item.id === itemIdToEdit);
-                const index = stock.findIndex(item => item.id === itemIdToEdit);
-                if (index !== -1) {
-                    stock[index] = newItem;
-                    const quantityChange = newItem.quantity - (originalItem ? originalItem.quantity : 0);
-                    displayFeedback(`L'article "${escapeHtml(itemName)}" a été mis à jour.`, 'success');
-                }
-                itemIdToEditInput.value = ''; // Réinitialiser l'ID d'édition
-                addItemBtn.textContent = 'Ajouter au Stock'; // Réinitialiser le texte du bouton
+             // Update displayed prices only if a product is selected
+            if (productSelect.value) {
+                 productProdPriceDisplay.textContent = `$${prodPrice.toFixed(2)}`;
+                 productSellPriceDisplay.textContent = `$${sellPrice.toFixed(2)}`;
             } else {
-                stock.push(newItem);
-                if (itemSupplier) {
-                    productSuppliers.push({ productId: newItem.id, supplier: itemSupplier });
-                }
-                displayFeedback(`L'article "${escapeHtml(itemName)}" a été ajouté.`, 'success');
+                 productProdPriceDisplay.textContent = ''; // Clear if no product selected
+                 productSellPriceDisplay.textContent = ''; // Clear if no product selected
             }
 
-            saveStock();
-            itemNameInput.value = '';
-            itemQuantityInput.value = '';
-            itemCategoryInput.value = '';
-            lowStockThresholdInput.value = '5';
-            itemImageInput.value = '';
-            itemSupplierInput.value = '';
+            rowAmountDisplay.textContent = `$${amount.toFixed(2)}`;
+            rowProfitDisplay.textContent = `$${profit.toFixed(2)}`;
         }
 
-        function populateEditForm(id) {
-            const itemToEdit = stock.find(item => item.id === id);
-            if (itemToEdit) {
-                itemNameInput.value = itemToEdit.name;
-                itemQuantityInput.value = itemToEdit.quantity;
-                itemCategoryInput.value = itemToEdit.category;
-                lowStockThresholdInput.value = itemToEdit.lowStockThreshold;
-                itemImageInput.value = itemToEdit.image || '';
-                const supplierInfo = productSuppliers.find(ps => ps.productId === id);
-                itemSupplierInput.value = supplierInfo ? supplierInfo.supplier : '';
-                itemIdToEditInput.value = id;
-                addItemBtn.textContent = 'Modifier l\'Article';
-            }
+        function calculateTotal() {
+            let totalAmount = 0;
+             document.querySelectorAll('.row-amount').forEach(amountDisplay => { // Use querySelectorAll here to get current elements
+                totalAmount += parseFloat(amountDisplay.textContent.replace('$', '')) || 0;
+            });
+            totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
+
+            let totalProfit = 0;
+             document.querySelectorAll('.row-profit').forEach(profitDisplay => { // Use querySelectorAll here
+                totalProfit += parseFloat(profitDisplay.textContent.replace('$', '')) || 0;
+            });
+            totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`;
         }
 
-        function changeQuantity(event, id, change) {
-            event.stopPropagation();
-            const item = stock.find(item => item.id === id);
-            if (item) {
-                const oldQuantity = item.quantity;
-                item.quantity += change;
-                if (item.quantity < 0) item.quantity = 0;
-                saveStock();
-                // Réinitialiser le délai précédent si une nouvelle modification survient
-                clearTimeout(sendPendingMessagesTimeout);
-                // Planifier l'envoi des messages après une période d'inactivité (par exemple, 2 secondes)
-                sendPendingMessagesTimeout = setTimeout(sendDiscordNotificationDigest, 2000);
-            }
-        }
-
-        function openDeleteModal(id) {
-            currentItemToDeleteId = id;
-            deleteModal.style.display = "block";
-        }
-
-        function closeDeleteModal() {
-            deleteModal.style.display = "none";
-            currentItemToDeleteId = null;
-        }
-
-        confirmDeleteBtn.addEventListener('click', deleteStockItem);
-
-        function deleteStockItem() {
-            if (currentItemToDeleteId !== null) {
-                const index = stock.findIndex(item => item.id === currentItemToDeleteId);
-                if (index !== -1) {
-                    const itemName = stock[index].name;
-                    const quantityBeforeDeletion = stock[index].quantity;
-                    stock.splice(index, 1);
-                    const supplierIndex = productSuppliers.findIndex(ps => ps.productId === currentItemToDeleteId);
-                    if (supplierIndex !== -1) {
-                        productSuppliers.splice(supplierIndex, 1);
-                    }
-                    saveStock();
-                    displayFeedback(`L'article "${escapeHtml(itemName)}" a été supprimé.`, 'success');
-                    // Réinitialiser le délai précédent si une nouvelle modification survient
-                    clearTimeout(sendPendingMessagesTimeout);
-                    // Planifier l'envoi des messages après une période d'inactivité (par exemple, 2 secondes)
-                    sendPendingMessagesTimeout = setTimeout(sendDiscordNotificationDigest, 2000);
-                }
-                closeDeleteModal();
-            }
-        }
-
-        let stockChangeSummary = {}; // Objet pour stocker les changements de stock
-
-        function saveStock() {
-            try {
-                localStorage.setItem('restaurantStock', JSON.stringify(stock));
-                localStorage.setItem('productSuppliers', JSON.stringify(productSuppliers));
-                renderStock();
-
-                pendingDiscordMessages = []; // Réinitialiser les messages en attente pour reconstruire la liste
-
-                stock.forEach(item => {
-                    const existingLowAlertIndex = pendingDiscordMessages.findIndex(msg => msg.includes(`Alerte Stock Bas : L'article **${escapeHtml(item.name)}**`));
-                    const existingOutAlertIndex = pendingDiscordMessages.findIndex(msg => msg.includes(`Alerte Rupture de Stock : L'article **${escapeHtml(item.name)}**`));
-
-                    if (item.quantity < item.lowStockThreshold && item.quantity > 0 && existingLowAlertIndex === -1) {
-                        pendingDiscordMessages.push(`⚠️ **Alerte Stock Bas** : L'article **${escapeHtml(item.name)}** est en dessous du seuil de stock bas (${item.lowStockThreshold}). Quantité actuelle : ${item.quantity}`);
-                    } else if (item.quantity === 0 && existingOutAlertIndex === -1) {
-                        pendingDiscordMessages.push(`🔴 **Alerte Rupture de Stock** : L'article **${escapeHtml(item.name)}** est en rupture de stock.`);
-                    } else if (item.quantity > 0 && existingLowAlertIndex !== -1) {
-                        // Retirer l'alerte si le stock est remonté
-                        const itemName = pendingDiscordMessages[existingLowAlertIndex].match(/Alerte Stock Bas : L'article \*\*([^*]+)\*\*/)[1];
-                        if (itemName === item.name) {
-                            pendingDiscordMessages.splice(existingLowAlertIndex, 1);
-                        }
-                    } else if (item.quantity > 0 && existingOutAlertIndex !== -1) {
-                        // Retirer l'alerte si le stock est revenu
-                        const itemName = pendingDiscordMessages[existingOutAlertIndex].match(/Alerte Rupture de Stock : L'article \*\*([^*]+)\*\*/)[1];
-                        if (itemName === item.name) {
-                            pendingDiscordMessages.splice(existingOutAlertIndex, 1);
-                        }
-                    }
-                });
-
-            } catch (error) {
-                console.error("Erreur lors de la sauvegarde du stock dans le localStorage:", error);
-                displayFeedback("Erreur lors de la sauvegarde des données de stock.", 'error');
-            }
-        }
-
-        function sendDiscordNotificationDigest() {
-            if (pendingDiscordMessages.length > 0) {
-                const messageToSend = pendingDiscordMessages.join("\n");
-                sendDiscordMessage(messageToSend);
-                pendingDiscordMessages = []; // Vider la liste après l'envoi
-            }
-        }
-
-        function displayFeedback(message, type = 'success') {
-            feedbackMessageDiv.textContent = message;
-            feedbackMessageDiv.className = `feedback-message feedback-${type}`;
-            feedbackMessageDiv.style.display = 'block';
-            setTimeout(() => {
-                feedbackMessageDiv.style.display = 'none';
-            }, 3000);
-        }
-
-        // --- Gestion de l'admin login ---
-        function checkAdminLogin(username, password) {
-            return users.some(user => user.username === username && user.password === password);
-        }
-
-        loginForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const username = usernameInput.value;
-            const password = passwordInput.value;
-
-            if (checkAdminLogin(username, password)) {
-                loggedInUsername = username;
-                isLoggedIn = true;
-                localStorage.setItem('isAdminLoggedIn', 'true');
-                loginContainer.style.display = 'none';
-                mainContainer.style.display = 'block';
-                suppliersSection.style.display = 'block';
-                usersSection.style.display = 'block';
-                renderStock();
-                renderSuppliersList();
-                renderUsersList();
-                populateCategoryFilter();
-                updateSupplierOptions();
-            } else {
-                loginErrorDiv.style.display = 'block';
-                setTimeout(() => {
-                    loginErrorDiv.style.display = 'none';
-                }, 3000);
-            }
-            usernameInput.value = '';
-            passwordInput.value = '';
+        // Add event listeners for select and input changes
+        productSelects.forEach((select) => {
+            select.addEventListener('change', () => {
+                calculateRowAmount(select.closest('tr'));
+                calculateTotal();
+            });
         });
 
-        logoutLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            isLoggedIn = false;
-            localStorage.removeItem('isAdminLoggedIn');
-            loginContainer.style.display = 'block';
-            mainContainer.style.display = 'none';
-            suppliersSection.style.display = 'none';
-            usersSection.style.display = 'none';
-            loggedInUsername = ''; // Réinitialiser le nom d'utilisateur
+        quantityInputs.forEach((input) => {
+            input.addEventListener('input', () => {
+                calculateRowAmount(input.closest('tr'));
+                calculateTotal();
+            });
         });
 
-        function checkLoginStatus() {
-            const loggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
-            if (loggedIn) {
-                isLoggedIn = true;
-                loginContainer.style.display = 'none';
-                mainContainer.style.display = 'block';
-                suppliersSection.style.display = 'block';
-                usersSection.style.display = 'block';
-                renderStock();
-                renderSuppliersList();
-                renderUsersList();
-                populateCategoryFilter();
-                updateSupplierOptions();
-                // Démarrer le traitement de la file d'attente au chargement si des messages sont en attente
-                if (discordMessageQueue.length > 0 && !isSendingDiscordMessage) {
-                    processDiscordMessageQueue();
-                }
-            } else {
-                loginContainer.style.display = 'block';
-                mainContainer.style.display = 'none';
-                suppliersSection.style.display = 'none';
-                usersSection.style.display = 'none';
+        // --- Google Sheets Integration Logic (Client-side data collection) ---
+
+        validateButton.addEventListener('click', () => {
+            const salesperson = salespersonNameElement.textContent.trim();
+            const saleDate = currentDateElement.textContent.trim();
+            const saleTime = currentTimeElement.textContent.trim();
+
+            // Recalculate totals just before sending to ensure accuracy
+            calculateTotal(); // Ensure totals are fresh
+
+            const totalAmount = parseFloat(totalAmountDisplay.textContent.replace('$', '')) || 0;
+            const totalProfit = parseFloat(totalProfitDisplay.textContent.replace('$', '')) || 0;
+
+            // Check if there are any items selected with quantity > 0 or if total amount > 0
+             const hasSelectedItems = Array.from(document.querySelectorAll('tbody tr')).some(row => {
+                 const productSelect = row.querySelector('.product-select');
+                 const quantityInput = row.querySelector('.quantity-input');
+                 return productSelect.value && parseInt(quantityInput.value) > 0;
+             });
+
+             if (!hasSelectedItems && totalAmount <= 0) {
+                 alert("Aucun article sélectionné avec une quantité supérieure à 0.");
+                 return; // Prevent sending empty data
+             }
+
+
+            // Créer un objet avec les données de résumé à envoyer
+            // Les clés doivent correspondre à celles attendues par votre script Google Apps Script
+            const summaryDataToSend = {
+                Date: saleDate,
+                Heure: saleTime,
+                Vendeur: salesperson,
+                // Utilisez des noms de clés simples sans caractères spéciaux si possible pour l'échange JSON
+                Chiffre_Affaire: totalAmount,
+                Marge_Totale: totalProfit
+                // NP, % Salaire, Salaire dû, Bénéfice Net seront gérés dans la feuille/Apps Script
+            };
+
+            console.log('Données sommaires à envoyer :', summaryDataToSend);
+
+            // --- *** Placez l'URL déployée de votre Web App Google Apps Script ici *** ---
+            // Important: Remplacez cette chaîne par l'URL réelle obtenue après le déploiement de votre script Apps Script.
+            const googleSheetsUrl = 'https://script.google.com/macros/s/AKfycbzIZaXY4OmtqM4j67REJq1c9YbvGUnJZE2qgc2vfhIpRmD8v_dBK-IW09qaOB2s6n_OTw/exec';
+
+            if (googleSheetsUrl === 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
+                 alert("Erreur de configuration : Veuillez remplacer 'YOUR_APPS_SCRIPT_WEB_APP_URL' dans le script par l'URL de votre Web App Google Apps Script.");
+                 return; // Stop if URL is not set
             }
+
+
+            // --- Send data to Google Apps Script Web App ---
+            fetch(googleSheetsUrl, {
+                method: 'POST',
+                mode: 'no-cors', // Utilisez 'no-cors' pour éviter les problèmes de CORS, limite la gestion des réponses.
+                headers: {
+                    'Content-Type': 'application/json'
+                    // Note sur no-cors et headers: Voir commentaire dans le code Apps Script si besoin.
+                },
+                body: JSON.stringify(summaryDataToSend) // Envoyez l'objet JSON résumé
+            })
+            .then(response => {
+                 console.log('Réponse reçue (mode no-cors, réponse opaque):', response);
+                 // En mode no-cors, on ne peut pas lire le statut HTTP ni le corps de la réponse directement en JS.
+                 // On assume généralement le succès si le 'fetch' ne déclenche pas d'erreur réseau.
+                 alert('Sélection validée. Données envoyées à Google Sheets (vérifiez la feuille pour confirmation) !');
+
+                 // Optional: Clear the form after assumed successful submission
+                 document.querySelectorAll('.quantity-input').forEach(input => input.value = 0);
+                 document.querySelectorAll('.product-select').forEach(select => select.value = '');
+                 document.querySelectorAll('tbody tr').forEach(row => calculateRowAmount(row)); // Recalculate row amounts to reset displays
+                 calculateTotal(); // Recalculate totals to show $0.00
+                 // Update date and time for the next transaction
+                 updateDateTime();
+
+            })
+            .catch((error) => {
+                console.error('Erreur lors de l\'envoi des données:', error);
+                alert('Échec de l\'envoi des données. Vérifiez la console, la configuration Apps Script et l\'URL.');
+            });
+        });
+
+        // Function to update date and time
+        function updateDateTime() {
+             const now = new Date();
+             const day = String(now.getDate()).padStart(2, '0');
+             const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+             const year = now.getFullYear();
+             const hours = String(now.getHours()).padStart(2, '0');
+             const minutes = String(now.getMinutes()).padStart(2, '0');
+             const seconds = String(now.getSeconds()).padStart(2, '0');
+
+             currentDateElement.textContent = `${day}/${month}/${year}`;
+             currentTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
         }
 
-        // --- Écouteurs d'événements ---
-        addItemBtn.addEventListener('click', addItemToStock);
-        searchInput.addEventListener('input', renderStock);
-        categoryFilter.addEventListener('change', renderStock);
-        supplierFilter.addEventListener('change', renderStock);
-        outOfStockFilter.addEventListener('change', renderStock);
-        addSupplierBtn.addEventListener('click', addSupplier);
-        addUserBtn.addEventListener('click', addUser);
-        saveWebhookBtn.addEventListener('click', saveWebhookUrl); // Ajout de l'écouteur pour enregistrer l'URL du webhook
 
-        function closeStockHistoryModal() {
-            stockHistoryModal.style.display = "none";
-        }
-
+        // Initial setup on page load
         document.addEventListener('DOMContentLoaded', () => {
-            checkLoginStatus();
-            renderSuppliersList();
-            renderUsersList();
-            renderStock();
-            populateCategoryFilter();
-            updateSupplierOptions();
-            discordWebhookUrlInput.value = discordWebhookUrl; // Initialiser le champ de l'URL du webhook
-
-            document.querySelectorAll('#stockTable th[data-sort]').forEach(th => {
-                th.addEventListener('click', () => {
-                    const column = th.dataset.sort;
-                    const currentSortColumn = localStorage.getItem('sortColumn');
-                    const currentSortDirection = localStorage.getItem('sortDirection') || 'asc';
-                    let newSortDirection = 'asc';
-
-                    if (currentSortColumn === column && currentSortDirection === 'asc') {
-                        newSortDirection = 'desc';
-                    }
-
-                    localStorage.setItem('sortColumn', column);
-                    localStorage.setItem('sortDirection', newSortDirection);
-                    renderStock(column, newSortDirection);
-                });
+            // Calculate initial values based on default selections/quantities
+            document.querySelectorAll('tbody tr').forEach(row => {
+                calculateRowAmount(row);
             });
-
-            const initialSortColumn = localStorage.getItem('sortColumn');
-            const initialSortDirection = localStorage.getItem('sortDirection') || 'asc';
-            if (initialSortColumn) {
-                renderStock(initialSortColumn, initialSortDirection);
-            }
-
-            // Démarrer le traitement de la file d'attente au chargement si des messages sont en attente
-            if (discordMessageQueue.length > 0 && !isSendingDiscordMessage) {
-                processDiscordMessageQueue();
-            }
+            calculateTotal();
+            // Set the current date and time
+            updateDateTime();
         });
-
-        function escapeHtml(unsafe) {
-            return unsafe
-                 .replace(/&/g, "&amp;")
-                 .replace(/</g, "&lt;")
-                 .replace(/>/g, "&gt;")
-                 .replace(/"/g, "&quot;")
-                 .replace(/'/g, "&#039;");
-         }
-
     </script>
-
 </body>
 </html>
