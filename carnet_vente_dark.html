@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carnet de Vente (Login - Thème Sombre)</title>
+    <link rel="stylesheet" href="style_dark.css"> </head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-container">
+            <h2>Connexion</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Se connecter</button>
+                <p id="login-error-message" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="sales-book-content">
+        <h1>Carnet de Vente</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="6">Carnet</th>
+                    <th colspan="1" id="salesperson-name">Aiden Wellington</th>
+                </tr>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Produit</th>
+                    <th>Prix de prod</th>
+                    <th>Prix de vente</th>
+                    <th>Quantité</th>
+                    <th>Montant</th>
+                    <th>Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nourriture</td>
+                    <td>
+                        <select class="product-select" data-category="Nourriture">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                            <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                            <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                            <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                            <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                            <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                            <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                            <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                            <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                            <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Nourriture</td>
+                    <td>
+                        <select class="product-select" data-category="Nourriture">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                            <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                            <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                            <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                            <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                            <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                            <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                            <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                            <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                            <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Nourriture</td>
+                    <td>
+                        <select class="product-select" data-category="Nourriture">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                            <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                            <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                            <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                            <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                            <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                            <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                            <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                            <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                            <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Nourriture</td>
+                    <td>
+                        <select class="product-select" data-category="Nourriture">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                            <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                            <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                            <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                            <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                            <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                            <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                            <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                            <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                            <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Nourriture</td>
+                    <td>
+                        <select class="product-select" data-category="Nourriture">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                            <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                            <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                            <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                            <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                            <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                            <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                            <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                            <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                            <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Nourriture</td>
+                    <td>
+                        <select class="product-select" data-category="Nourriture">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Menu Huge Hunger" data-prod-price="29.5" data-sell-price="70">Menu Huge Hunger</option>
+                            <option value="Menu Huge Thirsty" data-prod-price="27.5" data-sell-price="65">Menu Huge Thirsty</option>
+                            <option value="Menu Bottle In The Sea" data-prod-price="21.25" data-sell-price="50">Menu Bottle In The Sea</option>
+                            <option value="Menu Bloody" data-prod-price="20.5" data-sell-price="50">Menu Bloody</option>
+                            <option value="Menu Morning" data-prod-price="11" data-sell-price="30">Menu Morning</option>
+                            <option value="Burger Love" data-prod-price="17.5" data-sell-price="45">Burger Love</option>
+                            <option value="Saignant" data-prod-price="15.5" data-sell-price="40">Saignant</option>
+                            <option value="Arrêt du Coeur" data-prod-price="16.5" data-sell-price="45">Arrêt du Coeur</option>
+                            <option value="Sandwitch Poisson" data-prod-price="9" data-sell-price="25">Sandwitch Poisson</option>
+                            <option value="OneShot" data-prod-price="14.5" data-sell-price="35">OneShot</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Boisson</td>
+                    <td>
+                        <select class="product-select" data-category="Boisson">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                            <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                            <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                            <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                             <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option>
+                            <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Boisson</td>
+                    <td>
+                        <select class="product-select" data-category="Boisson">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                            <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                            <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                            <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                             <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option>
+                            <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Boisson</td>
+                    <td>
+                        <select class="product-select" data-category="Boisson">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                            <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                            <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                            <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                             <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option>
+                            <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Boisson</td>
+                    <td>
+                        <select class="product-select" data-category="Boisson">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                            <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                            <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                            <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                             <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option>
+                            <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Boisson</td>
+                    <td>
+                        <select class="product-select" data-category="Boisson">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                            <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                            <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                            <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                             <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option>
+                            <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+                 <tr>
+                    <td>Boisson</td>
+                    <td>
+                        <select class="product-select" data-category="Boisson">
+                            <option value="" data-prod-price="0" data-sell-price="0">-- Sélectionner --</option>
+                            <option value="Ramune Fraise" data-prod-price="5" data-sell-price="15">Ramune Fraise</option>
+                            <option value="Ramune Limonade" data-prod-price="5" data-sell-price="15">Ramune Limonade</option>
+                            <option value="Ramune Exotique" data-prod-price="5" data-sell-price="15">Ramune Exotique</option>
+                            <option value="Bubble Tea CBD" data-prod-price="8" data-sell-price="20">Bubble Tea CBD</option>
+                             <option value="Café" data-prod-price="0.5" data-sell-price="2">Café</option>
+                            <option value="Cidre Pression" data-prod-price="1" data-sell-price="5">Cidre Pression</option>
+                        </select>
+                    </td>
+                    <td class="product-prod-price"></td>
+                    <td class="product-sell-price"></td>
+                    <td><input type="number" class="quantity-input" value="0" min="0"></td>
+                    <td class="row-amount">$0.00</td>
+                    <td class="row-profit">$0.00</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td class="total">Total à facturer</td>
+                    <td id="total-amount" class="total">$0.00</td>
+                    <td id="total-profit" class="total">$0.00</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="info-container">
+            <span id="current-date"></span> <span id="current-time"></span> <span>✅</span>
+        </div>
+
+        <div class="button-container">
+            <button id="validate-button">Valider la sélection</button>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script> </body>
+</html>
