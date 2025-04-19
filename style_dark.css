@@ -1,0 +1,194 @@
+/* Couleurs pour le thème sombre */
+:root {
+    --dark-bg: #1e1e1e;
+    --dark-surface: #2d2d2d;
+    --dark-border: #555;
+    --light-text: #f0f0f0;
+    --medium-text: #b0b0b0;
+    --accent-green: #4CAF50;
+    --accent-green-dark: #45a049;
+    --error-red: #f44336; /* Couleur pour les messages d'erreur */
+}
+
+body {
+    font-family: sans-serif;
+    margin-bottom: 80px; /* Add space at the bottom for the fixed button */
+    padding: 20px; /* Add some padding around content */
+    background-color: var(--dark-bg); /* Fond sombre */
+    color: var(--light-text); /* Texte clair */
+    /* Centering the login screen if needed, or hiding the main content */
+    display: flex; /* Use flexbox for centering login screen */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Minimum height to center vertically */
+}
+
+/* Hide the main content initially */
+#sales-book-content {
+    display: none;
+    width: 100%; /* Take full width when visible */
+    max-width: 1000px; /* Max width for the table layout */
+     margin: 0 auto; /* Center the content */
+}
+
+
+/* --- Login Screen Styles --- */
+#login-screen {
+    display: block; /* Show login screen by default */
+    width: 100%;
+    max-width: 400px; /* Limit login form width */
+    padding: 20px;
+    background-color: var(--dark-surface); /* Same as table cells */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    color: var(--light-text);
+}
+
+.login-container h2 {
+    text-align: center;
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block; /* Label on its own line */
+    margin-bottom: 5px;
+    color: var(--medium-text);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: calc(100% - 12px); /* Full width minus padding */
+    padding: 8px;
+    background-color: #444;
+    color: var(--light-text);
+    border: 1px solid var(--dark-border);
+    border-radius: 4px;
+}
+
+#login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#login-form button:hover {
+    background-color: var(--accent-green-dark);
+}
+
+.error-message {
+    color: var(--error-red);
+    text-align: center;
+    margin-top: 15px;
+    min-height: 1em; /* Reserve space even if empty */
+}
+
+.security-warning {
+    font-size: 0.8em;
+    color: #ff9800; /* Orange warning color */
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px dashed #ff9800;
+    border-radius: 5px;
+}
+
+
+/* --- Existing Sales Book Styles (adjusted for dark theme) --- */
+h1 {
+    color: var(--light-text); /* Titre clair */
+    text-align: center; /* Center the title */
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid var(--dark-border); /* Bordure de table plus claire pour visibilité */
+}
+
+th, td {
+    border: 1px solid var(--dark-border); /* Bordures de cellules plus claires */
+    padding: 8px;
+    text-align: left;
+    color: var(--light-text); /* Texte clair dans les cellules */
+    background-color: var(--dark-surface); /* Fond des cellules légèrement plus clair que le body */
+}
+
+th {
+    background-color: #3a3a3a; /* Fond des en-têtes plus distinct */
+    font-weight: bold;
+}
+
+ /* Alternating row colors for better readability */
+tbody tr:nth-child(even) td {
+    background-color: #333; /* Fond des lignes paires légèrement différent */
+}
+
+.total {
+    font-weight: bold;
+     background-color: #4a4a4a; /* Fond plus sombre pour la ligne total */
+     color: var(--light-text);
+}
+
+/* Style for inputs and selects within the table */
+td input[type="number"],
+td select { /* Target inputs/selects specifically within table cells */
+    background-color: #444; /* Fond sombre pour les champs */
+    color: var(--light-text); /* Texte clair dans les champs */
+    border: 1px solid var(--dark-border); /* Bordure claire */
+    padding: 5px;
+    border-radius: 3px;
+    width: auto; /* Allow inputs to size according to content */
+}
+
+td select option {
+    background-color: #444; /* Fond sombre pour les options */
+    color: var(--light-text); /* Texte clair pour les options */
+}
+
+
+/* Style for the button container */
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.button-container button:hover {
+    background-color: var(--accent-green-dark);
+}
+
+ /* Style for the date/time/check container */
+ .info-container {
+     margin-top: 10px;
+     text-align: right;
+     font-size: 0.9em;
+     color: var(--medium-text);
+ }
+
+ .info-container span {
+     margin-left: 15px;
+ }
