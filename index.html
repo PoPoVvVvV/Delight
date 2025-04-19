@@ -3,29 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carnet de Vente</title>
+    <title>Carnet de Vente (Thème Sombre)</title>
     <style>
+        /* Couleurs pour le thème sombre */
+        :root {
+            --dark-bg: #1e1e1e;
+            --dark-surface: #2d2d2d;
+            --dark-border: #555;
+            --light-text: #f0f0f0;
+            --medium-text: #b0b0b0;
+            --accent-green: #4CAF50;
+            --accent-green-dark: #45a049;
+        }
+
         body {
             font-family: sans-serif;
             margin-bottom: 80px; /* Add space at the bottom for the fixed button */
             padding: 20px; /* Add some padding around content */
+            background-color: var(--dark-bg); /* Fond sombre */
+            color: var(--light-text); /* Texte clair */
         }
+
+        h1 {
+            color: var(--light-text); /* Titre clair */
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin-bottom: 20px;
+            border: 1px solid var(--dark-border); /* Bordure de table plus claire pour visibilité */
         }
+
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--dark-border); /* Bordures de cellules plus claires */
             padding: 8px;
             text-align: left;
+            color: var(--light-text); /* Texte clair dans les cellules */
+            background-color: var(--dark-surface); /* Fond des cellules légèrement plus clair que le body */
         }
+
         th {
-            background-color: #f2f2f2;
-        }
-        .total {
+            background-color: #3a3a3a; /* Fond des en-têtes plus distinct */
             font-weight: bold;
         }
+
+         /* Alternating row colors for better readability */
+        tbody tr:nth-child(even) td {
+            background-color: #333; /* Fond des lignes paires légèrement différent */
+        }
+
+        .total {
+            font-weight: bold;
+             background-color: #4a4a4a; /* Fond plus sombre pour la ligne total */
+             color: var(--light-text);
+        }
+
+        /* Style for inputs and selects */
+        input[type="number"],
+        select {
+            background-color: #444; /* Fond sombre pour les champs */
+            color: var(--light-text); /* Texte clair dans les champs */
+            border: 1px solid var(--dark-border); /* Bordure claire */
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        select option {
+            background-color: #444; /* Fond sombre pour les options */
+            color: var(--light-text); /* Texte clair pour les options */
+        }
+
+
         /* Style for the button container */
         .button-container {
             position: fixed; /* Fixed position relative to the viewport */
@@ -37,14 +86,14 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #4CAF50; /* Green */
-            color: white;
+            background-color: var(--accent-green); /* Green */
+            color: white; /* White text */
             border: none;
             border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Ombre plus visible sur fond sombre */
         }
         .button-container button:hover {
-            background-color: #45a049;
+            background-color: var(--accent-green-dark); /* Darker green on hover */
         }
 
          /* Style for the date/time/check container */
@@ -52,7 +101,7 @@
              margin-top: 10px;
              text-align: right;
              font-size: 0.9em;
-             color: #555;
+             color: var(--medium-text); /* Texte gris moyen */
          }
 
          .info-container span {
@@ -342,10 +391,6 @@
     <script>
         const productSelects = document.querySelectorAll('.product-select');
         const quantityInputs = document.querySelectorAll('.quantity-input');
-        // rowAmounts and rowProfits are not strictly needed as global consts for calculation logic
-        // but we keep them for potential direct access if needed elsewhere.
-        const rowAmounts = document.querySelectorAll('.row-amount');
-        const rowProfits = document.querySelectorAll('.row-profit');
 
         const totalAmountDisplay = document.getElementById('total-amount');
         const totalProfitDisplay = document.getElementById('total-profit');
