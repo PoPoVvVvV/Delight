@@ -5,9 +5,7 @@
 
 // <<< DÉFINISSEZ VOS NOMS D'UTILISATEUR ET MOTS DE PASSE VALIDES ICI >>>
 const validCredentials = [
-    { username: 'AidenWellington', password: 'AidenWellington2205' },
-    { username: 'user2', password: 'password2' },
-    { username: 'admin', password: 'securepassword' } // Exemple d'un autre utilisateur
+    { username: 'AidenWellington', password: 'AidenWellington2205' }
     // Ajoutez autant d'objets { username: '...', password: '...' } que nécessaire
 ];
 // ********************************************************
@@ -17,8 +15,8 @@ const salesBookContent = document.getElementById('sales-book-content');
 const loginForm = document.getElementById('login-form');
 const loginErrorMessage = document.getElementById('login-error-message');
 
-// Keep track of login state (optional, but improves user experience in same session)
-const isLoggedIn = sessionStorage.getItem('isLoggedIn'); // Use sessionStorage to keep state for current tab/session
+// Nous retirons l'utilisation de sessionStorage, donc pas besoin de vérifier 'isLoggedIn' au chargement.
+// const isLoggedIn = sessionStorage.getItem('isLoggedIn'); // Ligne retirée
 
 
 // Function to show the sales book and hide the login screen
@@ -29,8 +27,13 @@ function showSalesBook() {
      document.body.style.justifyContent = 'flex-start';
      document.body.style.alignItems = 'flex-start';
     document.body.style.minHeight = 'auto';
-    sessionStorage.setItem('isLoggedIn', 'true'); // Set flag in sessionStorage
+    // sessionStorage.setItem('isLoggedIn', 'true'); // Ligne retirée : ne mémorise plus la connexion
 }
+
+// Variable to store the calculated total profit (still needed for display on page)
+let currentTotalProfit = 0;
+let currentTotalAmount = 0; // Also keep track of total amount
+
 
 // Function to handle login form submission
 if (loginForm) { // Check if the form exists
@@ -65,32 +68,27 @@ if (loginForm) { // Check if the form exists
 }
 
 
-// --- Existing Sales Book Logic (wrapped in a function) ---
+// --- Existing Sales Book Logic ---
 // We wrap the existing calculation and event listener setup
 // so it can be called after a successful login OR on page load if already logged in.
 function initializeSalesBook() {
      // Only initialize if the sales book content is actually displayed
      if (salesBookContent.style.display === 'none') {
-         // Content is hidden, likely still on login screen, don't initialize sales book parts
         return;
      }
 
-    // Re-get elements just in case, though they exist in the DOM even when hidden
+    // Get elements needed for calculations and display
     const productSelects = document.querySelectorAll('.product-select');
     const quantityInputs = document.querySelectorAll('.quantity-input');
     const totalAmountDisplay = document.getElementById('total-amount');
-    const totalProfitDisplay = document.getElementById('total-profit');
-    const validateButton = document.getElementById('validate-button');
-    const salespersonNameElement = document.getElementById('salesperson-name');
-    const currentDateElement = document.getElementById('current-date');
-    const currentTimeElement = document.getElementById('current-time');
+    const totalProfitDisplay = document.getElementById('total-profit'); // Keep this to update display
 
 
     function calculateRowAmount(row) {
         const productSelect = row.querySelector('.product-select');
         const quantityInput = row.querySelector('.quantity-input');
         const rowAmountDisplay = row.querySelector('.row-amount');
-        const rowProfitDisplay = row.querySelector('.row-profit');
+        const rowProfitDisplay = row.querySelector('.row-profit'); // Keep this to update display
         const productProdPriceDisplay = row.querySelector('.product-prod-price');
         const productSellPriceDisplay = row.querySelector('.product-sell-price');
 
@@ -112,21 +110,29 @@ function initializeSalesBook() {
         }
 
         rowAmountDisplay.textContent = `$${amount.toFixed(2)}`;
-        rowProfitDisplay.textContent = `$${profit.toFixed(2)}`;
+        rowProfitDisplay.textContent = `$${profit.toFixed(2)}`; // KEEP: Update row profit display
     }
 
     function calculateTotal() {
         let totalAmount = 0;
-         document.querySelectorAll('.row-amount').forEach(amountDisplay => {
-            totalAmount += parseFloat(amountDisplay.textContent.replace('$', '')) || 0;
-        });
-        totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
-
         let totalProfit = 0;
-         document.querySelectorAll('.row-profit').forEach(profitDisplay => {
-            totalProfit += parseFloat(profitDisplay.textContent.replace('$', '')) || 0;
+
+        // Loop through each row to sum displayed amount and profit
+         document.querySelectorAll('tbody tr').forEach(row => {
+             const rowAmountDisplay = row.querySelector('.row-amount');
+             const rowProfitDisplay = row.querySelector('.row-profit'); // Get profit display
+
+             totalAmount += parseFloat(rowAmountDisplay.textContent.replace('$', '')) || 0;
+             totalProfit += parseFloat(rowProfitDisplay.textContent.replace('$', '')) || 0; // Sum displayed profit
         });
-        totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`;
+
+        // Update total displays on the page
+        totalAmountDisplay.textContent = `$${totalAmount.toFixed(2)}`;
+        totalProfitDisplay.textContent = `$${totalProfit.toFixed(2)}`; // KEEP: Update total profit display
+
+        // Store totals in variables accessible by the fetch call
+        currentTotalAmount = totalAmount;
+        currentTotalProfit = totalProfit; // Store total profit value
     }
 
     // Add event listeners for select and input changes (only once per element)
@@ -136,15 +142,21 @@ function initializeSalesBook() {
      };
 
     document.querySelectorAll('.product-select, .quantity-input').forEach(element => {
+        // Add listeners only if not added before
         if (!element.dataset.listenersAdded) {
             const eventType = element.tagName === 'SELECT' ? 'change' : 'input';
             element.addEventListener(eventType, handleSalesBookChange);
-            element.dataset.listenersAdded = 'true'; // Mark element
+            element.dataset.listenersAdded = 'true';
         }
     });
 
 
     // --- Google Sheets Integration Logic ---
+
+    const salespersonNameElement = document.getElementById('salesperson-name');
+    const currentDateElement = document.getElementById('current-date');
+    const currentTimeElement = document.getElementById('current-time');
+    const validateButton = document.getElementById('validate-button'); // Ensure button is accessible
 
     if (validateButton) {
         validateButton.addEventListener('click', () => {
@@ -152,11 +164,12 @@ function initializeSalesBook() {
             const saleDate = currentDateElement.textContent.trim();
             const saleTime = currentTimeElement.textContent.trim();
 
-            // Recalculate totals just before sending to ensure accuracy
+            // Recalculate totals just before sending to ensure accuracy and update currentTotalAmount/currentTotalProfit
             calculateTotal();
 
-            const totalAmount = parseFloat(totalAmountDisplay.textContent.replace('$', '')) || 0;
-            const totalProfit = parseFloat(totalProfitDisplay.textContent.replace('$', '')) || 0;
+            const totalAmount = currentTotalAmount; // Use the value stored in the variable
+            const totalProfit = currentTotalProfit; // Use the total profit value (even if not displayed)
+
 
             // Check if there are any items selected with quantity > 0 or if total amount > 0
             const hasSelectedItems = Array.from(document.querySelectorAll('tbody tr')).some(row => {
@@ -165,19 +178,21 @@ function initializeSalesBook() {
                  return productSelect.value && parseInt(quantityInput.value) > 0;
              });
 
+             // Also check if total amount is 0, even if items are selected (e.g. free items)
              if (!hasSelectedItems && totalAmount <= 0) {
-                 alert("Aucun article sélectionné avec une quantité supérieure à 0.");
+                 alert("Aucun article sélectionné avec une quantité supérieure à 0 ou le total à facturer est de $0.00.");
                  return;
              }
 
 
             // Créer un objet avec les données de résumé à envoyer
+            // Inclure la Marge_Totale car elle est envoyée à Google Sheets
             const summaryDataToSend = {
                 Date: saleDate,
                 Heure: saleTime,
                 Vendeur: salesperson,
                 Chiffre_Affaire: totalAmount,
-                Marge_Totale: totalProfit
+                Marge_Totale: totalProfit // Inclure la marge totale pour Google Sheets
             };
 
             console.log('Données sommaires à envoyer :', summaryDataToSend);
@@ -196,7 +211,7 @@ function initializeSalesBook() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(summaryDataToSend)
+                body: JSON.stringify(summaryDataToSend) // Envoyez l'objet JSON résumé
             })
             .then(response => {
                  console.log('Réponse reçue (mode no-cors, réponse opaque):', response);
@@ -237,9 +252,9 @@ function initializeSalesBook() {
 
     // Initial calculation and date/time set
      document.querySelectorAll('tbody tr').forEach(row => {
-         calculateRowAmount(row);
+         calculateRowAmount(row); // Calculate row amounts and profits
      });
-     calculateTotal();
+     calculateTotal(); // Calculate total amount and total profit, update displays and variables
     updateDateTime();
 
 }
@@ -247,14 +262,14 @@ function initializeSalesBook() {
 
 // --- Initial logic on page load ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if already logged in (based on sessionStorage)
-    if (isLoggedIn === 'true') {
-        showSalesBook(); // Show sales book directly
-         initializeSalesBook(); // Initialize all sales book logic
-    } else {
-        // Show login screen (it's already displayed by default CSS)
-        // Add focus to the username input
+    // Retirons la vérification de sessionStorage. La page montrera toujours l'écran de login au départ.
+    // if (isLoggedIn === 'true') {
+    //     showSalesBook();
+    //      initializeSalesBook();
+    // } else {
+        // Afficher l'écran de login (il est déjà affiché par défaut via CSS)
+        // Mettre le focus sur le champ nom d'utilisateur
         const usernameInput = document.getElementById('username');
         if(usernameInput) usernameInput.focus();
-    }
+    // }
 });
